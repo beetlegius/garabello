@@ -1,0 +1,34 @@
+<%= content_for :header do %>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <%= Message.model_name.human %>
+      <small>panel principal</small>
+    </h1>
+  </section>
+<% end %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">
+          Listado de mensajes
+        </h3>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+        <%= tag.table role: :datatable, class: 'table table-bordered table-hover', data: { url: admin_messages_path(format: :json) } do %>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Fecha</th>
+              <th>Cliente</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

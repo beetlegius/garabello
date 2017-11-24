@@ -1,0 +1,14 @@
+<div class="form-group">
+  <% if f.object.try(attribute).present? %>
+    <div class="checkbox">
+      <% if f.object.try(attribute).ext.downcase.in? %w(jpg gif png) %>
+        <%= image_tag f.object.try(attribute).thumb('x100').url, class: 'img-responsive' %>
+      <% else %>
+        <p><%= link_to "Descargar #{f.object.try("#{attribute}_name")}", f.object.try(attribute).url, target: :_blank %></p>
+      <% end %>
+      <%= f.input "remove_#{attribute}", as: :boolean %>
+    </div>
+  <% else %>
+    <%= f.input attribute, as: :file %>
+  <% end %>
+</div>

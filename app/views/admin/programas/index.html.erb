@@ -1,0 +1,39 @@
+<%= content_for :header do %>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <%= link_to t(:add, element: 'programa'), new_admin_programa_path, class: 'btn btn-primary pull-right' %>
+    <h1>
+      <%= Programa.model_name.human %>
+      <small>panel principal</small>
+    </h1>
+  </section>
+<% end %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">
+          Listado de programas
+        </h3>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+        <%= tag.table role: :datatable, class: 'table table-bordered table-hover', data: { url: admin_programas_path(format: :json) } do %>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Desde</th>
+              <th>Hasta</th>
+              <th>Cuadrilla</th>
+              <th>Vía</th>
+              <th>Capataz</th>
+              <th>Inspector</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

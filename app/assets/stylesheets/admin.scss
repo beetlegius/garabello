@@ -1,0 +1,25 @@
+//= require bootstrap
+//= require font-awesome
+//= require ionicons
+//= require admin/AdminLTE
+//= require admin/skins/skin-blue
+//= require admin/dataTables.bootstrap
+//= require admin/plugins/icheck/square/blue
+//= require jquery-ui
+//= require jquery.fileupload-ui
+// @import "bootstrap-wysihtml5/bootstrap3-wysihtml5";
+
+table.table tbody td { vertical-align: middle !important; }
+
+textarea.textile_editor { font-family: "Roboto Mono", monospace; margin-top: 5px; }
+
+form label { cursor: pointer; }
+
+form label.boolean div,
+form .radio label div,
+form .checkbox label div { margin-right: 5px; }
+
+form .radio label, form .checkbox label { padding-left: 0px; }
+
+.fileupload-buttonbar button.delete { display: none; }
+.fileupload-buttonbar div.icheckbox_square-red { display: none; }

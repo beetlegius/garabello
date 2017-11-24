@@ -1,0 +1,76 @@
+<%= content_for :header do %>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <%= Programa.model_name.human %>
+      <% if @programa.persisted? %>
+        <small><%= date @programa.desde %> - <%= date @programa.hasta %></small>
+      <% end %>
+    </h1>
+    <ol class="breadcrumb">
+      <li><%= link_to fa_icon(:wrench, text: Programa.model_name.human), admin_programas_path %></li>
+      <li class="active"><%= t(action_name, scope: :actions) %></li>
+    </ol>
+  </section>
+<% end %>
+
+<%= simple_form_for [:admin, @programa], html: { role: :form } do |f| %>
+  <div class="nav-tabs-custom">
+
+    <ul class="nav nav-tabs">
+      <li class="active"><%= link_to 'Información', '#info', data: { toggle: :tab } %></li>
+      <li class="<%= :disabled if @programa.new_record? %>"><%= link_to 'Trabajos', '#trabajos', data: { toggle: (:tab if @programa.persisted?) } %></li>
+      <li class="<%= :disabled if @programa.new_record? %>"><%= link_to 'Consumos', '#consumos', data: { toggle: (:tab if @programa.persisted?) } %></li>
+      <li class="<%= :disabled if @programa.new_record? %>"><%= link_to 'Asistencias', '#asistencias', data: { toggle: (:tab if @programa.persisted?) } %></li>
+      <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-tasks"></i></a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="info">
+        <div class="row">
+          <div class="col-xs-12 col-sm-3">
+            <%= f.input :desde, html5: true, autofocus: true %>
+          </div>
+          <div class="col-xs-12 col-sm-3">
+            <%= f.input :hasta, html5: true %>
+          </div>
+          <div class="col-xs-12 col-sm-3">
+            <%= f.association :cuadrilla, prompt: true %>
+          </div>
+          <div class="col-xs-12 col-sm-3">
+            <%= f.association :via, prompt: true %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-3">
+            <%= f.input :estimado_ayudante, input_html: { placeholder: true } %>
+          </div>
+          <div class="col-xs-12 col-sm-3">
+            <%= f.input :real_ayudante, input_html: { placeholder: true } %>
+          </div>
+          <div class="col-xs-12 col-sm-3">
+            <%= f.input :estimado_operario, input_html: { placeholder: true } %>
+          </div>
+          <div class="col-xs-12 col-sm-3">
+            <%= f.input :real_operario, input_html: { placeholder: true } %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6">
+            <%= f.input :capataz, input_html: { placeholder: true } %>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <%= f.input :inspector, input_html: { placeholder: true } %>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane" id="trabajos">Trabajos</div>
+      <div class="tab-pane" id="consumos">Consumos</div>
+      <div class="tab-pane" id="asistencias">Asistencias</div>
+    </div>
+
+    <div class="box-footer">
+      <%= f.button :submit, class: 'btn btn-primary', data: { disable_with: t(:wait) } %>
+    </div>
+  </div>
+<% end %>

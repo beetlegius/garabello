@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title><%= variables[:title] %> | Garabello</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <%= csrf_meta_tags %>
+    <%= yield :head %>
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300itlic,400italic,600italic" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" />
+
+    <%= stylesheet_link_tag :admin, media: 'all', 'data-turbolinks-track': 'reload'  %>
+    <%= javascript_include_tag :admin, 'data-turbolinks-track': 'reload' %>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="skin-blue sidebar-mini">
+    <div class="wrapper">
+
+      <header class="main-header">
+        <!-- Logo -->
+        <%= link_to admin_root_path, class: :logo do %>
+          <span class="logo-lg"><b>Gara</b>bello</span>
+          <span class="logo-mini"><b>GAR</b></span>
+        <% end %>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+          <!-- Sidebar toggle button-->
+          <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <span class="sr-only">Cambiar navegación</span>
+          </a>
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <!-- User Account: style can be found in dropdown.less -->
+              <li><%= link_to fa_icon('paper-plane'), root_path, title: 'Ir al sitio' %></li>
+              <li class="dropdown user user-menu">
+                <%= link_to '#', class: 'dropdown-toggle', data: { toggle: :dropdown } do %>
+                  <%= image_tag current_user.image&.url || 'default-user.png', class: 'user-image' %>
+                  <span class="hidden-xs"><%= current_user.name %></span>
+                <% end %>
+                <ul class="dropdown-menu">
+                  <!-- User image -->
+                  <li class="user-header">
+                    <%= image_tag current_user.image&.url || 'default-user.png', class: 'img-circle' %>
+                    <p>
+                      <%= current_user.name %> - <%= t current_user.role, scope: :roles %>
+                    </p>
+                  </li>
+                  <!-- Menu Footer-->
+                  <li class="user-footer">
+                    <div class="pull-left">
+                      <%= link_to 'Perfil', edit_admin_user_path(current_user), class: 'btn btn-default btn-flat' %>
+                    </div>
+                    <div class="pull-right">
+                      <%= link_to 'Salir', destroy_user_session_path, method: :delete, class: 'btn btn-default btn-flat' %>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+
+      <!-- Left side column. contains the logo and sidebar -->
+      <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+          <!-- sidebar menu: : style can be found in sidebar.less -->
+          <%= render 'nav' %>
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
+      <!-- Right side column. Contains the navbar and content of the page -->
+      <div class="content-wrapper">
+        <%= yield :header %>
+        <section class="content">
+          <%= flash_messages %>
+          <%= yield %>
+        </section>
+      </div><!-- /.content-wrapper -->
+
+      <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+          <b>Version</b> 1.0
+        </div>
+        <strong>Garabello <%= Date.today.year %></strong>
+      </footer>
+    </div><!-- ./wrapper -->
+
+  </body>
+</html>

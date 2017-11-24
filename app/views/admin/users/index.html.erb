@@ -1,0 +1,36 @@
+<%= content_for :header do %>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <%= link_to t(:add, element: 'usuario'), new_admin_user_path, class: 'btn btn-primary pull-right' %>
+    <h1>
+      <%= User.model_name.human %>
+      <small>panel principal</small>
+    </h1>
+  </section>
+<% end %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">
+          Listado de usuarios
+        </h3>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+        <%= tag.table role: :datatable, class: 'table table-bordered table-hover', data: { url: admin_users_path(format: :json) } do %>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th style="width: 110px;"></th>
+              <th>Nombre</th>
+              <th>Correo electrónico</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

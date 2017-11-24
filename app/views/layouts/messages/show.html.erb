@@ -1,0 +1,53 @@
+<%= content_for :header do %>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <%= Message.model_name.human %>
+      <small><%= l @message.created_at, format: :short %></small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><%= link_to fa_icon(:envelope, text: Message.model_name.human), admin_messages_path %></li>
+      <li class="active"><%= t(action_name, scope: :actions) %></li>
+    </ol>
+
+  </section>
+<% end %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">
+          Mensaje de <%= @message.fullname %>
+        </h3>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+        <%= tag.table class: 'table table-bordered table-hover' do %>
+          <tbody>
+            <tr>
+              <th><%= Message.human_attribute_name :created_at %></th>
+              <td><%= l @message.created_at, format: :short %></td>
+              <th><%= Message.human_attribute_name :email %></th>
+              <td><%= @message.email %></td>
+            </tr>
+            <tr>
+              <th><%= Message.human_attribute_name :fullname %></th>
+              <td><%= @message.fullname %></td>
+              <th><%= Message.human_attribute_name :phone %></th>
+              <td><%= @message.phone %></td>
+            </tr>
+            <tr>
+              <th><%= Message.human_attribute_name :address %></th>
+              <td><%= @message.address %></td>
+              <th><%= Message.human_attribute_name :location %></th>
+              <td><%= @message.location %></td>
+            </tr>
+          </tbody>
+        <% end %>
+        <br />
+        <h4>Mensaje</h4>
+        <%= simple_format @message.comments.to_s %>
+      </div>
+    </div>
+  </div>
+</div>

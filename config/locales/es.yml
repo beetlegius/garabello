@@ -1,0 +1,75 @@
+es:
+  confirm: '¿Estás seguro?'
+  wait: 'Espere...'
+  add: 'Agregar %{element}'
+  roles:
+    admin: 'Administrador'
+    superadmin: 'Super administrador'
+  views:
+    pagination:
+      previous: "&lsaquo; Anterior"
+      next: "Siguiente &rsaquo;"
+      truncate: "&hellip;"
+
+  activerecord:
+    models:
+      user: 'Usuarios'
+      cuadrilla: 'Cuadrillas'
+      via: 'Vías'
+      empleado: 'Empleados'
+      recurso: 'Recursos'
+      tarea: 'Tareas'
+      programa: 'Programas'
+      asistencia: 'Asistencias'
+      consumo: 'Consumos'
+      trabajo: 'Trabajos'
+    attributes:
+      tarea:
+        nombre: 'Nombre'
+        unidad: 'Unidad'
+      user:
+        email: 'Correo electrónico'
+        name: 'Nombre'
+        image: 'Imagen'
+        remove_image: 'Eliminar imagen'
+        role: 'Rol'
+        password: 'Contraseña'
+        password_confirmation: 'Confirmación de contraseña'
+
+  date:
+    formats:
+      default: '%Y/%m/%d'
+      note: '%B %d, %Y'
+  time:
+    formats:
+      default: '%d/%m %H:%M'
+
+  helpers:
+    placeholder:
+    submit:
+      message:
+        create: 'Enviar'
+      create: 'Agregar'
+      update: 'Guardar cambios'
+
+  notice:
+    create: 'El elemento ha sido agregado exitosamente.'
+    update: 'Se guardaron los cambios. %{link}'
+    destroy: 'El elemento ha sido eliminado exitosamente.'
+    login: 'Sesión iniciada.'
+  alert:
+    destroy: 'El elemento no puede ser eliminado.'
+    access_denied: 'Acceso denegado'
+    login: 'El usuario y/o la contraseña no son correctos.'
+    no_puede_editar: 'No se puede editar este elemento.'
+  actions:
+    new: 'Agregar'
+    create: 'Agregar'
+    edit: 'Editar'
+    update: 'Editar'
+    show: 'Ver'
+
+  number:
+    currency:
+      format:
+        strip_insignificant_zeros: true
