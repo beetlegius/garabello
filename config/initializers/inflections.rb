@@ -17,6 +17,9 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'asistencia', 'asistencias'
   inflect.irregular 'consumo', 'consumos'
   inflect.irregular 'trabajo', 'trabajos'
+  inflect.irregular 'trabajo_pam', 'trabajos_pam'
+  inflect.irregular 'trabajo_pat', 'trabajos_pat'
+  inflect.irregular 'trabajo_fp',  'trabajos_fp'
 end
 
 # These inflection rules are supported but not enabled by default:

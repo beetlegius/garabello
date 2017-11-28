@@ -105,8 +105,8 @@ ActiveRecord::Schema.define(version: 20171122160436) do
     t.date "fecha"
     t.integer "cantidad_ejecutada"
     t.integer "cantidad_estimada"
-    t.integer "km_desde"
-    t.integer "km_hasta"
+    t.decimal "km_desde", precision: 10, scale: 3
+    t.decimal "km_hasta", precision: 10, scale: 3
     t.datetime "deleted_at"
     t.string "type"
     t.integer "programa_id"

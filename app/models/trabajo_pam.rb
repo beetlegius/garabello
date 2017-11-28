@@ -1,4 +1,4 @@
-class TrabajoPROG < Trabajo
+class TrabajoPAM < Trabajo
 
   # CONFIG
 

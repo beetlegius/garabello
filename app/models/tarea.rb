@@ -29,8 +29,11 @@ class Tarea < ApplicationRecord
 
   # ALIASES
 
+  def to_label
+    "#{nombre} (#{unidad})"
+  end
+
   alias_attribute :to_s, :nombre
-  alias_attribute :to_label, :nombre
 
   # PRIVATE METHODS
 

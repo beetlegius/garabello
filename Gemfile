@@ -99,3 +99,4 @@ gem 'faker'
 gem 'sucker_punch'
 
 gem 'paranoia'
+gem 'cocoon'

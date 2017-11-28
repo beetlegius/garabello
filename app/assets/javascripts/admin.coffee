@@ -11,6 +11,7 @@
 #= require admin/plugins/icheck
 #= require jquery-fileupload
 #= require turbolinks
+#= require cocoon
 #  require bootstrap-wysihtml5
 #  require bootstrap-wysihtml5/locales/es-AR
 #= require admin/sortable

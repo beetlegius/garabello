@@ -4,7 +4,7 @@ class CreateTrabajos < ActiveRecord::Migration[5.1]
       t.date :fecha
       t.integer :cantidad_ejecutada
       t.integer :cantidad_estimada
-      t.integer :km_desde, :km_hasta
+      t.decimal :km_desde, :km_hasta, precision: 10, scale: 3
 
       t.datetime :deleted_at, index: true
       t.string :type

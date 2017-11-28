@@ -1,4 +1,4 @@
-class TrabajoEXT < Trabajo
+class TrabajoFP < Trabajo
 
   # CONFIG
 

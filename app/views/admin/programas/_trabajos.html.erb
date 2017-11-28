@@ -1,0 +1,48 @@
+<div class="box-group">
+  <h4>Trabajos</h4>
+  <% for dia in (programa.desde..programa.hasta) %>
+    <div class="panel box box-primary">
+      <div class="box-header with-border">
+        <h4 class="box-title">
+          <%= link_to date(dia, format: :tab), "#trabajos-#{dia}", data: { toggle: :collapse, parent: '#trabajos' } %>
+        </h4>
+      </div>
+      <div id="trabajos-<%= dia %>" class="panel-collapse collapse in">
+        <div class="box-body">
+          <div class="btn-group btn-group-xs">
+            <%= link_to_add_association 'Agregar PAM', f, :trabajos_pam, partial: 'admin/trabajos_pam/fields',
+              wrap_object: Proc.new { |trabajo| trabajo.fecha = dia; trabajo }, class: 'btn btn-primary',
+              data: { association_insertion_node: "#trabajo-fields-#{dia}", association_insertion_method: :append } %>
+            <%= link_to_add_association 'Agregar PAT', f, :trabajos_pat, partial: 'admin/trabajos_pat/fields',
+              wrap_object: Proc.new { |trabajo| trabajo.fecha = dia; trabajo }, class: 'btn btn-danger',
+              data: { association_insertion_node: "#trabajo-fields-#{dia}", association_insertion_method: :append } %>
+            <%= link_to_add_association 'Agregar FP', f, :trabajos_fp, partial: 'admin/trabajos_fp/fields',
+              wrap_object: Proc.new { |trabajo| trabajo.fecha = dia; trabajo }, class: 'btn btn-success',
+              data: { association_insertion_node: "#trabajo-fields-#{dia}", association_insertion_method: :append } %>
+          </div>
+          <table class="table table-striped table-condensed table-form">
+            <thead>
+              <tr>
+                <th>Tarea</th>
+                <th>KM desde</th>
+                <th>KM hasta</th>
+                <th>Estimado</th>
+                <th>Ejecutado</th>
+                <td></td>
+              </tr>
+            </thead>
+            <%= tag.tbody id: "trabajo-fields-#{dia}" do %>
+
+              <% for trabajo in programa.trabajos.where(fecha: dia) %>
+                <%= f.simple_fields_for trabajo.class.name.tableize, trabajo do |builder| %>
+                  <%= render "admin/#{trabajo.class.name.tableize}/fields", f: builder, fecha: dia %>
+                <% end %>
+              <% end %>
+
+            <% end %>
+          </table>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
