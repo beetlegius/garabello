@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
     resources :users
 
-    root to: 'tareas#index'
+    root to: 'programas#index'
   end
 
   scope module: :public do

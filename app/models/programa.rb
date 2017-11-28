@@ -2,12 +2,15 @@ class Programa < ApplicationRecord
 
   # CONFIG
 
+  attr_accessor :rango
+
   include Destroyable
-  
+
   UNIDADES = %w(metro unidad metro_2 toneladas horas kilometro litros)
 
   # CALLBACKS
 
+  after_initialize :set_rango
   before_create :crear_asistencias
 
   # RELATIONS
@@ -37,6 +40,17 @@ class Programa < ApplicationRecord
 
   # INSTANCE METHODS
 
+  def rango
+    # return nil if new_record?
+    "#{desde.strftime('%d-%m-%Y')} - #{hasta.strftime('%d-%m-%Y')}"
+  end
+
+  def rango=(str)
+    arr = str.split(" - ")
+    self.desde = arr.first
+    self.hasta = arr.last
+  end
+
   # ALIASES
 
   # PRIVATE METHODS
@@ -45,8 +59,15 @@ class Programa < ApplicationRecord
 
   def crear_asistencias
     for empleado in cuadrilla.empleados
-      self.asistencias.build empleado: empleado
+      (desde..hasta).each do |dia|
+        self.asistencias.build empleado: empleado, fecha: dia
+      end
     end
+  end
+
+  def set_rango
+    self.desde ||= 1.week.ago
+    self.hasta ||= 1.day.ago
   end
 
 end

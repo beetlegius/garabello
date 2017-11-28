@@ -15,7 +15,7 @@ User.create! name: 'Esteban Suárez',   email: 'estebansuarezbue@gmail.com', rol
 end
 
 for cuadrilla in Cuadrilla.all
-  rand(10..15).times do
+  rand(5..10).times do
     cuadrilla.empleados.create! nombre: Faker::Name.first_name, apellido: Faker::Name.last_name
   end
 end

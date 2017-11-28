@@ -1,4 +1,5 @@
 //= require bootstrap
+//= require bootstrap-daterangepicker
 //= require font-awesome
 //= require ionicons
 //= require admin/AdminLTE
@@ -23,3 +24,5 @@ form .radio label, form .checkbox label { padding-left: 0px; }
 
 .fileupload-buttonbar button.delete { display: none; }
 .fileupload-buttonbar div.icheckbox_square-red { display: none; }
+
+.table-form .form-group { margin-bottom: 0px; }

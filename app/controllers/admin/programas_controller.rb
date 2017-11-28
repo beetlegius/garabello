@@ -41,7 +41,7 @@ module Admin
     private
 
     def programa_params
-      params.require(:programa).permit(:desde, :hasta, :capataz, :inspector, :estimado_ayudante, :estimado_operario, :real_ayudante, :real_operario, :via_id, :cuadrilla_id, trabajos_attributes: [:id, :_destroy], consumos_attributes: [:id, :_destroy], asistencias_attributes: [:id, :_destroy])
+      params.require(:programa).permit(:rango, :capataz, :inspector, :dotacion_original, :dotacion_real, :via_id, :cuadrilla_id, trabajos_attributes: [:id, :_destroy], consumos_attributes: [:id, :_destroy], asistencias_attributes: [:id, :estado, :recargo_horas])
     end
 
   end

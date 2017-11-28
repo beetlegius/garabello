@@ -1,6 +1,9 @@
 #= require jquery
 #= require jquery-ui
+#= require moment
+#= require moment/locale/es
 #= require bootstrap
+#= require bootstrap-daterangepicker
 #= require rails-ujs
 #= require datatables
 #= require admin/app
@@ -11,6 +14,7 @@
 #  require bootstrap-wysihtml5
 #  require bootstrap-wysihtml5/locales/es-AR
 #= require admin/sortable
+#= require admin/asistencias
 
 $(document).on 'turbolinks:load', ->
 
@@ -57,3 +61,5 @@ $(document).on 'turbolinks:load', ->
       $('#loading').remove()
 
   sortSetup()
+
+  $("[data-behavior='daterangepicker']").daterangepicker()

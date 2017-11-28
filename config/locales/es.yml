@@ -39,7 +39,7 @@ es:
   date:
     formats:
       default: '%Y/%m/%d'
-      note: '%B %d, %Y'
+      tab: '%d/%m %A'
   time:
     formats:
       default: '%d/%m %H:%M'

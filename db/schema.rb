@@ -13,9 +13,8 @@
 ActiveRecord::Schema.define(version: 20171122160436) do
 
   create_table "asistencias", force: :cascade do |t|
-    t.integer "cantidad_presente"
-    t.integer "cantidad_ausente"
-    t.integer "cantidad_ausente_sin_aviso"
+    t.date "fecha"
+    t.integer "estado"
     t.integer "recargo_horas"
     t.datetime "deleted_at"
     t.integer "programa_id"
@@ -69,10 +68,8 @@ ActiveRecord::Schema.define(version: 20171122160436) do
     t.date "hasta"
     t.string "capataz"
     t.string "inspector"
-    t.integer "estimado_ayudante"
-    t.integer "estimado_operario"
-    t.integer "real_ayudante"
-    t.integer "real_operario"
+    t.integer "dotacion_original"
+    t.integer "dotacion_real"
     t.datetime "deleted_at"
     t.integer "trabajos_count", default: 0, null: false
     t.integer "via_id"

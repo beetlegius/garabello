@@ -185,11 +185,15 @@ GEM
       sprockets-rails (>= 2.0.0)
     rails-assets-bootstrap (3.3.7)
       rails-assets-jquery (>= 1.9.1, < 4)
+    rails-assets-bootstrap-daterangepicker (2.1.25)
+      rails-assets-jquery (>= 1.9.1, < 4)
+      rails-assets-moment (>= 2.9.0)
     rails-assets-datatables (1.10.16)
       rails-assets-jquery (>= 1.7.0)
     rails-assets-jquery (3.2.1)
     rails-assets-jquery-ui (1.12.1)
       rails-assets-jquery (>= 1.6)
+    rails-assets-moment (2.19.2)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -313,9 +317,11 @@ DEPENDENCIES
   puma (~> 3.7)
   rails (~> 5.1.4)
   rails-assets-bootstrap!
+  rails-assets-bootstrap-daterangepicker!
   rails-assets-datatables!
   rails-assets-jquery!
   rails-assets-jquery-ui!
+  rails-assets-moment!
   rails-i18n
   ransack
   sass-rails (~> 5.0)

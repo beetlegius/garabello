@@ -28,45 +28,67 @@
     <div class="tab-content">
       <div class="tab-pane active" id="info">
         <div class="row">
-          <div class="col-xs-12 col-sm-3">
-            <%= f.input :desde, html5: true, autofocus: true %>
+          <div class="col-xs-12 col-md-4">
+            <%= f.input :rango, autofocus: @programa.new_record?, disabled: @programa.persisted?, input_html: { class: 'text-center input-lg', data: { behavior: :daterangepicker } } %>
           </div>
-          <div class="col-xs-12 col-sm-3">
-            <%= f.input :hasta, html5: true %>
+          <div class="col-xs-12 col-md-4">
+            <%= f.association :cuadrilla, autofocus: @programa.persisted?, prompt: true, input_html: { class: 'input-lg' } %>
           </div>
-          <div class="col-xs-12 col-sm-3">
-            <%= f.association :cuadrilla, prompt: true %>
-          </div>
-          <div class="col-xs-12 col-sm-3">
-            <%= f.association :via, prompt: true %>
+          <div class="col-xs-12 col-md-4">
+            <%= f.association :via, prompt: true, input_html: { class: 'input-lg' } %>
           </div>
         </div>
         <div class="row">
-          <div class="col-xs-12 col-sm-3">
-            <%= f.input :estimado_ayudante, input_html: { placeholder: true } %>
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <%= f.input :dotacion_original, input_html: { placeholder: true } %>
           </div>
-          <div class="col-xs-12 col-sm-3">
-            <%= f.input :real_ayudante, input_html: { placeholder: true } %>
+          <div class="col-xs-12 col-sm-6 col-md-3">
+            <%= f.input :dotacion_real, input_html: { placeholder: true } %>
           </div>
-          <div class="col-xs-12 col-sm-3">
-            <%= f.input :estimado_operario, input_html: { placeholder: true } %>
-          </div>
-          <div class="col-xs-12 col-sm-3">
-            <%= f.input :real_operario, input_html: { placeholder: true } %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 col-sm-6">
+          <div class="col-xs-12 col-sm-6 col-md-3">
             <%= f.input :capataz, input_html: { placeholder: true } %>
           </div>
-          <div class="col-xs-12 col-sm-6">
+          <div class="col-xs-12 col-sm-6 col-md-3">
             <%= f.input :inspector, input_html: { placeholder: true } %>
           </div>
         </div>
       </div>
       <div class="tab-pane" id="trabajos">Trabajos</div>
-      <div class="tab-pane" id="consumos">Consumos</div>
-      <div class="tab-pane" id="asistencias">Asistencias</div>
+      <div class="tab-pane" id="consumos">
+        Consumos
+      </div>
+      <div class="tab-pane" id="asistencias">
+        <div class="box-group">
+          <% (@programa.desde..@programa.hasta).each_with_index do |dia, index| %>
+            <div class="panel box box-primary">
+              <div class="box-header with-border">
+                <h4 class="box-title">
+                  <%= link_to date(dia, format: :tab), "##{dia}", data: { toggle: :collapse, parent: '#asistencias' } %>
+                </h4>
+              </div>
+              <div id="<%= dia %>" class="panel-collapse collapse in">
+                <div class="box-body">
+                  <div class="btn-group btn-group-xs">
+                    <%= link_to 'Todos presentes', '#', class: 'btn btn-success', data: { behavior: 'marcar-estado', valor: :presente } %>
+                    <%= link_to 'Todos ausentes', '#', class: 'btn btn-warning', data: { behavior: 'marcar-estado', valor: :ausente } %>
+                    <%= link_to 'Todos ausentes sin aviso', '#', class: 'btn btn-danger', data: { behavior: 'marcar-estado', valor: :ausente_sin_aviso } %>
+                  </div>
+                  <table class="table table-striped table-condensed table-form">
+                    <thead>
+                      <tr>
+                        <th>Empleado</th>
+                        <th>Estado</th>
+                        <th>Recargo horas</th>
+                      </tr>
+                    </thead>
+                    <%= tag.tbody render(partial: 'admin/asistencias/form', collection: @programa.asistencias.alfabetico.where(fecha: dia).select("asistencias.*, (empleados.apellido || ' ' || empleados.nombre) AS empleado_s"), as: :asistencia, locals: { f: f }) %>
+                  </table>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
 
     <div class="box-footer">
@@ -74,3 +96,7 @@
     </div>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $("body").addClass("sidebar-collapse");
+</script>

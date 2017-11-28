@@ -14,6 +14,8 @@ class Empleado < ApplicationRecord
 
   # SCOPES
 
+  # scope :alfabetico, -> { order :apellido, :nombre }
+
   # VALIDATIONS
 
   validates :nombre, :apellido, presence: true
@@ -23,7 +25,7 @@ class Empleado < ApplicationRecord
   # INSTANCE METHODS
 
   def nombre_completo
-    [nombre, apellido].join(" ")
+    [apellido, nombre].join(" ")
   end
 
   def can_delete?
