@@ -20,8 +20,8 @@ test:
   <<: *default
   database: db/test.sqlite3
 
-production:
-  <<: *default
-  database: garabello
-  username: garabello
-  password: <%= Rails.application.secrets.database_password %>
+# production:
+#   <<: *default
+#   database: garabello
+#   username: garabello
+#   password: <%= Rails.application.secrets.database_password %>
