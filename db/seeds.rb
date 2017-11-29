@@ -11,8 +11,13 @@ User.create! name: 'Esteban Suárez',   email: 'estebansuarezbue@gmail.com', rol
 
 5.times do
   Cuadrilla.create! nombre: Faker::Simpsons.character
-  Via.create! nombre: Faker::Simpsons.location
 end
+Via.create! nombre: 'Mar del Plata'
+Via.create! nombre: 'Rosario'
+Via.create! nombre: 'Chaco'
+Via.create! nombre: 'Tucumán'
+Via.create! nombre: 'Bahía Blanca'
+Via.create! nombre: 'Mendoza'
 
 for cuadrilla in Cuadrilla.all
   rand(5..10).times do
@@ -43,4 +48,3 @@ Tarea.create! nombre: "Tareas de vía en PaNs", unidad: 'unidad'
 Tarea.create! nombre: "Manipuleo, carga y descarga de materiales", unidad: 'toneladas'
 Tarea.create! nombre: "Limpieza lugar de trabajo y reparación de herramientas", unidad: 'horas'
 Tarea.create! nombre: "Traslado base a obradores", unidad: 'kilometro'
-Tarea.create! nombre: "Otros", unidad: 'varios'

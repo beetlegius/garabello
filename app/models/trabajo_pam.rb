@@ -16,6 +16,10 @@ class TrabajoPAM < Trabajo
 
   # INSTANCE METHODS
 
+  def color
+    'text-primary'
+  end
+
   # ALIASES
 
   # PRIVATE METHODS

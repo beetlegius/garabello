@@ -10,6 +10,7 @@ class CreateTrabajos < ActiveRecord::Migration[5.1]
       t.string :type
       t.belongs_to :programa, foreign_key: true, index: true
       t.belongs_to :tarea, foreign_key: true, index: true
+      t.index [:fecha, :tarea_id]
       t.timestamps
     end
   end

@@ -2,7 +2,7 @@ class Programa < ApplicationRecord
 
   # CONFIG
 
-  attr_accessor :rango
+  attr_accessor :periodo
 
   include Destroyable
 
@@ -10,7 +10,7 @@ class Programa < ApplicationRecord
 
   # CALLBACKS
 
-  after_initialize :set_rango
+  after_initialize :set_periodo
   before_create :crear_asistencias
 
   # RELATIONS
@@ -47,12 +47,20 @@ class Programa < ApplicationRecord
 
   # INSTANCE METHODS
 
-  def rango
+  def cantidad_dias
+    (desde..hasta).count
+  end
+
+  def dotacion_correcta?
+    dotacion_original == dotacion_real
+  end
+
+  def periodo
     # return nil if new_record?
     "#{desde.strftime('%d-%m-%Y')} - #{hasta.strftime('%d-%m-%Y')}"
   end
 
-  def rango=(str)
+  def periodo=(str)
     arr = str.split(" - ")
     self.desde = arr.first
     self.hasta = arr.last
@@ -72,9 +80,9 @@ class Programa < ApplicationRecord
     end
   end
 
-  def set_rango
-    self.desde ||= 1.week.ago
-    self.hasta ||= 1.day.ago
+  def set_periodo
+    self.desde ||= 1.week.ago.beginning_of_week
+    self.hasta ||= 1.week.ago.beginning_of_week + 4.days
   end
 
 end

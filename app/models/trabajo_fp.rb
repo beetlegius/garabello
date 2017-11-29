@@ -14,6 +14,14 @@ class TrabajoFP < Trabajo
 
   # INSTANCE METHODS
 
+  def cantidad_correcta?
+    true
+  end
+
+  def color
+    'text-success'
+  end
+
   # ALIASES
 
   # PRIVATE METHODS

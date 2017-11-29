@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20171122160436) do
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_asistencias_on_deleted_at"
     t.index ["empleado_id"], name: "index_asistencias_on_empleado_id"
+    t.index ["fecha", "empleado_id", "programa_id"], name: "index_asistencias_on_fecha_and_empleado_id_and_programa_id", unique: true
     t.index ["programa_id"], name: "index_asistencias_on_programa_id"
   end
 
@@ -114,6 +115,7 @@ ActiveRecord::Schema.define(version: 20171122160436) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_trabajos_on_deleted_at"
+    t.index ["fecha", "tarea_id"], name: "index_trabajos_on_fecha_and_tarea_id"
     t.index ["programa_id"], name: "index_trabajos_on_programa_id"
     t.index ["tarea_id"], name: "index_trabajos_on_tarea_id"
   end

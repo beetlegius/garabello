@@ -14,9 +14,9 @@ class ProgramasDatatable < ApplicationDatatable
         column << programa.inspector
 
         links = []
-        links.push @view.link_to('Detalle', @view.admin_programa_path(programa), class: 'btn btn-xs bg-purple')
-        links.push @view.link_to('Editar', @view.edit_admin_programa_path(programa), class: 'btn btn-xs btn-info')
-        links.push @view.link_to('Eliminar', @view.admin_programa_path(programa), method: :delete, class: 'btn btn-xs btn-danger', data: { confirm: @view.t(:confirm) })
+        links.push @view.link_to('Detalle', @view.admin_programa_path(programa), class: 'btn btn-xs btn-flat bg-purple')
+        links.push @view.link_to('Editar', @view.edit_admin_programa_path(programa), class: 'btn btn-xs btn-flat btn-info')
+        links.push @view.link_to('Eliminar', @view.admin_programa_path(programa), method: :delete, class: 'btn btn-xs btn-flat btn-danger', data: { confirm: @view.t(:confirm) })
         column << @view.tag.div(links.join.html_safe, class: 'btn-group pull-right')
       end
     end

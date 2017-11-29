@@ -23,6 +23,9 @@ es:
       asistencia: 'Asistencias'
       consumo: 'Consumos'
       trabajo: 'Trabajos'
+      trabajo_pam: 'Plan anual'
+      trabajo_pat: 'Puntada a tiempo'
+      trabajo_fp: 'Fuera de programa'
     attributes:
       tarea:
         nombre: 'Nombre'
@@ -38,7 +41,9 @@ es:
 
   date:
     formats:
+      dia_semana: '%A'
       default: '%Y/%m/%d'
+      header: '%d/%m/%y'
       tab: '%d/%m %A'
   time:
     formats:
@@ -46,6 +51,8 @@ es:
 
   helpers:
     placeholder:
+      asistencia:
+        recargo_horas: 'Horas extras (cantidad)'
     submit:
       message:
         create: 'Enviar'
@@ -56,7 +63,6 @@ es:
     create: 'El elemento ha sido agregado exitosamente.'
     update: 'Se guardaron los cambios. %{link}'
     destroy: 'El elemento ha sido eliminado exitosamente.'
-    login: 'Sesión iniciada.'
   alert:
     destroy: 'El elemento no puede ser eliminado.'
     access_denied: 'Acceso denegado'

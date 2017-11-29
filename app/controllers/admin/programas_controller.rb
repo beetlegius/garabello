@@ -41,11 +41,11 @@ module Admin
     private
 
     def programa_params
-      params.require(:programa).permit(:rango, :capataz, :inspector, :dotacion_original, :dotacion_real, :via_id, :cuadrilla_id,
+      params.require(:programa).permit(:periodo, :capataz, :inspector, :dotacion_original, :dotacion_real, :via_id, :cuadrilla_id,
         trabajos_pam_attributes: [:id, :fecha, :tarea_id, :km_desde, :km_hasta, :cantidad_estimada, :cantidad_ejecutada, :_destroy],
         trabajos_pat_attributes: [:id, :fecha, :tarea_id, :km_desde, :km_hasta, :cantidad_estimada, :cantidad_ejecutada, :_destroy],
         trabajos_fp_attributes: [:id, :fecha, :tarea_id, :km_desde, :km_hasta, :cantidad_ejecutada, :_destroy],
-        consumos_attributes: [:id, :_destroy],
+        consumos_attributes: [:id, :fecha, :cantidad, :km_desde, :km_hasta, :recurso_id, :_destroy],
         asistencias_attributes: [:id, :estado, :recargo_horas])
     end
 

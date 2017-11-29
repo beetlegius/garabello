@@ -1,17 +1,21 @@
 <%= content_for :header do %>
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <h1>
-      <%= Programa.model_name.human %>
-      <% if @programa.persisted? %>
-        <small><%= date @programa.desde %> - <%= date @programa.hasta %></small>
-      <% end %>
-    </h1>
-    <ol class="breadcrumb">
-      <li><%= link_to fa_icon(:wrench, text: Programa.model_name.human), admin_programas_path %></li>
-      <li class="active"><%= t(action_name, scope: :actions) %></li>
-    </ol>
-  </section>
+  <% if @programa.persisted? %>
+    <%= render 'header' %>
+  <% else %>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        <%= Programa.model_name.human %>
+        <% if @programa.persisted? %>
+          <small><%= date @programa.desde %> - <%= date @programa.hasta %></small>
+        <% end %>
+      </h1>
+      <ol class="breadcrumb">
+        <li><%= link_to fa_icon(:wrench, text: Programa.model_name.human), admin_programas_path %></li>
+        <li class="active"><%= t(action_name, scope: :actions) %></li>
+      </ol>
+    </section>
+  <% end %>
 <% end %>
 
 <%= simple_form_for [:admin, @programa], html: { role: :form } do |f| %>
@@ -22,17 +26,19 @@
       <li class="<%= @programa.new_record? ? :disabled : :active %>"><%= link_to 'Trabajos', '#trabajos', data: { toggle: (:tab if @programa.persisted?) } %></li>
       <li class="<%= :disabled if @programa.new_record? %>"><%= link_to 'Consumos', '#consumos', data: { toggle: (:tab if @programa.persisted?) } %></li>
       <li class="<%= :disabled if @programa.new_record? %>"><%= link_to 'Asistencias', '#asistencias', data: { toggle: (:tab if @programa.persisted?) } %></li>
-      <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-tasks"></i></a></li>
+      <li class="pull-right">
+        <%= link_to fa_icon(:tasks, class: 'fa-fw', text: 'ver detalle'), admin_programa_path(@programa), class: 'text-muted ver-detalle' if @programa.persisted? %>
+      </li>
     </ul>
 
     <div class="tab-content">
       <div class="tab-pane <%= :active if @programa.new_record? %>" id="info">
         <div class="row">
           <div class="col-xs-12 col-md-4">
-            <%= f.input :rango, autofocus: @programa.new_record?, disabled: @programa.persisted?, input_html: { class: 'text-center input-lg', data: { behavior: :daterangepicker } } %>
+            <%= f.input :periodo, autofocus: @programa.new_record?, disabled: @programa.persisted?, hint: true, input_html: { class: 'text-center input-lg', data: { behavior: :daterangepicker } } %>
           </div>
           <div class="col-xs-12 col-md-4">
-            <%= f.association :cuadrilla, autofocus: @programa.persisted?, prompt: true, input_html: { class: 'input-lg' } %>
+            <%= f.association :cuadrilla, autofocus: @programa.persisted?, prompt: true, hint: true, input_html: { class: 'input-lg' } %>
           </div>
           <div class="col-xs-12 col-md-4">
             <%= f.association :via, prompt: true, input_html: { class: 'input-lg' } %>
@@ -57,7 +63,7 @@
         <%= render 'trabajos', programa: @programa, f: f %>
       </div>
       <div class="tab-pane" id="consumos">
-        Consumos
+        <%= render 'consumos', programa: @programa, f: f %>
       </div>
       <div class="tab-pane" id="asistencias">
         <%= render 'asistencias', programa: @programa, f: f %>

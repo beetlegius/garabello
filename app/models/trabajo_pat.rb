@@ -14,6 +14,10 @@ class TrabajoPAT < Trabajo
 
   # INSTANCE METHODS
 
+  def color
+    'text-danger'
+  end
+
   # ALIASES
 
   # PRIVATE METHODS

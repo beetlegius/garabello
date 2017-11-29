@@ -11,6 +11,8 @@ class CreateAsistencias < ActiveRecord::Migration[5.1]
       t.datetime :deleted_at, index: true
       t.belongs_to :programa, foreign_key: true, index: true
       t.belongs_to :empleado, foreign_key: true, index: true
+
+      t.index [:fecha, :empleado_id, :programa_id], unique: true
       t.timestamps
     end
   end

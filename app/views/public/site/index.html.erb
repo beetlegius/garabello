@@ -1,10 +1,14 @@
 <div class="container">
-  <div class="text-center">
-    <div class="page-header">
-      <h1>Garabello</h1>
+  <main>
+    <div class="carousel-train carousel slide" data-ride="carousel">
+      <div class="carousel-inner" role="listbox">
+        <% 6.times do |i| %>
+          <%= tag.div image_tag("public/tren-0#{i.next}.jpg", class: 'img-responsive'), class: [:item, (:active if i.zero?)] %>
+        <% end %>
+      </div>
     </div>
-    <%= image_tag 'logo.png', alt: 'Trenes Argentinos' %>
+    <%= image_tag 'logo.png', alt: 'Trenes Argentinos', class: 'img-responsive' %>
     <hr />
     <p class="lead">Sistema en desarrollo - <%= link_to 'iniciar sesión', new_user_session_path %></p>
-  </div>
+  </main>
 </div>

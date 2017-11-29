@@ -2,7 +2,7 @@ class Asistencia < ApplicationRecord
 
   # CONFIG
 
-  enum estado: %w(presente ausente ausente_sin_aviso)
+  enum estado: [PRESENTE = 'presente', AUSENTE = 'ausente', AUSENTE_SIN_AVISO = 'ausente_sin_aviso']
 
   include Destroyable
 
@@ -20,7 +20,7 @@ class Asistencia < ApplicationRecord
   # VALIDATIONS
 
   # validates :cantidad_presence, :cantidad_ausente, :cantidad_ausente_sin_aviso, :recargo_horas, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
-  validates :fecha, presence: true
+  validates :fecha, presence: true, uniqueness: { scope: [:empleado_id, :programa_id] }
   validates :recargo_horas, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
 
   # CLASS METHODS

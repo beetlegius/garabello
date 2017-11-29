@@ -22,6 +22,10 @@ class Trabajo < ApplicationRecord
 
   # INSTANCE METHODS
 
+  def cantidad_correcta?
+    cantidad_estimada == cantidad_ejecutada
+  end
+
   # ALIASES
 
   alias_attribute :to_s, :fecha

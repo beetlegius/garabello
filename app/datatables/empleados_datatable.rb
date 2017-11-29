@@ -11,8 +11,8 @@ class EmpleadosDatatable < ApplicationDatatable
         column << empleado.apellido
 
         links = []
-        links.push @view.link_to('Editar', @view.edit_admin_empleado_path(empleado), class: 'btn btn-xs btn-info')
-        links.push @view.link_to('Eliminar', @view.admin_empleado_path(empleado), method: :delete, class: 'btn btn-xs btn-danger', data: { confirm: @view.t(:confirm) })
+        links.push @view.link_to('Editar', @view.edit_admin_empleado_path(empleado), class: 'btn btn-xs btn-flat btn-info')
+        links.push @view.link_to('Eliminar', @view.admin_empleado_path(empleado), method: :delete, class: 'btn btn-xs btn-flat btn-danger', data: { confirm: @view.t(:confirm) })
         column << @view.tag.div(links.join.html_safe, class: 'btn-group pull-right')
       end
     end

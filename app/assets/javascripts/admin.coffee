@@ -64,3 +64,6 @@ $(document).on 'turbolinks:load', ->
   sortSetup()
 
   $("[data-behavior='daterangepicker']").daterangepicker()
+
+  $.map $("table.table td"), (elem) ->
+    $(elem).addClass('text-muted') if $(elem).text() == '0'

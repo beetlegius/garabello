@@ -1,29 +1,45 @@
-<div class="row">
-  <div class="col-sm-4 col-sm-offset-4">
-    <h1 class="text-center">Log in</h1>
-    <hr>
+<div class="login-box">
+  <div class="login-logo">
+    <%= link_to root_path do %>
+      Bienvenido a
+      Gara<b>bello</b>
+    <% end %>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Inicie sesión para operar</p>
+
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div class="form-group">
-        <%= f.email_field :email, autofocus: true, placeholder: 'Email Address', class: 'form-control' %>
+      <%= devise_error_messages! %>
+      <div class="form-group has-feedback">
+        <%= f.email_field :email, autofocus: true, placeholder: 'Correo electrónico', class: 'form-control' %>
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
 
-      <div class="form-group">
+      <div class="form-group has-feedback">
         <%= f.password_field :password, autocomplete: "off", placeholder: 'Password', class: 'form-control' %>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
 
-      <% if devise_mapping.rememberable? -%>
-        <div class="form-group">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
+      <div class="row">
+        <div class="col-xs-8">
+          <% if devise_mapping.rememberable? -%>
+            <div class="checkbox icheck">
+              <label><%= f.check_box :remember_me %> Recordarme</label>
+            </div>
+          <% end %>
         </div>
-      <% end -%>
-
-      <div class="form-group">
-          <%= f.submit "Log in", class: "btn btn-primary btn-block btn-lg" %>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <%= f.submit 'Ingresar', class: 'btn btn-primary btn-block btn-flat' %>
+        </div>
+        <!-- /.col -->
       </div>
     <% end %>
-      <div class="text-center">
-        <%= render "devise/shared/links" %>
-      </div>
+    <div class="text-center">
+      <%= render "devise/shared/links" %>
     </div>
+  </div>
+  <!-- /.login-box-body -->
 </div>
+<!-- /.login-box -->
