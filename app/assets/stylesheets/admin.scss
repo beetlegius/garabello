@@ -2,13 +2,13 @@
 //= require bootstrap-daterangepicker
 //= require font-awesome
 //= require ionicons
+//= require select2
 //= require admin/AdminLTE
 //= require admin/skins/skin-blue
 //= require admin/dataTables.bootstrap
 //= require admin/plugins/icheck/square/blue
 //= require jquery-ui
 //= require jquery.fileupload-ui
-// @import "bootstrap-wysihtml5/bootstrap3-wysihtml5";
 
 table.table tbody td { vertical-align: middle !important; }
 
@@ -41,3 +41,5 @@ table.table th { vertical-align: middle !important; }
 .border-left { border-left: 3px solid #aaa !important; }
 
 .text-muted { color: #777 !important; }
+
+.select2 { width: 100% !important; }

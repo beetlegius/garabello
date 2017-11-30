@@ -58,11 +58,16 @@
             <%= f.input :inspector, input_html: { placeholder: true } %>
           </div>
         </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <%= f.input :observaciones, input_html: { rows: 4, placeholder: true } %>
+          </div>
+        </div>
       </div>
-      <div class="tab-pane <%= :active if @programa.persisted? %>" id="trabajos">
+      <div class="tab-pane <%= :active if @programa.persisted? %>" id="trabajos" data-behavior="cocoon">
         <%= render 'trabajos', programa: @programa, f: f %>
       </div>
-      <div class="tab-pane" id="consumos">
+      <div class="tab-pane" id="consumos" data-behavior="cocoon">
         <%= render 'consumos', programa: @programa, f: f %>
       </div>
       <div class="tab-pane" id="asistencias">
@@ -76,6 +81,6 @@
   </div>
 <% end %>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   $("body").addClass("sidebar-collapse");
-</script>
+</script> -->

@@ -194,7 +194,8 @@ GEM
     rails-assets-jquery (3.2.1)
     rails-assets-jquery-ui (1.12.1)
       rails-assets-jquery (>= 1.6)
-    rails-assets-moment (2.19.2)
+    rails-assets-moment (2.19.3)
+    rails-assets-select2 (4.0.5)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -324,6 +325,7 @@ DEPENDENCIES
   rails-assets-jquery!
   rails-assets-jquery-ui!
   rails-assets-moment!
+  rails-assets-select2!
   rails-i18n
   ransack
   sass-rails (~> 5.0)

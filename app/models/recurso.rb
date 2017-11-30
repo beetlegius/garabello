@@ -4,7 +4,7 @@ class Recurso < ApplicationRecord
 
   include Destroyable
 
-  UNIDADES = %w(metro unidad metro_2 toneladas horas kilometro litros)
+  UNIDADES = %w(metro metro_2 litro unidad kilo tonelada hora kilometro)
 
   # CALLBACKS
 

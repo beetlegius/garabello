@@ -26,7 +26,7 @@
               <%= f.input :nombre, autofocus: true, input_html: { placeholder: true } %>
             </div>
             <div class="col-xs-12 col-sm-6">
-              <%= f.input :unidad, collection: Tarea::UNIDADES, prompt: true %>
+              <%= f.input :unidad, collection: Tarea::UNIDADES, label_method: :humanize, prompt: true %>
             </div>
           </div>
         </div><!-- /.box-body -->

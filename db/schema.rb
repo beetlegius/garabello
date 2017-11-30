@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20171122160436) do
   create_table "asistencias", force: :cascade do |t|
     t.date "fecha"
     t.integer "estado"
-    t.integer "recargo_horas"
+    t.decimal "recargo_horas", precision: 10, scale: 3
     t.datetime "deleted_at"
     t.integer "programa_id"
     t.integer "empleado_id"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20171122160436) do
     t.string "inspector"
     t.integer "dotacion_original"
     t.integer "dotacion_real"
+    t.text "observaciones"
     t.datetime "deleted_at"
     t.integer "trabajos_count", default: 0, null: false
     t.integer "via_id"

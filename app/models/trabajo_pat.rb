@@ -14,6 +14,10 @@ class TrabajoPAT < Trabajo
 
   # INSTANCE METHODS
 
+  def field_class
+    'danger'
+  end
+
   def color
     'text-danger'
   end

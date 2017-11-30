@@ -4,7 +4,7 @@
 #= require moment/locale/es
 #= require bootstrap
 #= require bootstrap-daterangepicker
-#= require rails-ujs
+#= require select2
 #= require datatables
 #= require admin/app
 #= require admin/dataTables.bootstrap
@@ -12,10 +12,9 @@
 #= require jquery-fileupload
 #= require turbolinks
 #= require cocoon
-#  require bootstrap-wysihtml5
-#  require bootstrap-wysihtml5/locales/es-AR
 #= require admin/sortable
 #= require admin/asistencias
+#= require rails-ujs
 
 $(document).on 'turbolinks:load', ->
 
@@ -67,3 +66,13 @@ $(document).on 'turbolinks:load', ->
 
   $.map $("table.table td"), (elem) ->
     $(elem).addClass('text-muted') if $(elem).text() == '0'
+
+  $('[data-behavior="select2"]').select2()
+
+  $('[data-behavior="cocoon"]').on 'cocoon:before-insert', (e, insertedItem) ->
+    $(e.target).find("tr.empty-row").remove()
+  $('[data-behavior="cocoon"]').on 'cocoon:after-insert', (e, insertedItem) ->
+    $(insertedItem).find('[data-behavior="select2"]').select2()
+
+  # $('[data-behavior="autosubmit"]').find("input, select").on 'change', (e) ->
+  #   $(this).parents("form").submit()

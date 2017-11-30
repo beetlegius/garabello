@@ -16,6 +16,10 @@ class TrabajoPAM < Trabajo
 
   # INSTANCE METHODS
 
+  def field_class
+    'info'
+  end
+
   def color
     'text-primary'
   end

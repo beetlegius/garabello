@@ -20,6 +20,7 @@ es:
         dotacion_real: 'Dotación real'
         capataz: 'Capataz (nombre y apellido)'
         inspector: 'Inspector (nombre y apellido)'
+        observaciones: 'Observaciones especiales'
     #   defaults:
     #     password: 'Password'
     #   user:

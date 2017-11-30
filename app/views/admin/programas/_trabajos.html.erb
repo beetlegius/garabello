@@ -9,13 +9,13 @@
       <div id="trabajos-<%= dia %>" class="panel-collapse collapse in">
         <div class="box-body">
           <nav class="nav text-uppercase">
-            <%= link_to_add_association 'Agregar PAM', f, :trabajos_pam, partial: 'admin/trabajos_pam/fields',
+            <%= link_to_add_association 'Agregar PAM', f, :trabajos_pam, partial: 'admin/trabajos/fields',
             wrap_object: Proc.new { |trabajo| trabajo.fecha = dia; trabajo }, class: 'btn btn-sm btn-flat btn-primary',
             data: { association_insertion_node: "#trabajo-fields-#{dia}", association_insertion_method: :append } %>
-            <%= link_to_add_association 'Agregar PAT', f, :trabajos_pat, partial: 'admin/trabajos_pat/fields',
+            <%= link_to_add_association 'Agregar PAT', f, :trabajos_pat, partial: 'admin/trabajos/fields',
             wrap_object: Proc.new { |trabajo| trabajo.fecha = dia; trabajo }, class: 'btn btn-sm btn-flat btn-danger',
             data: { association_insertion_node: "#trabajo-fields-#{dia}", association_insertion_method: :append } %>
-            <%= link_to_add_association 'Agregar FP', f, :trabajos_fp, partial: 'admin/trabajos_fp/fields',
+            <%= link_to_add_association 'Agregar FP', f, :trabajos_fp, partial: 'admin/trabajos/fields',
             wrap_object: Proc.new { |trabajo| trabajo.fecha = dia; trabajo }, class: 'btn btn-sm btn-flat btn-success',
             data: { association_insertion_node: "#trabajo-fields-#{dia}", association_insertion_method: :append } %>
           </nav>
@@ -37,13 +37,13 @@
               <% if programa.trabajos.where(fecha: dia).exists? %>
                 <% for trabajo in programa.trabajos.where(fecha: dia) %>
                   <%= f.simple_fields_for trabajo.class.name.tableize, trabajo do |builder| %>
-                    <%= render "admin/#{trabajo.class.name.tableize}/fields", f: builder, fecha: dia %>
+                    <%= render "admin/trabajos/fields", f: builder, fecha: dia %>
                   <% end %>
                 <% end %>
               <% else %>
-              <tr>
-                <td colspan="6">No se han cargado trabajos para esta jornada</td>
-              </tr>
+                <tr class="empty-row">
+                  <td colspan="6">No se han cargado trabajos para esta jornada</td>
+                </tr>
               <% end %>
 
             <% end %>

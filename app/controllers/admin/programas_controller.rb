@@ -3,8 +3,10 @@ module Admin
     load_and_authorize_resource
 
     def index
+      @q = Programa.search params[:q]
       respond_to do |format|
         format.html
+        format.js
         format.json { render json: ProgramasDatatable.new(view_context) }
       end
     end
@@ -41,7 +43,7 @@ module Admin
     private
 
     def programa_params
-      params.require(:programa).permit(:periodo, :capataz, :inspector, :dotacion_original, :dotacion_real, :via_id, :cuadrilla_id,
+      params.require(:programa).permit(:periodo, :capataz, :inspector, :dotacion_original, :dotacion_real, :observaciones, :via_id, :cuadrilla_id,
         trabajos_pam_attributes: [:id, :fecha, :tarea_id, :km_desde, :km_hasta, :cantidad_estimada, :cantidad_ejecutada, :_destroy],
         trabajos_pat_attributes: [:id, :fecha, :tarea_id, :km_desde, :km_hasta, :cantidad_estimada, :cantidad_ejecutada, :_destroy],
         trabajos_fp_attributes: [:id, :fecha, :tarea_id, :km_desde, :km_hasta, :cantidad_ejecutada, :_destroy],

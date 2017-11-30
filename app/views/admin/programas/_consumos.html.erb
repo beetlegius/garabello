@@ -27,10 +27,16 @@
             </thead>
             <%= tag.tbody id: "consumo-fields-#{dia}" do %>
 
-              <% for consumo in programa.consumos.where(fecha: dia) %>
-                <%= f.simple_fields_for :consumos, consumo do |builder| %>
-                  <%= render "admin/consumos/fields", f: builder, fecha: dia %>
+              <% if programa.consumos.where(fecha: dia).exists? %>
+                <% for consumo in programa.consumos.where(fecha: dia) %>
+                  <%= f.simple_fields_for :consumos, consumo do |builder| %>
+                    <%= render "admin/consumos/fields", f: builder, fecha: dia %>
+                  <% end %>
                 <% end %>
+              <% else %>
+                <tr class="empty-row">
+                  <td colspan="5">No se han cargado consumos para esta jornada</td>
+                </tr>
               <% end %>
 
             <% end %>

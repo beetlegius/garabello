@@ -5,6 +5,6 @@
       <%= asistencia.empleado_s %>
     </td>
     <td><%= b.input :estado, collection: Asistencia.estados.keys, label: false, label_method: :humanize, prompt: true, input_html: { data: { behavior: :estado } } %></td>
-    <td><%= b.input :recargo_horas, label: false, input_html: { placeholder: true } %></td>
+    <td><%= b.input :recargo_horas, label: false, input_html: { min: 0, step: 0.1, placeholder: true } %></td>
   </tr>
 <% end %>

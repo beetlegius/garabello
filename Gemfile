@@ -85,6 +85,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-jquery-ui'
   gem 'rails-assets-moment'
   gem 'rails-assets-bootstrap-daterangepicker'
+  gem 'rails-assets-select2'
 end
 
 gem 'capistrano-rails'

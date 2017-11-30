@@ -4,9 +4,8 @@ class CreateProgramas < ActiveRecord::Migration[5.1]
       t.date :desde, :hasta
       t.string :capataz, :inspector
       t.integer :dotacion_original, :dotacion_real
-      # t.integer :estimado_ayudante, :estimado_operario
-      # t.integer :real_ayudante, :real_operario
-
+      t.text :observaciones
+      
       t.datetime :deleted_at, index: true
       t.integer :trabajos_count, default: 0, null: false
       t.belongs_to :via, foreign_key: true, index: true

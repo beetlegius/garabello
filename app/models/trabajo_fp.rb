@@ -18,6 +18,10 @@ class TrabajoFP < Trabajo
     true
   end
 
+  def field_class
+    'success'
+  end
+
   def color
     'text-success'
   end

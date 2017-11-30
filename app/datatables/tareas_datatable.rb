@@ -7,7 +7,7 @@ class TareasDatatable < ApplicationDatatable
       [].tap do |column|
         column << tarea.id
         column << tarea.nombre
-        column << tarea.unidad
+        column << tarea.unidad.humanize
 
         links = []
         links.push @view.link_to('Editar', @view.edit_admin_tarea_path(tarea), class: 'btn btn-xs btn-flat btn-info')

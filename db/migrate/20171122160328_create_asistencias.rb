@@ -6,7 +6,7 @@ class CreateAsistencias < ActiveRecord::Migration[5.1]
       # t.integer :cantidad_presente
       # t.integer :cantidad_ausente
       # t.integer :cantidad_ausente_sin_aviso
-      t.integer :recargo_horas
+      t.decimal :recargo_horas, precision: 10, scale: 3
 
       t.datetime :deleted_at, index: true
       t.belongs_to :programa, foreign_key: true, index: true

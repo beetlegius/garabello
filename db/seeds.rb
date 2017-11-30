@@ -20,24 +20,21 @@ Via.create! nombre: 'Bahía Blanca'
 Via.create! nombre: 'Mendoza'
 
 for cuadrilla in Cuadrilla.all
-  rand(5..10).times do
+  rand(4..8).times do
     cuadrilla.empleados.create! nombre: Faker::Name.first_name, apellido: Faker::Name.last_name
   end
 end
 
-15.times do
-  Recurso.create! nombre: Faker::Name.name, unidad: Recurso::UNIDADES.sample
-end
 
 Tarea.create! nombre: "Tapar", unidad: 'metro'
 Tarea.create! nombre: "Destapar", unidad: 'metro'
-Tarea.create! nombre: "Ajuste y reemplazo fijaciones", unidad: 'metro'
-Tarea.create! nombre: "Cambio durmientes", unidad: 'unidad'
+Tarea.create! nombre: "Ajuste y reemplazo de fijaciones", unidad: 'metro'
+Tarea.create! nombre: "Cambio de durmientes", unidad: 'unidad'
 Tarea.create! nombre: "Escuadrar durmientes", unidad: 'unidad'
-Tarea.create! nombre: "Tratamiento juntas", unidad: 'unidad'
-Tarea.create! nombre: "Reemplazo rieles", unidad: 'metro'
+Tarea.create! nombre: "Tratamiento de juntas", unidad: 'unidad'
+Tarea.create! nombre: "Reemplazo de rieles", unidad: 'metro'
 Tarea.create! nombre: "Conservacion geométrica manual", unidad: 'metro'
-Tarea.create! nombre: "Tareas conservación ADV", unidad: 'unidad'
+Tarea.create! nombre: "Tareas de conservación ADV", unidad: 'unidad'
 Tarea.create! nombre: "Desmalezado, desmonte, carpir", unidad: 'metro_2'
 Tarea.create! nombre: "Nivelación longitudinal", unidad: 'metro'
 Tarea.create! nombre: "Nivelación de juntas", unidad: 'unidad'
@@ -45,6 +42,22 @@ Tarea.create! nombre: "Alinear vía", unidad: 'metro'
 Tarea.create! nombre: "Perfilar (zanja, tajeas)", unidad: 'metro'
 Tarea.create! nombre: "Corrección de trocha", unidad: 'metro'
 Tarea.create! nombre: "Tareas de vía en PaNs", unidad: 'unidad'
-Tarea.create! nombre: "Manipuleo, carga y descarga de materiales", unidad: 'toneladas'
-Tarea.create! nombre: "Limpieza lugar de trabajo y reparación de herramientas", unidad: 'horas'
+Tarea.create! nombre: "Manipuleo, carga y descarga de materiales", unidad: 'tonelada'
+Tarea.create! nombre: "Limpieza lugar de trabajo y reparación de herramientas", unidad: 'hora'
 Tarea.create! nombre: "Traslado base a obradores", unidad: 'kilometro'
+
+Recurso.create! nombre: 'Durmiente', unidad: 'unidad'
+Recurso.create! nombre: 'Bulón para eclisa', unidad: 'unidad'
+Recurso.create! nombre: 'Arandela grower', unidad: 'unidad'
+Recurso.create! nombre: 'Tirafondos para vía', unidad: 'unidad'
+Recurso.create! nombre: 'Eclisa para riel', unidad: 'unidad'
+Recurso.create! nombre: 'Riel', unidad: 'metro'
+Recurso.create! nombre: 'Mecha para durmientes', unidad: 'unidad'
+Recurso.create! nombre: 'Disco de corte', unidad: 'unidad'
+Recurso.create! nombre: 'Balasto', unidad: 'tonelada'
+Recurso.create! nombre: 'Aceite', unidad: 'litro'
+Recurso.create! nombre: 'Tanza', unidad: 'metro'
+Recurso.create! nombre: 'Grasa', unidad: 'kilo'
+Recurso.create! nombre: 'Nafta moto - herramientas', unidad: 'litro'
+Recurso.create! nombre: 'Nafta zorra - movilidad', unidad: 'litro'
+Recurso.create! nombre: 'Herbicida', unidad: 'litro'

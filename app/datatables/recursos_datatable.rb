@@ -7,7 +7,7 @@ class RecursosDatatable < ApplicationDatatable
       [].tap do |column|
         column << recurso.id
         column << recurso.nombre
-        column << recurso.unidad
+        column << recurso.unidad.humanize
 
         links = []
         links.push @view.link_to('Editar', @view.edit_admin_recurso_path(recurso), class: 'btn btn-xs btn-flat btn-info')

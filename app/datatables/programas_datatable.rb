@@ -6,12 +6,13 @@ class ProgramasDatatable < ApplicationDatatable
     programas.map do |programa|
       [].tap do |column|
         column << programa.id
-        column << @view.date(programa.desde)
-        column << @view.date(programa.hasta)
-        column << programa.cuadrilla&.nombre
-        column << programa.via&.nombre
-        column << programa.capataz
-        column << programa.inspector
+        column << @view.fa_icon(:calendar, class: 'fa-fw', text: @view.date(programa.desde))
+        column << @view.fa_icon(:calendar, class: 'fa-fw', text: @view.date(programa.hasta))
+        column << @view.fa_icon(:truck, class: 'fa-fw', text: programa.cuadrilla&.nombre)
+        column << @view.fa_icon(:train, class: 'fa-fw', text: programa.via&.nombre)
+        column << @view.fa_icon(:user, class: 'fa-fw', text: programa.capataz)
+        column << @view.fa_icon('user-secret', class: 'fa-fw', text: programa.inspector)
+        column << @view.tag.span(@view.fa_icon(:users, class: 'fa-fw', text: "#{programa.dotacion_real}/#{programa.dotacion_original}"), title: ('La dotación real no coincide con la original' unless programa.dotacion_correcta?), class: ('text-danger' unless programa.dotacion_correcta?))
 
         links = []
         links.push @view.link_to('Detalle', @view.admin_programa_path(programa), class: 'btn btn-xs btn-flat bg-purple')
@@ -31,7 +32,7 @@ class ProgramasDatatable < ApplicationDatatable
   end
 
   def programas
-    @programas ||= Programa.includes(:cuadrilla, :via)
+    @programas ||= Programa.includes(:cuadrilla, :via).search(params[:q]).result(distinct: true)
   end
 
 end
