@@ -1,23 +1,23 @@
 <div class="box-group">
-  <% for dia in (programa.desde..programa.hasta) %>
+  <% for jornada in programa.jornadas %>
     <div class="panel box box-primary">
       <div class="box-header with-border">
         <h4 class="box-title">
-          <%= link_to fa_icon(:calendar, class: 'fa-fw', text: date(dia, format: :tab)), "#trabajos-#{dia}", data: { toggle: :collapse, parent: '#trabajos' } %>
+          <%= link_to fa_icon(:calendar, class: 'fa-fw', text: date(jornada.fecha, format: :tab)), "##{dom_id(jornada)}", data: { toggle: :collapse, parent: '#trabajos' } %>
         </h4>
       </div>
-      <div id="trabajos-<%= dia %>" class="panel-collapse collapse in">
+      <div id="<%= dom_id(jornada) %>" class="panel-collapse collapse in">
         <div class="box-body">
           <nav class="nav text-uppercase">
             <%= link_to_add_association 'Agregar PAM', f, :trabajos_pam, partial: 'admin/trabajos/fields',
-            wrap_object: Proc.new { |trabajo| trabajo.fecha = dia; trabajo }, class: 'btn btn-sm btn-flat btn-primary',
-            data: { association_insertion_node: "#trabajo-fields-#{dia}", association_insertion_method: :append } %>
+            wrap_object: Proc.new { |trabajo| trabajo.asociar_jornada(jornada); trabajo }, title: 'Plan anual de mantenimiento', class: 'btn btn-sm btn-flat btn-primary',
+            data: { association_insertion_node: "#trabajo-fields-#{jornada.fecha}", association_insertion_method: :append } %>
             <%= link_to_add_association 'Agregar PAT', f, :trabajos_pat, partial: 'admin/trabajos/fields',
-            wrap_object: Proc.new { |trabajo| trabajo.fecha = dia; trabajo }, class: 'btn btn-sm btn-flat btn-danger',
-            data: { association_insertion_node: "#trabajo-fields-#{dia}", association_insertion_method: :append } %>
+            wrap_object: Proc.new { |trabajo| trabajo.asociar_jornada(jornada); trabajo }, title: 'Puntada a tiempo', class: 'btn btn-sm btn-flat btn-danger',
+            data: { association_insertion_node: "#trabajo-fields-#{jornada.fecha}", association_insertion_method: :append } %>
             <%= link_to_add_association 'Agregar FP', f, :trabajos_fp, partial: 'admin/trabajos/fields',
-            wrap_object: Proc.new { |trabajo| trabajo.fecha = dia; trabajo }, class: 'btn btn-sm btn-flat btn-success',
-            data: { association_insertion_node: "#trabajo-fields-#{dia}", association_insertion_method: :append } %>
+            wrap_object: Proc.new { |trabajo| trabajo.asociar_jornada(jornada); trabajo }, title: 'Fuera de programa', class: 'btn btn-sm btn-flat btn-success',
+            data: { association_insertion_node: "#trabajo-fields-#{jornada.fecha}", association_insertion_method: :append } %>
           </nav>
           <br />
 
@@ -32,12 +32,12 @@
                 <td></td>
               </tr>
             </thead>
-            <%= tag.tbody id: "trabajo-fields-#{dia}" do %>
+            <%= tag.tbody id: "trabajo-fields-#{jornada.fecha}" do %>
 
-              <% if programa.trabajos.where(fecha: dia).exists? %>
-                <% for trabajo in programa.trabajos.where(fecha: dia) %>
+              <% if programa.trabajos.where(fecha: jornada.fecha).exists? %>
+                <% for trabajo in programa.trabajos.where(fecha: jornada.fecha) %>
                   <%= f.simple_fields_for trabajo.class.name.tableize, trabajo do |builder| %>
-                    <%= render "admin/trabajos/fields", f: builder, fecha: dia %>
+                    <%= render "admin/trabajos/fields", f: builder, fecha: jornada.fecha %>
                   <% end %>
                 <% end %>
               <% else %>

@@ -6,12 +6,18 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create! name: 'Gustavo Molinari', email: 'info@beetlegius.com.ar', role: User::SUPERADMIN, password: 'beetlegius'
-User.create! name: 'Esteban Suárez',   email: 'estebansuarezbue@gmail.com', role: User::SUPERADMIN, password: 'suarez'
+puts 'Creando usuarios...'
+User.create! name: 'Gustavo Molinari',    email: 'info@beetlegius.com.ar',     role: User::SUPERADMIN, password: 'beetlegius'
+User.create! name: 'Esteban Suárez',      email: 'estebansuarezbue@gmail.com', role: User::SUPERADMIN, password: 'suarez'
+User.create! name: 'Martín Beraldi',      email: 'martinberaldibue@gmail.com', role: User::ADMIN,      password: 'beraldi'
+User.create! name: 'Sebastián Garabello', email: 'sebasofse@gmail.com',        role: User::ADMIN,      password: 'garabello'
 
+puts 'Creando cuadrillas...'
 5.times do
-  Cuadrilla.create! nombre: Faker::Simpsons.character
+  Cuadrilla.create! nombre: Faker::Simpsons.character, sector: [Cuadrilla::NORTE, Cuadrilla::SUR].sample
 end
+
+puts 'Creando vías...'
 Via.create! nombre: 'Mar del Plata'
 Via.create! nombre: 'Rosario'
 Via.create! nombre: 'Chaco'
@@ -19,13 +25,14 @@ Via.create! nombre: 'Tucumán'
 Via.create! nombre: 'Bahía Blanca'
 Via.create! nombre: 'Mendoza'
 
+puts 'Creando empleados...'
 for cuadrilla in Cuadrilla.all
   rand(4..8).times do
     cuadrilla.empleados.create! nombre: Faker::Name.first_name, apellido: Faker::Name.last_name
   end
 end
 
-
+puts 'Creando tareas...'
 Tarea.create! nombre: "Tapar", unidad: 'metro'
 Tarea.create! nombre: "Destapar", unidad: 'metro'
 Tarea.create! nombre: "Ajuste y reemplazo de fijaciones", unidad: 'metro'
@@ -46,6 +53,7 @@ Tarea.create! nombre: "Manipuleo, carga y descarga de materiales", unidad: 'tone
 Tarea.create! nombre: "Limpieza lugar de trabajo y reparación de herramientas", unidad: 'hora'
 Tarea.create! nombre: "Traslado base a obradores", unidad: 'kilometro'
 
+puts 'Creando recursos...'
 Recurso.create! nombre: 'Durmiente', unidad: 'unidad'
 Recurso.create! nombre: 'Bulón para eclisa', unidad: 'unidad'
 Recurso.create! nombre: 'Arandela grower', unidad: 'unidad'
@@ -61,3 +69,6 @@ Recurso.create! nombre: 'Grasa', unidad: 'kilo'
 Recurso.create! nombre: 'Nafta moto - herramientas', unidad: 'litro'
 Recurso.create! nombre: 'Nafta zorra - movilidad', unidad: 'litro'
 Recurso.create! nombre: 'Herbicida', unidad: 'litro'
+
+puts 'SEEDS COMPLETO'
+puts ''

@@ -44,6 +44,7 @@ module Admin
 
     def programa_params
       params.require(:programa).permit(:periodo, :capataz, :inspector, :dotacion_original, :dotacion_real, :observaciones, :via_id, :cuadrilla_id,
+        jornadas_attributes: [:id, :fecha, :km_desde, :km_hasta],
         trabajos_pam_attributes: [:id, :fecha, :tarea_id, :km_desde, :km_hasta, :cantidad_estimada, :cantidad_ejecutada, :_destroy],
         trabajos_pat_attributes: [:id, :fecha, :tarea_id, :km_desde, :km_hasta, :cantidad_estimada, :cantidad_ejecutada, :_destroy],
         trabajos_fp_attributes: [:id, :fecha, :tarea_id, :km_desde, :km_hasta, :cantidad_ejecutada, :_destroy],

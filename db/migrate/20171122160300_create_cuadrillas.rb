@@ -2,6 +2,7 @@ class CreateCuadrillas < ActiveRecord::Migration[5.1]
   def change
     create_table :cuadrillas do |t|
       t.string :nombre
+      t.integer :sector
 
       t.datetime :deleted_at, index: true
       t.integer :empleados_count, default: 0, null: false

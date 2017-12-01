@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171122160436) do
+ActiveRecord::Schema.define(version: 20171201175147) do
 
   create_table "asistencias", force: :cascade do |t|
     t.date "fecha"
     t.integer "estado"
-    t.decimal "recargo_horas", precision: 10, scale: 3
+    t.integer "recargo_horas"
     t.datetime "deleted_at"
     t.integer "programa_id"
     t.integer "empleado_id"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20171122160436) do
 
   create_table "cuadrillas", force: :cascade do |t|
     t.string "nombre"
+    t.integer "sector"
     t.datetime "deleted_at"
     t.integer "empleados_count", default: 0, null: false
     t.integer "programas_count", default: 0, null: false
@@ -64,6 +65,16 @@ ActiveRecord::Schema.define(version: 20171122160436) do
     t.index ["deleted_at"], name: "index_empleados_on_deleted_at"
   end
 
+  create_table "jornadas", force: :cascade do |t|
+    t.date "fecha"
+    t.decimal "km_desde", precision: 10, scale: 3
+    t.decimal "km_hasta", precision: 10, scale: 3
+    t.integer "programa_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["programa_id"], name: "index_jornadas_on_programa_id"
+  end
+
   create_table "programas", force: :cascade do |t|
     t.date "desde"
     t.date "hasta"
@@ -73,6 +84,7 @@ ActiveRecord::Schema.define(version: 20171122160436) do
     t.integer "dotacion_real"
     t.text "observaciones"
     t.datetime "deleted_at"
+    t.integer "jornadas_count", default: 0, null: false
     t.integer "trabajos_count", default: 0, null: false
     t.integer "via_id"
     t.integer "cuadrilla_id"
@@ -111,12 +123,14 @@ ActiveRecord::Schema.define(version: 20171122160436) do
     t.decimal "km_hasta", precision: 10, scale: 3
     t.datetime "deleted_at"
     t.string "type"
+    t.integer "jornada_id"
     t.integer "programa_id"
     t.integer "tarea_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_trabajos_on_deleted_at"
     t.index ["fecha", "tarea_id"], name: "index_trabajos_on_fecha_and_tarea_id"
+    t.index ["jornada_id"], name: "index_trabajos_on_jornada_id"
     t.index ["programa_id"], name: "index_trabajos_on_programa_id"
     t.index ["tarea_id"], name: "index_trabajos_on_tarea_id"
   end

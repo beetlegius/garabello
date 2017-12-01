@@ -63,6 +63,26 @@
             <%= f.input :observaciones, input_html: { rows: 4, placeholder: true } %>
           </div>
         </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <table class="table table-condensed table-striped">
+              <tr>
+                <th>Fecha</th>
+                <th>Desde</th>
+                <th>Hasta</th>
+              </tr>
+              <% for jornada in @programa.jornadas %>
+                <%= f.simple_fields_for :jornadas, jornada do |b| %>
+                  <tr>
+                    <td><%= b.input :fecha, as: :date, html5: true, label: false, disabled: true %></td>
+                    <td><%= b.input :km_desde, label: false, input_html: { placeholder: true } %></td>
+                    <td><%= b.input :km_hasta, label: false, input_html: { placeholder: true } %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </table>
+          </div>
+        </div>
       </div>
       <div class="tab-pane <%= :active if @programa.persisted? %>" id="trabajos" data-behavior="cocoon">
         <%= render 'trabajos', programa: @programa, f: f %>

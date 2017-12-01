@@ -9,6 +9,7 @@ class Trabajo < ApplicationRecord
   # RELATIONS
 
   belongs_to :programa, counter_cache: true
+  belongs_to :jornada
   belongs_to :tarea, counter_cache: true
 
   # SCOPES
@@ -27,6 +28,12 @@ class Trabajo < ApplicationRecord
     cantidad_estimada == cantidad_ejecutada
   end
 
+  def asociar_jornada(jornada)
+    self.jornada = jornada
+    self.km_desde = jornada.km_desde
+    self.km_hasta = jornada.km_hasta
+  end
+
   # ALIASES
 
   alias_attribute :to_s, :fecha
@@ -35,5 +42,6 @@ class Trabajo < ApplicationRecord
   # PRIVATE METHODS
 
   private
+
 
 end

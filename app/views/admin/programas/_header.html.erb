@@ -10,7 +10,7 @@
       <div class="col-xs-12 col-sm-3">
         <p>
           <strong><%= fa_icon :truck, class: 'fa-fw', text: 'Cuadrilla' %></strong>
-          <%= tag.span @programa.cuadrilla.to_label, class: :lead %>
+          <%= tag.span @programa.cuadrilla.to_label, class: :lead, title: @programa.cuadrilla.sector.humanize %>
         </p>
       </div>
       <div class="col-xs-12 col-sm-3">

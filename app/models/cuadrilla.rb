@@ -4,6 +4,8 @@ class Cuadrilla < ApplicationRecord
 
   include Destroyable
 
+  enum sector: [NORTE = 'inspectoria_norte', SUR = 'inspectoria_sur']
+
   # CALLBACKS
 
   # RELATIONS
@@ -15,7 +17,7 @@ class Cuadrilla < ApplicationRecord
 
   # VALIDATIONS
 
-  validates :nombre, presence: true
+  validates :nombre, :sector, presence: true
 
   # CLASS METHODS
 

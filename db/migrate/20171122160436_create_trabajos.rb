@@ -8,6 +8,7 @@ class CreateTrabajos < ActiveRecord::Migration[5.1]
 
       t.datetime :deleted_at, index: true
       t.string :type
+      t.belongs_to :jornada, foreign_key: true, index: true
       t.belongs_to :programa, foreign_key: true, index: true
       t.belongs_to :tarea, foreign_key: true, index: true
       t.index [:fecha, :tarea_id]

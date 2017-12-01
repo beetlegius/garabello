@@ -12,6 +12,7 @@ class Programa < ApplicationRecord
 
   after_initialize :set_periodo
   before_create :crear_asistencias
+  before_create :crear_jornadas
 
   # RELATIONS
 
@@ -36,6 +37,9 @@ class Programa < ApplicationRecord
   accepts_nested_attributes_for :trabajos_pat, reject_if: :all_blank, allow_destroy: true
   has_many :trabajos_fp, class_name: 'TrabajoFP'
   accepts_nested_attributes_for :trabajos_fp, reject_if: :all_blank, allow_destroy: true
+
+  has_many :jornadas
+  accepts_nested_attributes_for :jornadas, reject_if: :all_blank
 
   # SCOPES
 
@@ -77,6 +81,12 @@ class Programa < ApplicationRecord
       (desde..hasta).each do |dia|
         self.asistencias.build empleado: empleado, fecha: dia
       end
+    end
+  end
+
+  def crear_jornadas
+    (desde..hasta).each do |dia|
+      self.jornadas.build fecha: dia
     end
   end
 
