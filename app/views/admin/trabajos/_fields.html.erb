@@ -1,6 +1,6 @@
 <tr class="<%= f.object.field_class %> field">
   <td>
-    <%= f.input :fecha, as: :hidden %>
+    <%= f.input :jornada_id, as: :hidden %>
     <%= f.association :tarea, prompt: true, label: false, input_html: { class: :select2, data: { behavior: :select2 } } %>
   </td>
   <td><%= f.input :km_desde, label: false, input_html: { min: 0, step: 0.01, placeholder: true } %></td>

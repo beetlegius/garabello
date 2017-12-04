@@ -6,18 +6,19 @@
     <% end %>
   </div>
   <!-- /.login-logo -->
+  <%= flash_messages %>
   <div class="login-box-body">
     <p class="login-box-msg">Inicie sesión para operar</p>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
       <div class="form-group has-feedback">
-        <%= f.email_field :email, autofocus: true, placeholder: 'Correo electrónico', class: 'form-control' %>
+        <%= f.email_field :email, autofocus: true, placeholder: true, class: 'form-control' %>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
 
       <div class="form-group has-feedback">
-        <%= f.password_field :password, autocomplete: "off", placeholder: 'Password', class: 'form-control' %>
+        <%= f.password_field :password, autocomplete: "off", placeholder: true, class: 'form-control' %>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
 
@@ -25,7 +26,7 @@
         <div class="col-xs-8">
           <% if devise_mapping.rememberable? -%>
             <div class="checkbox icheck">
-              <label><%= f.check_box :remember_me %> Recordarme</label>
+              <label><%= f.check_box :remember_me %> <%= User.human_attribute_name :remember_me %></label>
             </div>
           <% end %>
         </div>
@@ -36,6 +37,7 @@
         <!-- /.col -->
       </div>
     <% end %>
+    <hr>
     <div class="text-center">
       <%= render "devise/shared/links" %>
     </div>

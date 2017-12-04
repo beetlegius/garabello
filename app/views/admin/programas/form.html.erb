@@ -18,89 +18,90 @@
   <% end %>
 <% end %>
 
-<%= simple_form_for [:admin, @programa], html: { role: :form } do |f| %>
-  <div class="nav-tabs-custom">
+<div class="wrapper-programa">
+  <%= simple_form_for [:admin, @programa], html: { role: :form } do |f| %>
+    <div class="nav-tabs-custom">
 
-    <ul class="nav nav-tabs">
-      <li class="<%= :active if @programa.new_record? %>"><%= link_to 'Información', '#info', data: { toggle: :tab } %></li>
-      <li class="<%= @programa.new_record? ? :disabled : :active %>"><%= link_to 'Trabajos', '#trabajos', data: { toggle: (:tab if @programa.persisted?) } %></li>
-      <li class="<%= :disabled if @programa.new_record? %>"><%= link_to 'Consumos', '#consumos', data: { toggle: (:tab if @programa.persisted?) } %></li>
-      <li class="<%= :disabled if @programa.new_record? %>"><%= link_to 'Asistencias', '#asistencias', data: { toggle: (:tab if @programa.persisted?) } %></li>
-      <li class="pull-right">
-        <%= link_to fa_icon(:tasks, class: 'fa-fw', text: 'ver detalle'), admin_programa_path(@programa), class: 'text-muted ver-detalle' if @programa.persisted? %>
-      </li>
-    </ul>
+      <ul class="nav nav-tabs">
+        <li class="<%= :active if @programa.new_record? %>"><%= link_to 'Información', '#info', data: { toggle: :tab } %></li>
+        <li class="<%= @programa.new_record? ? :disabled : :active %>"><%= link_to 'Trabajos', '#trabajos', data: { toggle: (:tab if @programa.persisted?) } %></li>
+        <li class="<%= :disabled if @programa.new_record? %>"><%= link_to 'Consumos', '#consumos', data: { toggle: (:tab if @programa.persisted?) } %></li>
+        <li class="<%= :disabled if @programa.new_record? %>"><%= link_to 'Asistencias', '#asistencias', data: { toggle: (:tab if @programa.persisted?) } %></li>
+        <li class="pull-right">
+          <%= link_to fa_icon(:tasks, class: 'fa-fw', text: 'ver detalle'), admin_programa_path(@programa), class: 'text-muted ver-detalle' if @programa.persisted? %>
+        </li>
+        <li class="pull-right"><%= f.button :submit, class: 'btn btn-sm btn-primary btn-submit', data: { disable_with: t(:wait) } %></li>
+      </ul>
 
-    <div class="tab-content">
-      <div class="tab-pane <%= :active if @programa.new_record? %>" id="info">
-        <div class="row">
-          <div class="col-xs-12 col-md-4">
-            <%= f.input :periodo, autofocus: @programa.new_record?, disabled: @programa.persisted?, hint: true, input_html: { class: 'text-center input-lg', data: { behavior: :daterangepicker } } %>
+      <div class="tab-content">
+        <div class="tab-pane <%= :active if @programa.new_record? %>" id="info">
+          <% if @programa.new_record? %>
+            <div class="row">
+              <div class="col-xs-12 col-md-4">
+                <%= f.input :periodo, autofocus: @programa.new_record?, disabled: @programa.persisted?, hint: true, input_html: { class: 'text-center input-lg', data: { behavior: :daterangepicker } } %>
+              </div>
+              <div class="col-xs-12 col-md-4">
+                <%= f.association :cuadrilla, autofocus: @programa.persisted?, disabled: @programa.persisted?, prompt: true, hint: true, input_html: { class: 'input-lg' } %>
+              </div>
+              <div class="col-xs-12 col-md-4">
+                <%= f.association :via, disabled: @programa.persisted?, prompt: true, input_html: { class: 'input-lg' } %>
+              </div>
+            </div>
+          <% end %>
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3">
+              <%= f.input :dotacion_original, input_html: { placeholder: true } %>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+              <%= f.input :dotacion_real, input_html: { placeholder: true } %>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+              <%= f.input :capataz, input_html: { placeholder: true } %>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3">
+              <%= f.input :inspector, input_html: { placeholder: true } %>
+            </div>
           </div>
-          <div class="col-xs-12 col-md-4">
-            <%= f.association :cuadrilla, autofocus: @programa.persisted?, prompt: true, hint: true, input_html: { class: 'input-lg' } %>
+          <div class="row">
+            <div class="col-xs-12">
+              <%= f.input :observaciones, input_html: { rows: 4, placeholder: true } %>
+            </div>
           </div>
-          <div class="col-xs-12 col-md-4">
-            <%= f.association :via, prompt: true, input_html: { class: 'input-lg' } %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <%= f.input :dotacion_original, input_html: { placeholder: true } %>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <%= f.input :dotacion_real, input_html: { placeholder: true } %>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <%= f.input :capataz, input_html: { placeholder: true } %>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-md-3">
-            <%= f.input :inspector, input_html: { placeholder: true } %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <%= f.input :observaciones, input_html: { rows: 4, placeholder: true } %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12">
-            <table class="table table-condensed table-striped">
-              <tr>
-                <th>Fecha</th>
-                <th>Desde</th>
-                <th>Hasta</th>
-              </tr>
-              <% for jornada in @programa.jornadas %>
-                <%= f.simple_fields_for :jornadas, jornada do |b| %>
-                  <tr>
-                    <td><%= b.input :fecha, as: :date, html5: true, label: false, disabled: true %></td>
-                    <td><%= b.input :km_desde, label: false, input_html: { placeholder: true } %></td>
-                    <td><%= b.input :km_hasta, label: false, input_html: { placeholder: true } %></td>
-                  </tr>
+          <div class="row">
+            <div class="col-xs-12">
+              <table class="table table-condensed table-striped">
+                <tr>
+                  <th>Fecha</th>
+                  <th>Desde</th>
+                  <th>Hasta</th>
+                </tr>
+                <% for jornada in @programa.jornadas %>
+                  <%= f.simple_fields_for :jornadas, jornada do |b| %>
+                    <tr>
+                      <td><%= b.input :fecha, as: :date, html5: true, label: false, disabled: true %></td>
+                      <td><%= b.input :km_desde, label: false, input_html: { placeholder: true } %></td>
+                      <td><%= b.input :km_hasta, label: false, input_html: { placeholder: true } %></td>
+                    </tr>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </table>
+              </table>
+            </div>
           </div>
         </div>
+        <div class="tab-pane <%= :active if @programa.persisted? %>" id="trabajos" data-behavior="cocoon">
+          <%= render 'trabajos', programa: @programa, f: f %>
+        </div>
+        <div class="tab-pane" id="consumos" data-behavior="cocoon">
+          <%= render 'consumos', programa: @programa, f: f %>
+        </div>
+        <div class="tab-pane" id="asistencias">
+          <%= render 'asistencias', programa: @programa, f: f %>
+        </div>
       </div>
-      <div class="tab-pane <%= :active if @programa.persisted? %>" id="trabajos" data-behavior="cocoon">
-        <%= render 'trabajos', programa: @programa, f: f %>
-      </div>
-      <div class="tab-pane" id="consumos" data-behavior="cocoon">
-        <%= render 'consumos', programa: @programa, f: f %>
-      </div>
-      <div class="tab-pane" id="asistencias">
-        <%= render 'asistencias', programa: @programa, f: f %>
+
+      <div class="box-footer">
+        <%= f.button :submit, class: 'btn btn-primary', data: { disable_with: t(:wait) } %>
       </div>
     </div>
-
-    <div class="box-footer">
-      <%= f.button :submit, class: 'btn btn-primary', data: { disable_with: t(:wait) } %>
-    </div>
-  </div>
-<% end %>
-
-<!-- <script type="text/javascript">
-  $("body").addClass("sidebar-collapse");
-</script> -->
+  <% end %>
+</div>

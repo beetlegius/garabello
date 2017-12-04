@@ -41,7 +41,7 @@ module Admin
     private
 
     def cuadrilla_params
-      params.require(:cuadrilla).permit(:nombre)
+      params.require(:cuadrilla).permit(:nombre, :sector)
     end
 
   end

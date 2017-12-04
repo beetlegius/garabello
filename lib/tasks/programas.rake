@@ -24,47 +24,56 @@ task programas: :environment do
     consumos     = []
     asistencias  = []
 
-    for dia in (desde..hasta)
-      km_desde = rand(0..400)
-      km_hasta = km_desde + rand(10)
-      tareas_disponibles = tareas.shuffle
-      rand(0..3).times do
-        cantidad_estimada = rand(10)
-        trabajos_pam.push TrabajoPAM.new(fecha: dia, tarea: tareas_disponibles.pop, cantidad_estimada: cantidad_estimada, cantidad_ejecutada: [cantidad_estimada, cantidad_estimada - 1, cantidad_estimada - 2].sample)
-      end
-      tareas_disponibles = tareas.shuffle
-      rand(0..3).times do
-        cantidad_estimada = rand(10)
-        trabajos_pat.push TrabajoPAT.new(fecha: dia, tarea: tareas_disponibles.pop, km_desde: km_desde, km_hasta: km_hasta, cantidad_estimada: cantidad_estimada, cantidad_ejecutada: [cantidad_estimada, cantidad_estimada - 1, cantidad_estimada - 2].sample)
-      end
-      tareas_disponibles = tareas.shuffle
-      rand(0..1).times do
-        cantidad_ejecutada = rand(10)
-        trabajos_fp.push TrabajoFP.new(fecha: dia, tarea: tareas_disponibles.pop, km_desde: km_desde, km_hasta: km_hasta, cantidad_ejecutada: cantidad_ejecutada)
-      end
-      recursos_disponibles = recursos.shuffle
-      rand(6..10).times do
-        cantidad = rand(10..100)
-        consumos.push Consumo.new(fecha: dia, recurso: recursos_disponibles.pop, km_desde: km_desde, km_hasta: km_hasta, cantidad: cantidad)
-      end
-    end
-
     programa = Programa.create! desde: desde, hasta: hasta,
       capataz: capataz, inspector: inspector,
       dotacion_original: cuadrilla.empleados_count, dotacion_real: [cuadrilla.empleados_count, cuadrilla.empleados_count - 1, cuadrilla.empleados_count - 2].sample,
       observaciones: [Faker::Lorem.paragraph, nil, nil].sample, cuadrilla: cuadrilla, via: via
 
+
     km_desde = i.next * 100
     km_hasta = km_desde + 5
     for jornada in programa.jornadas
-      jornada.update! km_desde: km_desde, km_hasta: km_hasta
       km_desde += 5
       km_hasta += 5
+      jornada.update! km_desde: km_desde, km_hasta: km_hasta
+
+      tareas_disponibles = tareas.shuffle
+      rand(0..3).times do
+        cantidad_estimada = rand(1..10)
+        trabajo = TrabajoPAM.new(tarea: tareas_disponibles.pop, cantidad_estimada: cantidad_estimada, cantidad_ejecutada: [cantidad_estimada, cantidad_estimada - 1, cantidad_estimada - 2].sample)
+        trabajo.asociar_jornada(jornada)
+        trabajos_pam.push trabajo
+      end
+
+      tareas_disponibles = tareas.shuffle
+      rand(0..3).times do
+        cantidad_estimada = rand(1..10)
+        trabajo = TrabajoPAT.new(tarea: tareas_disponibles.pop, cantidad_estimada: cantidad_estimada, cantidad_ejecutada: [cantidad_estimada, cantidad_estimada - 1, cantidad_estimada - 2].sample)
+        trabajo.asociar_jornada(jornada)
+        trabajos_pat.push trabajo
+      end
+
+      tareas_disponibles = tareas.shuffle
+      rand(0..1).times do
+        cantidad_ejecutada = rand(1..10)
+        km_desde_puntual = km_desde + rand(50)
+        trabajo = TrabajoFP.new(tarea: tareas_disponibles.pop, km_desde: km_desde_puntual, km_hasta: km_desde_puntual + 5, cantidad_ejecutada: cantidad_ejecutada)
+        trabajo.asociar_jornada(jornada)
+        trabajos_fp.push trabajo
+      end
+
+      recursos_disponibles = recursos.shuffle
+      rand(6..10).times do
+        cantidad = rand(10..100)
+        consumo = Consumo.new(recurso: recursos_disponibles.pop, cantidad: cantidad)
+        consumo.asociar_jornada(jornada)
+        consumos.push consumo
+      end
     end
 
-    programa.trabajos_pam << trabajos_pam.map { |t| t.asociar_jornada programa.jornadas.detect { |j| j.fecha == t.fecha }; t }
-    programa.trabajos_pat << trabajos_pat.map { |t| t.asociar_jornada programa.jornadas.detect { |j| j.fecha == t.fecha }; t }
-    programa.trabajos_fp  << trabajos_fp.map  { |t| t.asociar_jornada programa.jornadas.detect { |j| j.fecha == t.fecha }; t }
+    programa.trabajos_pam << trabajos_pam#.map { |t| t.asociar_jornada programa.jornadas.detect { |j| j.fecha == t.fecha }; t }
+    programa.trabajos_pat << trabajos_pat#.map { |t| t.asociar_jornada programa.jornadas.detect { |j| j.fecha == t.fecha }; t }
+    programa.trabajos_fp  << trabajos_fp#.map  { |t| t.asociar_jornada programa.jornadas.detect { |j| j.fecha == t.fecha }; t }
     programa.consumos     << consumos
 
     programa.asistencias.update_all estado: Asistencia::PRESENTE

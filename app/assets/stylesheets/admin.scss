@@ -4,7 +4,7 @@
 //= require ionicons
 //= require select2
 //= require admin/AdminLTE
-//= require admin/skins/skin-blue
+//= require admin/skins/_all-skins
 //= require admin/dataTables.bootstrap
 //= require admin/plugins/icheck/square/blue
 //= require jquery-ui
@@ -28,13 +28,15 @@ form .radio label, form .checkbox label { padding-left: 0px; }
 .table-form .form-group { margin-bottom: 0px; }
 
 .header-message {
-  padding: 20px 30px; z-index: 999999; font-size: 16px;
+  padding: 20px 30px; z-index: 100; font-size: 16px; position: fixed; width: 100%;
   p {
     color: rgba(255, 255, 255, 0.9); display: inline-block; margin: 0px;
     strong { margin-right: 10px; display: block; }
-    span.dotacion-incorrecta { text-decoration: underline; color: red; font-weight: bold; }
+    a { color: #fff; }
+    a:hover { color: #ccc; }
   }
 }
+.dotacion-incorrecta { text-decoration: underline; color: red; font-weight: bold; }
 
 table.table th { vertical-align: middle !important; }
 .ver-detalle:hover { color: #000 !important; }
@@ -43,3 +45,10 @@ table.table th { vertical-align: middle !important; }
 .text-muted { color: #777 !important; }
 
 .select2 { width: 100% !important; }
+
+ul.nav-tabs .btn-submit { margin-top: 6px; }
+
+#cuadrilla .badge-sector { margin-top: 8px; }
+#cuadrilla .modal-body h4 { line-height: 1.5em; }
+
+.wrapper-programa { margin-top: 85px; }

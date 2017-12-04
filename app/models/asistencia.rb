@@ -11,6 +11,7 @@ class Asistencia < ApplicationRecord
   # RELATIONS
 
   belongs_to :programa
+  belongs_to :jornada
   belongs_to :empleado, counter_cache: true
 
   # SCOPES
@@ -20,12 +21,16 @@ class Asistencia < ApplicationRecord
   # VALIDATIONS
 
   # validates :cantidad_presence, :cantidad_ausente, :cantidad_ausente_sin_aviso, :recargo_horas, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
-  validates :fecha, presence: true, uniqueness: { scope: [:empleado_id, :programa_id] }
+  validates :jornada_id, presence: true, uniqueness: { scope: :empleado_id }
   validates :recargo_horas, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
 
   # CLASS METHODS
 
   # INSTANCE METHODS
+
+  def fecha
+    jornada&.fecha
+  end
 
   # ALIASES
 

@@ -16,13 +16,17 @@ class Trabajo < ApplicationRecord
 
   # VALIDATIONS
 
-  validates :fecha, :cantidad_ejecutada, :km_desde, :km_hasta, presence: true
+  validates :cantidad_ejecutada, :km_desde, :km_hasta, presence: true
   validates :km_desde, :km_hasta, numericality: { greater_than_or_equal_to: 0 }
   validates :cantidad_ejecutada, :cantidad_estimada, numericality: { greater_than_or_equal_to: 0, allow_nil: true }
 
   # CLASS METHODS
 
   # INSTANCE METHODS
+
+  def fecha
+    jornada&.fecha
+  end
 
   def cantidad_correcta?
     cantidad_estimada == cantidad_ejecutada
@@ -36,12 +40,11 @@ class Trabajo < ApplicationRecord
 
   # ALIASES
 
-  alias_attribute :to_s, :fecha
-  alias_attribute :to_label, :fecha
+  alias_method :to_s, :fecha
+  alias_method :to_label, :fecha
 
   # PRIVATE METHODS
 
   private
-
 
 end

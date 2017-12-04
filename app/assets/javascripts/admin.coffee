@@ -76,3 +76,5 @@ $(document).on 'turbolinks:load', ->
 
   # $('[data-behavior="autosubmit"]').find("input, select").on 'change', (e) ->
   #   $(this).parents("form").submit()
+
+ $('[data-toggle="popover"]').popover()

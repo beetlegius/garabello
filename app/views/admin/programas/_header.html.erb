@@ -7,24 +7,62 @@
           <%= tag.span sanitize("#{tag.span date(@programa.desde, format: :header), title: date(@programa.desde, format: :dia_semana)} &nbsp;&nbsp; al &nbsp;&nbsp; #{tag.span date(@programa.hasta, format: :header), title: date(@programa.hasta, format: :dia_semana)}"), class: :lead %>
         </p>
       </div>
-      <div class="col-xs-12 col-sm-3">
+      <div class="col-xs-12 col-sm-2">
         <p>
           <strong><%= fa_icon :truck, class: 'fa-fw', text: 'Cuadrilla' %></strong>
-          <%= tag.span @programa.cuadrilla.to_label, class: :lead, title: @programa.cuadrilla.sector.humanize %>
+          <%= link_to @programa.cuadrilla.to_label, '#cuadrilla', class: :lead, title: 'Ver detalles de la cuadrilla', data: { toggle: :modal } %>
         </p>
       </div>
-      <div class="col-xs-12 col-sm-3">
+      <div class="col-xs-12 col-sm-2">
         <p>
           <strong><%= fa_icon :train, class: 'fa-fw', text: 'Vía' %></strong>
           <%= tag.span @programa.via.to_label, class: :lead %>
         </p>
       </div>
+      <div class="col-xs-12 col-sm-2">
+        <p>
+          <strong><%= fa_icon :user, class: 'fa-fw', text: 'Capataz' %></strong>
+          <%= tag.span @programa.capataz, class: :lead %>
+        </p>
+      </div>
       <div class="col-xs-12 col-sm-3">
         <p>
-          <strong><%= fa_icon :users, class: 'fa-fw', text: 'Dotación real / original' %></strong>
-          <%= tag.span "#{@programa.dotacion_real} / #{@programa.dotacion_original}", title: ("La dotación real no coincide con la original" if !@programa.dotacion_correcta?), class: [:lead, ('dotacion-incorrecta' if !@programa.dotacion_correcta?)] %>
+          <strong><%= fa_icon 'user-secret', class: 'fa-fw', text: 'Inspector' %></strong>
+          <%= tag.span @programa.inspector, class: :lead %>
         </p>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="cuadrilla">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <%= tag.span @programa.cuadrilla.sector.humanize.upcase, class: 'badge label-primary badge-sector pull-right' %>
+          <%= fa_icon :truck, class: 'fa-fw', text: @programa.cuadrilla.to_label %>
+        </h3>
+      </div>
+      <div class="modal-body">
+        <h4 class="text-center">
+          <%= fa_icon :users, class: 'fa-fw', text: 'Empleados de la dotación' %><br />
+          <%= tag.span "#{@programa.dotacion_real} / #{@programa.dotacion_original}", title: ("La dotación real no coincide con la original" if !@programa.dotacion_correcta?), class: ('dotacion-incorrecta' if !@programa.dotacion_correcta?) %>
+        </h4>
+        <ul class="nav">
+          <% for empleado in @programa.cuadrilla.empleados %>
+            <li class="list-group-item <%= rand(5) >= 2 ? 'text-success' : 'text-muted' %>">
+              <%= empleado.nombre_completo %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

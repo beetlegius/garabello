@@ -10,20 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171201175147) do
+ActiveRecord::Schema.define(version: 20171122160436) do
 
   create_table "asistencias", force: :cascade do |t|
     t.date "fecha"
     t.integer "estado"
     t.integer "recargo_horas"
     t.datetime "deleted_at"
-    t.integer "programa_id"
+    t.integer "jornada_id"
     t.integer "empleado_id"
+    t.integer "programa_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_asistencias_on_deleted_at"
     t.index ["empleado_id"], name: "index_asistencias_on_empleado_id"
-    t.index ["fecha", "empleado_id", "programa_id"], name: "index_asistencias_on_fecha_and_empleado_id_and_programa_id", unique: true
+    t.index ["jornada_id", "empleado_id"], name: "index_asistencias_on_jornada_id_and_empleado_id", unique: true
+    t.index ["jornada_id"], name: "index_asistencias_on_jornada_id"
     t.index ["programa_id"], name: "index_asistencias_on_programa_id"
   end
 
@@ -33,11 +35,13 @@ ActiveRecord::Schema.define(version: 20171201175147) do
     t.decimal "km_desde"
     t.decimal "km_hasta"
     t.datetime "deleted_at"
-    t.integer "recurso_id"
+    t.integer "jornada_id"
     t.integer "programa_id"
+    t.integer "recurso_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_consumos_on_deleted_at"
+    t.index ["jornada_id"], name: "index_consumos_on_jornada_id"
     t.index ["programa_id"], name: "index_consumos_on_programa_id"
     t.index ["recurso_id"], name: "index_consumos_on_recurso_id"
   end
@@ -116,7 +120,6 @@ ActiveRecord::Schema.define(version: 20171201175147) do
   end
 
   create_table "trabajos", force: :cascade do |t|
-    t.date "fecha"
     t.integer "cantidad_ejecutada"
     t.integer "cantidad_estimada"
     t.decimal "km_desde", precision: 10, scale: 3
@@ -129,10 +132,10 @@ ActiveRecord::Schema.define(version: 20171201175147) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_trabajos_on_deleted_at"
-    t.index ["fecha", "tarea_id"], name: "index_trabajos_on_fecha_and_tarea_id"
     t.index ["jornada_id"], name: "index_trabajos_on_jornada_id"
     t.index ["programa_id"], name: "index_trabajos_on_programa_id"
     t.index ["tarea_id"], name: "index_trabajos_on_tarea_id"
+    t.index [nil, "tarea_id"], name: "index_trabajos_on_fecha_and_tarea_id"
   end
 
   create_table "users", force: :cascade do |t|

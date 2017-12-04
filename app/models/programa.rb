@@ -11,7 +11,6 @@ class Programa < ApplicationRecord
   # CALLBACKS
 
   after_initialize :set_periodo
-  before_create :crear_asistencias
   before_create :crear_jornadas
 
   # RELATIONS
@@ -40,6 +39,10 @@ class Programa < ApplicationRecord
 
   has_many :jornadas
   accepts_nested_attributes_for :jornadas, reject_if: :all_blank
+  
+  # has_many :trabajos, through: :jornadas
+  # has_many :consumos, through: :jornadas
+  # has_many :asistencias, through: :jornadas
 
   # SCOPES
 
@@ -51,9 +54,9 @@ class Programa < ApplicationRecord
 
   # INSTANCE METHODS
 
-  def cantidad_dias
-    (desde..hasta).count
-  end
+  # def cantidad_dias
+  #   (desde..hasta).count
+  # end
 
   def dotacion_correcta?
     dotacion_original == dotacion_real
@@ -75,14 +78,6 @@ class Programa < ApplicationRecord
   # PRIVATE METHODS
 
   private
-
-  def crear_asistencias
-    for empleado in cuadrilla.empleados
-      (desde..hasta).each do |dia|
-        self.asistencias.build empleado: empleado, fecha: dia
-      end
-    end
-  end
 
   def crear_jornadas
     (desde..hasta).each do |dia|

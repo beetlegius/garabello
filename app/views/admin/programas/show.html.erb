@@ -1,126 +1,128 @@
 <%= content_for :header, render('header') %>
 
-<div class="box box-primary">
-  <div class="box-header text-center">
-    <%= link_to fa_icon(:tasks, class: 'fa-fw', text: 'editar programa'), edit_admin_programa_path(@programa), class: 'text-muted ver-detalle pull-right' %>
-    <h3 class="box-title">
-      Planilla de tareas expresadas en unidad de medida
-    </h3>
-  </div>
-  <!-- /.box-header -->
-  <div class="box-body table-responsive no-padding">
-    <table class="table table-hover table-bordered table-condensed text-uppercase">
-      <tr>
-        <th class="text-center" rowspan="2">Tarea</th>
-        <th class="text-center">Días</th>
-        <% for dia in (@programa.desde..@programa.hasta) %>
-          <th class="text-center" colspan="4"><%= date dia, format: :dia_semana %></th>
-        <% end %>
-        <th class="text-center" colspan="8">Totales</th>
-      </tr>
-      <tr>
-        <th class="text-center" style="width: 100px;">Medida</th>
-        <% for dia in (@programa.desde..@programa.hasta) %>
-          <td colspan="2" class="text-center" style="width: 100px;">Prog.</td>
-          <td colspan="2" class="text-center" style="width: 100px;">Ejec.</td>
-        <% end %>
-        <td class="text-center" style="width: 50px;">PAM Prog.</td>
-        <td class="text-center" style="width: 50px;">PAM Ejec.</td>
-        <td class="text-center" style="width: 50px;">PAT Prog.</td>
-        <td class="text-center" style="width: 50px;">PAM Ejec.</td>
-        <td class="text-center" style="width: 50px;">FP Prog.</td>
-        <td class="text-center" style="width: 50px;">FP Ejec.</td>
-        <td class="text-center" style="width: 50px;">TOT Prog.</td>
-        <td class="text-center" style="width: 50px;">TOT Ejec.</td>
-      </tr>
-      <% for tarea in Tarea.all %>
+<div class="wrapper-programa">
+  <div class="box box-primary">
+    <div class="box-header text-center">
+      <%= link_to fa_icon(:tasks, class: 'fa-fw', text: 'editar programa'), edit_admin_programa_path(@programa), class: 'text-muted ver-detalle pull-right' %>
+      <h3 class="box-title">
+        Planilla de tareas expresadas en unidad de medida
+      </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body table-responsive no-padding">
+      <table class="table table-hover table-bordered table-condensed text-uppercase">
         <tr>
-          <td title="<%= tarea.nombre %>"><%= truncate tarea.nombre %></td>
-          <td class="text-center"><%= tarea.unidad.humanize %></td>
-          <% for dia in (@programa.desde..@programa.hasta) %>
-            <td colspan="2" class="text-center border-left">
-              <% @programa.trabajos.where(fecha: dia, tarea_id: tarea).each do |trabajo| %>
-                &nbsp;&nbsp;&nbsp;<%= tag.span trabajo.cantidad_estimada, class: trabajo.color, title: "#{trabajo.model_name.human}: KM #{trabajo.km_desde} a #{trabajo.km_hasta}" %>
-              <% end %>
-            </td>
-            <td colspan="2" class="text-center">
-              <% @programa.trabajos.where(fecha: dia, tarea_id: tarea).each do |trabajo| %>
-                &nbsp;&nbsp;&nbsp;<%= tag.span trabajo.cantidad_ejecutada, class: trabajo.color, title: "#{trabajo.model_name.human}: KM #{trabajo.km_desde} a #{trabajo.km_hasta}" %>
-              <% end %>
-            </td>
+          <th class="text-center" rowspan="2">Tarea</th>
+          <th class="text-center">Días</th>
+          <% for jornada in @programa.jornadas %>
+            <th class="text-center" colspan="4"><%= date jornada.fecha, format: :dia_semana %></th>
           <% end %>
-          <td class="border-left text-center text-primary"><%= @programa.trabajos_pam.where(tarea_id: tarea).sum(:cantidad_estimada) %></td>
-          <td class="text-center text-primary"><%= @programa.trabajos_pam.where(tarea_id: tarea).sum(:cantidad_ejecutada) %></td>
-          <td class="text-center text-danger"><%= @programa.trabajos_pat.where(tarea_id: tarea).sum(:cantidad_estimada) %></td>
-          <td class="text-center text-danger"><%= @programa.trabajos_pat.where(tarea_id: tarea).sum(:cantidad_ejecutada) %></td>
-          <td class="text-center text-success"><%= @programa.trabajos_fp.where(tarea_id: tarea).sum(:cantidad_estimada) %></td>
-          <td class="text-center text-success"><%= @programa.trabajos_fp.where(tarea_id: tarea).sum(:cantidad_ejecutada) %></td>
-          <td class="text-center lead border-left"><%= @programa.trabajos.where(tarea_id: tarea).sum(:cantidad_estimada) %></td>
-          <td class="text-center lead"><%= @programa.trabajos.where(tarea_id: tarea).sum(:cantidad_ejecutada) %></td>
+          <th class="text-center" colspan="8">Totales</th>
         </tr>
-      <% end %>
+        <tr>
+          <th class="text-center" style="width: 100px;">Medida</th>
+          <% @programa.jornadas.count.times do %>
+            <td colspan="2" class="text-center" style="width: 100px;">Prog.</td>
+            <td colspan="2" class="text-center" style="width: 100px;">Ejec.</td>
+          <% end %>
+          <td class="text-center" style="width: 50px;">PAM Prog.</td>
+          <td class="text-center" style="width: 50px;">PAM Ejec.</td>
+          <td class="text-center" style="width: 50px;">PAT Prog.</td>
+          <td class="text-center" style="width: 50px;">PAM Ejec.</td>
+          <td class="text-center" style="width: 50px;">FP Prog.</td>
+          <td class="text-center" style="width: 50px;">FP Ejec.</td>
+          <td class="text-center" style="width: 50px;">TOT Prog.</td>
+          <td class="text-center" style="width: 50px;">TOT Ejec.</td>
+        </tr>
+        <% for tarea in Tarea.all %>
+          <tr>
+            <td title="<%= tarea.nombre %>"><%= truncate tarea.nombre %></td>
+            <td class="text-center"><%= tarea.unidad.humanize %></td>
+            <% for jornada in @programa.jornadas %>
+              <td colspan="2" class="text-center border-left">
+                <% jornada.trabajos.where(tarea_id: tarea).each do |trabajo| %>
+                  &nbsp;&nbsp;&nbsp;<%= tag.span trabajo.cantidad_estimada, class: trabajo.color, title: "#{trabajo.model_name.human}: KM #{trabajo.km_desde} a #{trabajo.km_hasta}" %>
+                <% end %>
+              </td>
+              <td colspan="2" class="text-center">
+                <% jornada.trabajos.where(tarea_id: tarea).each do |trabajo| %>
+                  &nbsp;&nbsp;&nbsp;<%= tag.span trabajo.cantidad_ejecutada, class: trabajo.color, title: "#{trabajo.model_name.human}: KM #{trabajo.km_desde} a #{trabajo.km_hasta}" %>
+                <% end %>
+              </td>
+            <% end %>
+            <td class="border-left text-center text-primary"><%= @programa.trabajos_pam.where(tarea_id: tarea).sum(:cantidad_estimada) %></td>
+            <td class="text-center text-primary"><%= @programa.trabajos_pam.where(tarea_id: tarea).sum(:cantidad_ejecutada) %></td>
+            <td class="text-center text-danger"><%= @programa.trabajos_pat.where(tarea_id: tarea).sum(:cantidad_estimada) %></td>
+            <td class="text-center text-danger"><%= @programa.trabajos_pat.where(tarea_id: tarea).sum(:cantidad_ejecutada) %></td>
+            <td class="text-center text-success"><%= @programa.trabajos_fp.where(tarea_id: tarea).sum(:cantidad_estimada) %></td>
+            <td class="text-center text-success"><%= @programa.trabajos_fp.where(tarea_id: tarea).sum(:cantidad_ejecutada) %></td>
+            <td class="text-center lead border-left"><%= @programa.trabajos.where(tarea_id: tarea).sum(:cantidad_estimada) %></td>
+            <td class="text-center lead"><%= @programa.trabajos.where(tarea_id: tarea).sum(:cantidad_ejecutada) %></td>
+          </tr>
+        <% end %>
 
-      <tr>
-        <th class="text-center" rowspan="2">Material utilizado</th>
-        <th class="text-center" rowspan="2">Unidad</th>
-        <% for dia in (@programa.desde..@programa.hasta) %>
-          <th class="text-center" colspan="4"><%= date dia, format: :dia_semana %></th>
-        <% end %>
-        <th colspan="8" rowspan="2" class="text-center">Totales consumidos</th>
-      </tr>
-      <tr>
-        <% for dia in (@programa.desde..@programa.hasta) %>
-          <td colspan="4" class="text-center" style="width: 100px;">Cantidad</td>
-        <% end %>
-      </tr>
-      <% for recurso in Recurso.all %>
         <tr>
-          <td title="<%= recurso.nombre %>"><%= truncate recurso.nombre %></td>
-          <td class="text-center"><%= recurso.unidad.humanize %></td>
-          <% for dia in (@programa.desde..@programa.hasta) %>
-            <td colspan="4" class="text-center border-left">
-              <% @programa.consumos.where(fecha: dia, recurso_id: recurso).each do |consumo| %>
-                <%= consumo.cantidad %>
-              <% end %>
-            </td>
+          <th class="text-center" rowspan="2">Material utilizado</th>
+          <th class="text-center" rowspan="2">Unidad</th>
+          <% for jornada in @programa.jornadas %>
+            <th class="text-center" colspan="4"><%= date jornada.fecha, format: :dia_semana %></th>
           <% end %>
-          <td colspan="8" class="border-left text-center"><%= @programa.consumos.where(recurso_id: recurso).sum(:cantidad) %></td>
+          <th colspan="8" rowspan="2" class="text-center">Totales consumidos</th>
         </tr>
-      <% end %>
+        <tr>
+          <% @programa.jornadas.count.times do %>
+            <td colspan="4" class="text-center" style="width: 100px;">Cantidad</td>
+          <% end %>
+        </tr>
+        <% for recurso in Recurso.all %>
+          <tr>
+            <td title="<%= recurso.nombre %>"><%= truncate recurso.nombre %></td>
+            <td class="text-center"><%= recurso.unidad.humanize %></td>
+            <% for jornada in @programa.jornadas %>
+              <td colspan="4" class="text-center border-left">
+                <% jornada.consumos.where(recurso_id: recurso).each do |consumo| %>
+                  <%= consumo.cantidad %>
+                <% end %>
+              </td>
+            <% end %>
+            <td colspan="8" class="border-left text-center"><%= @programa.consumos.where(recurso_id: recurso).sum(:cantidad) %></td>
+          </tr>
+        <% end %>
 
-      <tr>
-        <th class="text-center" colspan="2" rowspan="2">Apellido y nombres</th>
-        <th colspan="<%= @programa.cantidad_dias * 4 %>"></th>
-        <th colspan="8" class="text-center">Totales semanales</th>
-      </tr>
-      <tr>
-        <% for dia in (@programa.desde..@programa.hasta) %>
-          <th class="text-center">P</th>
-          <th class="text-center">A</th>
-          <th class="text-center">AsA</th>
-          <th class="text-center">R Hs</th>
-        <% end %>
-        <th class="text-center" colspan="2">Pres</th>
-        <th class="text-center" colspan="2">Aus</th>
-        <th class="text-center" colspan="2">A s/aviso</th>
-        <th class="text-center" colspan="2">Rec. HS</th>
-      </tr>
-      <% for empleado in @programa.cuadrilla.empleados %>
         <tr>
-          <td colspan="2" title="<%= empleado.nombre_completo %>"><%= truncate empleado.nombre_completo %></td>
-          <% for dia in (@programa.desde..@programa.hasta) %>
-            <% asistencia = @programa.asistencias.where(empleado_id: empleado, fecha: dia).first %>
-            <td class="text-center border-left"><%= fa_icon :check, class: 'text-success' if asistencia.estado == Asistencia::PRESENTE %></td>
-            <td class="text-center"><%= fa_icon :check, class: 'text-warning' if asistencia.estado == Asistencia::AUSENTE %></td>
-            <td class="text-center"><%= fa_icon :check, class: 'text-danger' if asistencia.estado == Asistencia::AUSENTE_SIN_AVISO %></td>
-            <td class="text-center"><%= asistencia.recargo_horas %></td>
-          <% end %>
-          <td class="text-center border-left" colspan="2"><%= @programa.asistencias.where(empleado_id: empleado, estado: Asistencia::PRESENTE).count %></td>
-          <td class="text-center" colspan="2"><%= @programa.asistencias.where(empleado_id: empleado, estado: Asistencia::AUSENTE).count %></td>
-          <td class="text-center" colspan="2"><%= @programa.asistencias.where(empleado_id: empleado, estado: Asistencia::AUSENTE_SIN_AVISO).count %></td>
-          <td class="text-center" colspan="2"><%= @programa.asistencias.where(empleado_id: empleado).sum(:recargo_horas) %></td>
+          <th class="text-center" colspan="2" rowspan="2">Apellido y nombres</th>
+          <th colspan="<%= @programa.jornadas.count * 4 %>"></th>
+          <th colspan="8" class="text-center">Totales semanales</th>
         </tr>
-      <% end %>
-    </table>
+        <tr>
+          <% @programa.jornadas.count.times do %>
+            <th class="text-center">P</th>
+            <th class="text-center">A</th>
+            <th class="text-center">AsA</th>
+            <th class="text-center">R Hs</th>
+          <% end %>
+          <th class="text-center" colspan="2">Pres</th>
+          <th class="text-center" colspan="2">Aus</th>
+          <th class="text-center" colspan="2">A s/aviso</th>
+          <th class="text-center" colspan="2">Rec. HS</th>
+        </tr>
+        <% for empleado in @programa.cuadrilla.empleados %>
+          <tr>
+            <td colspan="2" title="<%= empleado.nombre_completo %>"><%= truncate empleado.nombre_completo %></td>
+            <% for jornada in @programa.jornadas %>
+              <% asistencia = jornada.asistencias.where(empleado_id: empleado).first %>
+              <td class="text-center border-left"><%= fa_icon :check, class: 'text-success' if asistencia.estado == Asistencia::PRESENTE %></td>
+              <td class="text-center"><%= fa_icon :check, class: 'text-warning' if asistencia.estado == Asistencia::AUSENTE %></td>
+              <td class="text-center"><%= fa_icon :check, class: 'text-danger' if asistencia.estado == Asistencia::AUSENTE_SIN_AVISO %></td>
+              <td class="text-center"><%= asistencia.recargo_horas %></td>
+            <% end %>
+            <td class="text-center border-left" colspan="2"><%= @programa.asistencias.where(empleado_id: empleado, estado: Asistencia::PRESENTE).count %></td>
+            <td class="text-center" colspan="2"><%= @programa.asistencias.where(empleado_id: empleado, estado: Asistencia::AUSENTE).count %></td>
+            <td class="text-center" colspan="2"><%= @programa.asistencias.where(empleado_id: empleado, estado: Asistencia::AUSENTE_SIN_AVISO).count %></td>
+            <td class="text-center" colspan="2"><%= @programa.asistencias.where(empleado_id: empleado).sum(:recargo_horas) %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
 </div>

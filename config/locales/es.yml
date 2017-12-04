@@ -27,6 +27,9 @@ es:
       trabajo_pat: 'Puntada a tiempo'
       trabajo_fp: 'Fuera de programa'
     attributes:
+      cuadrilla:
+        nombre: 'Nombre de la cuadrilla'
+        sector: 'Sector al que pertenece'
       tarea:
         nombre: 'Nombre'
         unidad: 'Unidad'

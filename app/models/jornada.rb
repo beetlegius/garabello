@@ -4,10 +4,14 @@ class Jornada < ApplicationRecord
 
   # CALLBACKS
 
+  before_create :crear_asistencias
+
   # RELATIONS
 
   belongs_to :programa, counter_cache: true
   has_many :trabajos
+  has_many :consumos
+  has_many :asistencias
 
   # SCOPES
 
@@ -26,5 +30,11 @@ class Jornada < ApplicationRecord
   # PRIVATE METHODS
 
   private
+
+    def crear_asistencias
+      for empleado in programa.cuadrilla.empleados
+        self.asistencias.build empleado: empleado, programa: programa
+      end
+    end
 
 end

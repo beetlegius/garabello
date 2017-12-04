@@ -34,13 +34,13 @@
             </thead>
             <%= tag.tbody id: "trabajo-fields-#{jornada.fecha}" do %>
 
-              <% if programa.trabajos.where(fecha: jornada.fecha).exists? %>
-                <% for trabajo in programa.trabajos.where(fecha: jornada.fecha) %>
-                  <%= f.simple_fields_for trabajo.class.name.tableize, trabajo do |builder| %>
-                    <%= render "admin/trabajos/fields", f: builder, fecha: jornada.fecha %>
-                  <% end %>
+              <% for trabajo in jornada.trabajos %>
+                <%= f.simple_fields_for trabajo.class.name.tableize, trabajo do |builder| %>
+                  <%= render "admin/trabajos/fields", f: builder %>
                 <% end %>
-              <% else %>
+              <% end %>
+
+              <% if jornada.trabajos.empty? %>
                 <tr class="empty-row">
                   <td colspan="6">No se han cargado trabajos para esta jornada</td>
                 </tr>
