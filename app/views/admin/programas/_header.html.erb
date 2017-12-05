@@ -9,8 +9,8 @@
       </div>
       <div class="col-xs-12 col-sm-2">
         <p>
-          <strong><%= fa_icon :truck, class: 'fa-fw', text: 'Cuadrilla' %></strong>
-          <%= link_to @programa.cuadrilla.to_label, '#cuadrilla', class: :lead, title: 'Ver detalles de la cuadrilla', data: { toggle: :modal } %>
+          <strong><%= fa_icon :wrench, class: 'fa-fw', text: 'Cuadrilla' %></strong>
+          <%= link_to fa_icon('th-list', right: true, class: 'fa-sm fa-fw', text: @programa.cuadrilla.to_label), '#cuadrilla', class: :lead, title: 'Ver detalles de la cuadrilla', data: { toggle: :modal } %>
         </p>
       </div>
       <div class="col-xs-12 col-sm-2">
@@ -41,7 +41,7 @@
       <div class="modal-header">
         <h3 class="modal-title">
           <%= tag.span @programa.cuadrilla.sector.humanize.upcase, class: 'badge label-primary badge-sector pull-right' %>
-          <%= fa_icon :truck, class: 'fa-fw', text: @programa.cuadrilla.to_label %>
+          <%= fa_icon :wrench, class: 'fa-fw', text: @programa.cuadrilla.to_label %>
         </h3>
       </div>
       <div class="modal-body">

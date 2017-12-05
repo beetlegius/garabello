@@ -8,7 +8,7 @@ class ProgramasDatatable < ApplicationDatatable
         column << programa.id
         column << @view.fa_icon(:calendar, class: 'fa-fw', text: @view.date(programa.desde))
         column << @view.fa_icon(:calendar, class: 'fa-fw', text: @view.date(programa.hasta))
-        column << @view.fa_icon(:truck, class: 'fa-fw', text: programa.cuadrilla&.nombre)
+        column << @view.fa_icon(:wrench, class: 'fa-fw', text: programa.cuadrilla&.nombre)
         column << @view.fa_icon(:train, class: 'fa-fw', text: programa.via&.nombre)
         column << @view.fa_icon(:user, class: 'fa-fw', text: programa.capataz)
         column << @view.fa_icon('user-secret', class: 'fa-fw', text: programa.inspector)
