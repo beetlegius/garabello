@@ -24,12 +24,12 @@ module Admin
 
     def create
       @programa.save!
-      redirect_to edit_admin_programa_path(@programa), notice: t(action_name, scope: :notice)
+      redirect_to edit_admin_programa_path(@programa, anchor: :jornadas)
     end
 
     def update
       @programa.update! programa_params
-      redirect_to [:edit, :admin, @programa], notice: t(action_name, link: view_context.link_to('Volver', admin_programas_path), scope: :notice)
+      redirect_to edit_admin_programa_path(@programa, anchor: :trabajos)#, notice: t(action_name, link: view_context.link_to('Volver', admin_programas_path), scope: :notice)
     end
 
     def destroy
@@ -43,7 +43,7 @@ module Admin
     private
 
     def programa_params
-      params.require(:programa).permit(:periodo, :capataz, :inspector, :dotacion_original, :dotacion_real, :observaciones, :via_id, :cuadrilla_id,
+      params.require(:programa).permit(:periodo, :capataz, :inspector, :observaciones, :via_id, :cuadrilla_id, :tipo_programa_id,
         jornadas_attributes: [:id, :fecha, :km_desde, :km_hasta],
         trabajos_pam_attributes: [:id, :tarea_id, :km_desde, :km_hasta, :cantidad_estimada, :cantidad_ejecutada, :jornada_id, :_destroy],
         trabajos_pat_attributes: [:id, :tarea_id, :km_desde, :km_hasta, :cantidad_estimada, :cantidad_ejecutada, :jornada_id, :_destroy],

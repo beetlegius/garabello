@@ -33,7 +33,7 @@ class Jornada < ApplicationRecord
 
     def crear_asistencias
       for empleado in programa.cuadrilla.empleados
-        self.asistencias.build empleado: empleado, programa: programa
+        self.asistencias.build empleado: empleado, programa: programa, estado: Asistencia::SIN_ASIGNAR
       end
     end
 

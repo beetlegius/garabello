@@ -15,7 +15,7 @@
           <th class="text-center" rowspan="2">Tarea</th>
           <th class="text-center">Días</th>
           <% for jornada in @programa.jornadas %>
-            <th class="text-center" colspan="4"><%= date jornada.fecha, format: :dia_semana %></th>
+            <th class="text-center" colspan="4" title="<%= date jornada.fecha %>"><%= date jornada.fecha, format: :dia_semana %></th>
           <% end %>
           <th class="text-center" colspan="8">Totales</th>
         </tr>
@@ -34,7 +34,7 @@
           <td class="text-center" style="width: 50px;">TOT Prog.</td>
           <td class="text-center" style="width: 50px;">TOT Ejec.</td>
         </tr>
-        <% for tarea in Tarea.all %>
+        <% for tarea in @programa.tipo_programa.tareas %>
           <tr>
             <td title="<%= tarea.nombre %>"><%= truncate tarea.nombre %></td>
             <td class="text-center"><%= tarea.unidad.humanize %></td>
@@ -74,7 +74,7 @@
             <td colspan="4" class="text-center" style="width: 100px;">Cantidad</td>
           <% end %>
         </tr>
-        <% for recurso in Recurso.all %>
+        <% for recurso in @programa.tipo_programa.recursos %>
           <tr>
             <td title="<%= recurso.nombre %>"><%= truncate recurso.nombre %></td>
             <td class="text-center"><%= recurso.unidad.humanize %></td>

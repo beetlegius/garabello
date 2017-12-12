@@ -26,6 +26,7 @@ es:
       trabajo_pam: 'Plan anual'
       trabajo_pat: 'Puntada a tiempo'
       trabajo_fp: 'Fuera de programa'
+      tipo_programa: 'Tipos de programa'
     attributes:
       cuadrilla:
         nombre: 'Nombre de la cuadrilla'

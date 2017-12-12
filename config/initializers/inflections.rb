@@ -20,8 +20,9 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'trabajo_pam', 'trabajos_pam'
   inflect.irregular 'trabajo_pat', 'trabajos_pat'
   inflect.irregular 'trabajo_fp',  'trabajos_fp'
-  
+
   inflect.irregular 'sector',  'sectores'
+  inflect.irregular 'tipo_programa',  'tipos_programa'
 end
 
 # These inflection rules are supported but not enabled by default:

@@ -1,0 +1,44 @@
+<%= content_for :header do %>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <%= TipoPrograma.model_name.human %>
+      <small><%= @tipo_programa&.nombre %></small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><%= link_to fa_icon(:wrench, text: TipoPrograma.model_name.human), admin_tipos_programa_path %></li>
+      <li class="active"><%= t(action_name, scope: :actions) %></li>
+    </ol>
+  </section>
+<% end %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box box-primary">
+      <div class="box-header">
+        <h3 class="box-title"><%= @tipo_programa.nombre || 'Nuevo tipo de programa' %></h3>
+      </div>
+
+      <%= simple_form_for [:admin, @tipo_programa], html: { role: :form } do |f| %>
+        <div class="box-body">
+          <div class="row">
+            <div class="col-xs-12">
+              <%= f.input :nombre, autofocus: true, input_html: { placeholder: true } %>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <%= f.association :tareas, as: :check_boxes %>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <%= f.association :recursos, as: :check_boxes %>
+            </div>
+          </div>
+        </div><!-- /.box-body -->
+
+        <div class="box-footer">
+          <%= f.button :submit, class: 'btn btn-primary', data: { disable_with: t(:wait) } %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

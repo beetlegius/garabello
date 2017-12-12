@@ -6,6 +6,7 @@ class ProgramasDatatable < ApplicationDatatable
     programas.map do |programa|
       [].tap do |column|
         column << programa.id
+        column << programa.tipo_programa.nombre
         column << @view.fa_icon(:calendar, class: 'fa-fw', text: @view.date(programa.desde))
         column << @view.fa_icon(:calendar, class: 'fa-fw', text: @view.date(programa.hasta))
         column << @view.fa_icon(:wrench, class: 'fa-fw', text: programa.cuadrilla&.nombre)

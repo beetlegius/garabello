@@ -82,18 +82,18 @@ ActiveRecord::Schema.define(version: 20171122160436) do
     t.date "hasta"
     t.string "capataz"
     t.string "inspector"
-    t.integer "dotacion_original"
-    t.integer "dotacion_real"
     t.text "observaciones"
     t.datetime "deleted_at"
     t.integer "jornadas_count", default: 0, null: false
     t.integer "trabajos_count", default: 0, null: false
     t.integer "via_id"
     t.integer "cuadrilla_id"
+    t.integer "tipo_programa_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cuadrilla_id"], name: "index_programas_on_cuadrilla_id"
     t.index ["deleted_at"], name: "index_programas_on_deleted_at"
+    t.index ["tipo_programa_id"], name: "index_programas_on_tipo_programa_id"
     t.index ["via_id"], name: "index_programas_on_via_id"
   end
 
@@ -107,6 +107,12 @@ ActiveRecord::Schema.define(version: 20171122160436) do
     t.index ["deleted_at"], name: "index_recursos_on_deleted_at"
   end
 
+  create_table "recursos_tipos_programa", id: false, force: :cascade do |t|
+    t.integer "recurso_id", null: false
+    t.integer "tipo_programa_id", null: false
+    t.index ["recurso_id", "tipo_programa_id"], name: "index_recursos_tipos_programa", unique: true
+  end
+
   create_table "tareas", force: :cascade do |t|
     t.string "nombre"
     t.string "unidad"
@@ -115,6 +121,21 @@ ActiveRecord::Schema.define(version: 20171122160436) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["deleted_at"], name: "index_tareas_on_deleted_at"
+  end
+
+  create_table "tareas_tipos_programa", id: false, force: :cascade do |t|
+    t.integer "tarea_id", null: false
+    t.integer "tipo_programa_id", null: false
+    t.index ["tarea_id", "tipo_programa_id"], name: "index_tarea_tipos_programa", unique: true
+  end
+
+  create_table "tipos_programa", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "deleted_at"
+    t.integer "programas_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_tipos_programa_on_deleted_at"
   end
 
   create_table "trabajos", force: :cascade do |t|

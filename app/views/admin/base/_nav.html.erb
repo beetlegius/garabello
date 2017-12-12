@@ -4,6 +4,7 @@
   <li><%= link_to fa_icon(:tasks, text: tag.span(Programa.model_name.human)), admin_programas_path if can? :index, Programa %></li>
 
   <li class="header">Administración general</li>
+  <li><%= link_to fa_icon(:th, text: tag.span(TipoPrograma.model_name.human)), admin_tipos_programa_path if can? :index, TipoPrograma %></li>
   <li><%= link_to fa_icon(:wrench, text: tag.span(Cuadrilla.model_name.human)), admin_cuadrillas_path if can? :index, Cuadrilla %></li>
   <li><%= link_to fa_icon('address-card-o', text: tag.span(Empleado.model_name.human)), admin_empleados_path if can? :index, Empleado %></li>
   <li><%= link_to fa_icon(:train, text: tag.span(Via.model_name.human)), admin_vias_path if can? :index, Via %></li>

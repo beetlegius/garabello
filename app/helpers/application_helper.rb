@@ -7,7 +7,7 @@ module ApplicationHelper
 
   def flash_messages
     flash.map do |key, value|
-      tag.div tag.p(value.html_safe), class: ['callout', ALERTS[key.to_sym]]
+      tag.div tag.p(value.html_safe), class: ['flash', 'callout', ALERTS[key.to_sym]]
     end.join.html_safe
   end
 

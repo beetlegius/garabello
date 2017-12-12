@@ -1,5 +1,6 @@
 todo:
-  ☐ Agregar planilla: un programa tiene muchas planillas.
-  ☐ Poder elegir qué empleados de la cuadrilla elegida van a trabajar en la planilla.
-  ☐ Totalizar los fuera de programa.
-  ☐ Total de totales
+  ✔ Agregar planilla: un programa tiene muchas planillas. @done(2017-12-12 16:29) @project(todo)
+  ✔ Poder elegir qué empleados de la cuadrilla elegida van a trabajar en la planilla. @done(2017-12-12 15:53) @project(todo)
+  ✔ Totalizar los fuera de programa. @done(2017-12-12 12:18) @project(todo)
+  ✔ Total de totales @done(2017-12-12 12:18) @project(todo)
+  ✔ Agregar tipo de programa @done(2017-12-12 16:30) @project(todo)

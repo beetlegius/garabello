@@ -70,5 +70,15 @@ Recurso.create! nombre: 'Nafta moto - herramientas', unidad: 'litro'
 Recurso.create! nombre: 'Nafta zorra - movilidad', unidad: 'litro'
 Recurso.create! nombre: 'Herbicida', unidad: 'litro'
 
+tipo_programa_vias = TipoPrograma.create! nombre: 'Vías'
+tipo_programa_puentes = TipoPrograma.create! nombre: 'Puentes'
+tipo_programa_senalamiento = TipoPrograma.create! nombre: 'Señalamiento'
+tipo_programa_pan = TipoPrograma.create! nombre: 'PAN'
+tipo_programa_comunicaciones = TipoPrograma.create! nombre: 'Comunicaciones'
+tipo_programa_obra_civil = TipoPrograma.create! nombre: 'Obra civil'
+
+tipo_programa_vias.tareas << Tarea.all
+tipo_programa_vias.recursos << Recurso.all
+
 puts 'SEEDS COMPLETO'
 puts ''

@@ -18,18 +18,17 @@
   <% end %>
 <% end %>
 
-<div class="wrapper-programa">
+<div class="<%= 'wrapper-programa' if @programa.persisted? %>">
   <%= simple_form_for [:admin, @programa], html: { role: :form } do |f| %>
     <div class="nav-tabs-custom">
 
       <ul class="nav nav-tabs">
         <li class="<%= :active if @programa.new_record? %>"><%= link_to 'Información', '#info', data: { toggle: :tab } %></li>
-        <li class="<%= @programa.new_record? ? :disabled : :active %>"><%= link_to 'Trabajos', '#trabajos', data: { toggle: (:tab if @programa.persisted?) } %></li>
+        <li class="<%= :disabled if @programa.new_record? %>"><%= link_to 'Jornadas', '#jornadas', data: { toggle: (:tab if @programa.persisted?) } %></li>
+        <li class="<%= :disabled if @programa.new_record? %>"><%= link_to 'Trabajos', '#trabajos', data: { toggle: (:tab if @programa.persisted?) } %></li>
         <li class="<%= :disabled if @programa.new_record? %>"><%= link_to 'Consumos', '#consumos', data: { toggle: (:tab if @programa.persisted?) } %></li>
         <li class="<%= :disabled if @programa.new_record? %>"><%= link_to 'Asistencias', '#asistencias', data: { toggle: (:tab if @programa.persisted?) } %></li>
-        <li class="pull-right">
-          <%= link_to fa_icon(:tasks, class: 'fa-fw', text: 'ver detalle'), admin_programa_path(@programa), class: 'text-muted ver-detalle' if @programa.persisted? %>
-        </li>
+        <li class="pull-right"><%= link_to fa_icon(:tasks, class: 'fa-fw', text: 'ver detalle'), admin_programa_path(@programa), class: 'text-muted ver-detalle' if @programa.persisted? %></li>
         <li class="pull-right"><%= f.button :submit, class: 'btn btn-sm btn-primary btn-submit', data: { disable_with: t(:wait) } %></li>
       </ul>
 
@@ -37,28 +36,25 @@
         <div class="tab-pane <%= :active if @programa.new_record? %>" id="info">
           <% if @programa.new_record? %>
             <div class="row">
-              <div class="col-xs-12 col-md-4">
+              <div class="col-xs-12 col-md-3">
                 <%= f.input :periodo, autofocus: @programa.new_record?, disabled: @programa.persisted?, hint: true, input_html: { class: 'text-center input-lg', data: { behavior: :daterangepicker } } %>
               </div>
-              <div class="col-xs-12 col-md-4">
-                <%= f.association :cuadrilla, autofocus: @programa.persisted?, disabled: @programa.persisted?, prompt: true, hint: true, input_html: { class: 'input-lg' } %>
+              <div class="col-xs-12 col-md-3">
+                <%= f.association :cuadrilla, disabled: @programa.persisted?, prompt: true, hint: true, input_html: { class: 'input-lg' } %>
               </div>
-              <div class="col-xs-12 col-md-4">
+              <div class="col-xs-12 col-md-3">
                 <%= f.association :via, disabled: @programa.persisted?, prompt: true, input_html: { class: 'input-lg' } %>
+              </div>
+              <div class="col-xs-12 col-md-3">
+                <%= f.association :tipo_programa, disabled: @programa.persisted?, prompt: true, input_html: { class: 'input-lg' } %>
               </div>
             </div>
           <% end %>
           <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <%= f.input :dotacion_original, input_html: { placeholder: true } %>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <%= f.input :dotacion_real, input_html: { placeholder: true } %>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="col-xs-12 col-sm-6">
               <%= f.input :capataz, input_html: { placeholder: true } %>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="col-xs-12 col-sm-6">
               <%= f.input :inspector, input_html: { placeholder: true } %>
             </div>
           </div>
@@ -67,6 +63,8 @@
               <%= f.input :observaciones, input_html: { rows: 4, placeholder: true } %>
             </div>
           </div>
+        </div>
+        <div class="tab-pane" id="jornadas">
           <div class="row">
             <div class="col-xs-12">
               <table class="table table-condensed table-striped">
@@ -88,7 +86,7 @@
             </div>
           </div>
         </div>
-        <div class="tab-pane <%= :active if @programa.persisted? %>" id="trabajos" data-behavior="cocoon">
+        <div class="tab-pane" id="trabajos" data-behavior="cocoon">
           <%= render 'trabajos', programa: @programa, f: f %>
         </div>
         <div class="tab-pane" id="consumos" data-behavior="cocoon">

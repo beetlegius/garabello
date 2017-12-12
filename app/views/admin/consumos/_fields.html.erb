@@ -1,7 +1,7 @@
 <tr class="field">
   <td>
     <%= f.input :jornada_id, as: :hidden %>
-    <%= f.association :recurso, prompt: true, label: false, input_html: { class: :select2, data: { behavior: :select2 } } %>
+    <%= f.association :recurso, collection: f.object.jornada.programa.tipo_programa.tareas, prompt: true, label: false, input_html: { class: :select2, data: { behavior: :select2 } } %>
   </td>
   <td><%= f.input :km_desde, label: false, input_html: { min: 0, step: 0.01, placeholder: true } %></td>
   <td><%= f.input :km_hasta, label: false, input_html: { min: 0, step: 0.01, placeholder: true } %></td>

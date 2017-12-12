@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :recursos
     resources :tareas
     resources :programas
+    resources :tipos_programa
 
     resources :users
 

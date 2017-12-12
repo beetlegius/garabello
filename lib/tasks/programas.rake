@@ -9,6 +9,7 @@ task programas: :environment do
   recursos    = Recurso.all
   capataces   = nombres
   inspectores = nombres
+  tipo_programa = TipoPrograma.find(1)
 
   20.downto(0) do |i|
     puts 'Creando programa...'
@@ -24,9 +25,8 @@ task programas: :environment do
     consumos     = []
     asistencias  = []
 
-    programa = Programa.create! desde: desde, hasta: hasta,
+    programa = tipo_programa.programas.create! desde: desde, hasta: hasta,
       capataz: capataz, inspector: inspector,
-      dotacion_original: cuadrilla.empleados_count, dotacion_real: [cuadrilla.empleados_count, cuadrilla.empleados_count - 1, cuadrilla.empleados_count - 2].sample,
       observaciones: [Faker::Lorem.paragraph, nil, nil].sample, cuadrilla: cuadrilla, via: via
 
 
@@ -79,6 +79,7 @@ task programas: :environment do
     programa.asistencias.update_all estado: Asistencia::PRESENTE
     programa.asistencias.reorder("RANDOM()").limit(cuadrilla.empleados_count / rand(4..5)).update_all estado: Asistencia::AUSENTE
     programa.asistencias.reorder("RANDOM()").limit(4).update_all estado: Asistencia::AUSENTE_SIN_AVISO
+    programa.asistencias.reorder("RANDOM()").where(empleado_id: cuadrilla.empleados.sample).update_all estado: Asistencia::SIN_ASIGNAR if rand(5..10) > 7
     programa.asistencias.where(estado: Asistencia::PRESENTE).reorder("RANDOM()").limit(10).each { |asistencia| asistencia.update! recargo_horas: rand(1..4) }
   end
 

@@ -2,7 +2,7 @@ class Asistencia < ApplicationRecord
 
   # CONFIG
 
-  enum estado: [PRESENTE = 'presente', AUSENTE = 'ausente', AUSENTE_SIN_AVISO = 'ausente_sin_aviso']
+  enum estado: [PRESENTE = 'presente', AUSENTE = 'ausente', AUSENTE_SIN_AVISO = 'ausente_sin_aviso', SIN_ASIGNAR = 'sin_asignar']
 
   include Destroyable
 
@@ -17,6 +17,7 @@ class Asistencia < ApplicationRecord
   # SCOPES
 
   scope :alfabetico, -> { joins(:empleado).order("empleados.apellido", "empleados.nombre") }
+  scope :asignada, -> { where.not estado: SIN_ASIGNAR }
 
   # VALIDATIONS
 

@@ -20,6 +20,25 @@ $(document).on 'turbolinks:load', ->
 
   $("a[href='" + window.location.pathname + "']").not("[data-method='post']").not("[data-method='delete']").parents('li').addClass('active')
 
+  $("a[data-toggle='tab']").on 'shown.bs.tab', (e) ->
+    setTimeout ->
+      hash = e.target.href.split("#")[1]
+      $('#' + hash).find('input,select,textarea').filter(':enabled:visible:first').focus()
+    , 100
+
+  tab = window.location.hash
+  if (tab)
+    link = $("a[href='" + tab + "']")
+    if link.length
+      resultado = link.tab("show")
+    else
+      $('.content ul.nav li:first-child a[data-toggle="tab"]').tab("show")
+  else if !$('.content ul.nav li.active').length
+    $('.content ul.nav li:first-child a[data-toggle="tab"]').tab("show")
+
+
+  # <%= @programa.new_record? ? :disabled : :active %>
+
   $("table[role='datatable']").each ->
     $(this).DataTable
       ajax: $(this).data('url')

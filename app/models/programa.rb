@@ -15,6 +15,7 @@ class Programa < ApplicationRecord
 
   # RELATIONS
 
+  belongs_to :tipo_programa, counter_cache: true
   belongs_to :via, counter_cache: true
   belongs_to :cuadrilla, counter_cache: true
 
@@ -39,7 +40,7 @@ class Programa < ApplicationRecord
 
   has_many :jornadas
   accepts_nested_attributes_for :jornadas, reject_if: :all_blank
-  
+
   # has_many :trabajos, through: :jornadas
   # has_many :consumos, through: :jornadas
   # has_many :asistencias, through: :jornadas
@@ -58,12 +59,23 @@ class Programa < ApplicationRecord
   #   (desde..hasta).count
   # end
 
+  def dotacion
+    asistencias.asignada.includes(:empleado).map(&:empleado).uniq
+  end
+
+  def dotacion_original
+    cuadrilla.empleados.count
+  end
+
+  def dotacion_real
+    dotacion.count
+  end
+
   def dotacion_correcta?
     dotacion_original == dotacion_real
   end
 
   def periodo
-    # return nil if new_record?
     "#{desde.strftime('%d-%m-%Y')} - #{hasta.strftime('%d-%m-%Y')}"
   end
 

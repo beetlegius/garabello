@@ -30,7 +30,7 @@ form .radio label, form .checkbox label { padding-left: 0px; }
 .header-message {
   padding: 20px 30px; z-index: 100; font-size: 16px; position: fixed; width: 100%;
   p {
-    color: rgba(255, 255, 255, 0.9); display: inline-block; margin: 0px;
+    color: rgba(255, 255, 255, 0.9); display: inline-block;
     strong { margin-right: 10px; display: block; }
     a { color: #fff; }
     a:hover { color: #ccc; }
@@ -52,4 +52,12 @@ ul.nav-tabs .btn-submit { margin-top: 6px; }
 #cuadrilla .badge-sector { margin-top: 8px; }
 #cuadrilla .modal-body h4 { line-height: 1.5em; }
 
-.wrapper-programa { margin-top: 85px; }
+@media (min-width: 768px) {
+  .wrapper-programa { margin-top: 95px; }
+}
+
+@media (max-width: 767px) {
+  .header-message { position: static; }
+  .content { padding: 15px 0px; }
+  .box { border-radius: 0px; }
+}

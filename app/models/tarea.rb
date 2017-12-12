@@ -12,6 +12,8 @@ class Tarea < ApplicationRecord
 
   has_many :trabajos
 
+  has_and_belongs_to_many :tipos_programa, class_name: 'TipoPrograma'
+
   # SCOPES
 
   # VALIDATIONS
