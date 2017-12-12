@@ -32,43 +32,76 @@ for cuadrilla in Cuadrilla.all
   end
 end
 
-puts 'Creando tareas...'
-Tarea.create! nombre: "Tapar", unidad: 'metro'
-Tarea.create! nombre: "Destapar", unidad: 'metro'
-Tarea.create! nombre: "Ajuste y reemplazo de fijaciones", unidad: 'metro'
-Tarea.create! nombre: "Cambio de durmientes", unidad: 'unidad'
-Tarea.create! nombre: "Escuadrar durmientes", unidad: 'unidad'
-Tarea.create! nombre: "Tratamiento de juntas", unidad: 'unidad'
-Tarea.create! nombre: "Reemplazo de rieles", unidad: 'metro'
-Tarea.create! nombre: "Conservacion geométrica manual", unidad: 'metro'
-Tarea.create! nombre: "Tareas de conservación ADV", unidad: 'unidad'
-Tarea.create! nombre: "Desmalezado, desmonte, carpir", unidad: 'metro_2'
-Tarea.create! nombre: "Nivelación longitudinal", unidad: 'metro'
-Tarea.create! nombre: "Nivelación de juntas", unidad: 'unidad'
-Tarea.create! nombre: "Alinear vía", unidad: 'metro'
-Tarea.create! nombre: "Perfilar (zanja, tajeas)", unidad: 'metro'
-Tarea.create! nombre: "Corrección de trocha", unidad: 'metro'
-Tarea.create! nombre: "Tareas de vía en PaNs", unidad: 'unidad'
-Tarea.create! nombre: "Manipuleo, carga y descarga de materiales", unidad: 'tonelada'
-Tarea.create! nombre: "Limpieza lugar de trabajo y reparación de herramientas", unidad: 'hora'
-Tarea.create! nombre: "Traslado base a obradores", unidad: 'kilometro'
+puts 'Creando tareas de vías...'
+tareas_vias = Tarea.create! [
+  { nombre: "Tapar", unidad: 'metro' },
+  { nombre: "Destapar", unidad: 'metro' },
+  { nombre: "Ajuste y reemplazo de fijaciones", unidad: 'metro' },
+  { nombre: "Cambio de durmientes", unidad: 'unidad' },
+  { nombre: "Escuadrar durmientes", unidad: 'unidad' },
+  { nombre: "Tratamiento de juntas", unidad: 'unidad' },
+  { nombre: "Reemplazo de rieles", unidad: 'metro' },
+  { nombre: "Conservacion geométrica manual", unidad: 'metro' },
+  { nombre: "Tareas de conservación ADV", unidad: 'unidad' },
+  { nombre: "Desmalezado, desmonte, carpir", unidad: 'metro_2' },
+  { nombre: "Nivelación longitudinal", unidad: 'metro' },
+  { nombre: "Nivelación de juntas", unidad: 'unidad' },
+  { nombre: "Alinear vía", unidad: 'metro' },
+  { nombre: "Perfilar (zanja, tajeas)", unidad: 'metro' },
+  { nombre: "Corrección de trocha", unidad: 'metro' },
+  { nombre: "Tareas de vía en PaNs", unidad: 'unidad' },
+  { nombre: "Manipuleo, carga y descarga de materiales", unidad: 'tonelada' },
+  { nombre: "Limpieza lugar de trabajo y reparación de herramientas", unidad: 'hora' },
+  { nombre: "Traslado base a obradores", unidad: 'kilometro' }
+]
 
-puts 'Creando recursos...'
-Recurso.create! nombre: 'Durmiente', unidad: 'unidad'
-Recurso.create! nombre: 'Bulón para eclisa', unidad: 'unidad'
-Recurso.create! nombre: 'Arandela grower', unidad: 'unidad'
-Recurso.create! nombre: 'Tirafondos para vía', unidad: 'unidad'
-Recurso.create! nombre: 'Eclisa para riel', unidad: 'unidad'
-Recurso.create! nombre: 'Riel', unidad: 'metro'
-Recurso.create! nombre: 'Mecha para durmientes', unidad: 'unidad'
-Recurso.create! nombre: 'Disco de corte', unidad: 'unidad'
-Recurso.create! nombre: 'Balasto', unidad: 'tonelada'
-Recurso.create! nombre: 'Aceite', unidad: 'litro'
-Recurso.create! nombre: 'Tanza', unidad: 'metro'
-Recurso.create! nombre: 'Grasa', unidad: 'kilo'
-Recurso.create! nombre: 'Nafta moto - herramientas', unidad: 'litro'
-Recurso.create! nombre: 'Nafta zorra - movilidad', unidad: 'litro'
-Recurso.create! nombre: 'Herbicida', unidad: 'litro'
+puts 'Creando tareas de puentes...'
+tareas_puentes = Tarea.create! [
+  { nombre: "Limpieza e inspeccion de apoyos", unidad: "metro_2" },
+  { nombre: "Desmalezado y limpieza de alas y estribos", unidad: "metro_2" },
+  { nombre: "Ajuste y reposición de bulon / amarre", unidad: "unidad" },
+  { nombre: "Revisión de clavaderas y juntas de vía en puentes", unidad: "unidad" },
+  { nombre: "Revisión de clavadura de contrarrieles", unidad: "unidad" },
+  { nombre: "Armado de Pilastra", unidad: "unidad" },
+  { nombre: "Repracion y sellado de grietas ", unidad: "metro" },
+  { nombre: "Limpiar cauce", unidad: "metro" },
+  { nombre: "Revision y tratamientos de zores", unidad: "unidad" },
+  { nombre: "Limpieza de drenajes ", unidad: "unidad" },
+  { nombre: "Nivelacion a punto fijo", unidad: "metro" },
+  { nombre: "Tratamiento de pintura", unidad: "metro_2" }
+]
+tareas_puentes << Tarea.find_by(nombre: 'Cambio de durmientes')
+
+puts 'Creando recursos de vías...'
+recursos_vias = Recurso.create! [
+  { nombre: 'Durmiente', unidad: 'unidad' },
+  { nombre: 'Bulón para eclisa', unidad: 'unidad' },
+  { nombre: 'Arandela grower', unidad: 'unidad' },
+  { nombre: 'Tirafondos para vía', unidad: 'unidad' },
+  { nombre: 'Eclisa para riel', unidad: 'unidad' },
+  { nombre: 'Riel', unidad: 'metro' },
+  { nombre: 'Mecha', unidad: 'unidad' },
+  { nombre: 'Disco de corte', unidad: 'unidad' },
+  { nombre: 'Balasto', unidad: 'tonelada' },
+  { nombre: 'Aceite', unidad: 'litro' },
+  { nombre: 'Tanza', unidad: 'metro' },
+  { nombre: 'Grasa', unidad: 'kilo' },
+  { nombre: 'Nafta moto - herramientas', unidad: 'litro' },
+  { nombre: 'Nafta zorra - movilidad', unidad: 'litro' },
+  { nombre: 'Herbicida', unidad: 'litro' }
+]
+
+puts 'Creando recursos de puentes...'
+recursos_puentes = Recurso.create! [
+  { nombre: 'Elementos para Pintura', unidad: 'unidad' },
+  { nombre: 'Cal', unidad: 'kilo' },
+  { nombre: 'Cemento', unidad: 'kilo' },
+  { nombre: 'Arena', unidad: 'metro_3' },
+  { nombre: 'Barra De Hierro', unidad: 'unidad' },
+  { nombre: 'Electrodo', unidad: 'unidad' }
+]
+
+recursos_puentes << Recurso.where(nombre: ['Mecha', 'Herbicida', 'Grasa', 'Nafta moto - herramientas', 'Nafta zorra - movilidad', 'Tanza', 'Aceite', 'Disco de corte', 'Durmiente', 'Bulón para eclisa', 'Arandela grower', 'Tirafondos para vía'])
 
 tipo_programa_vias = TipoPrograma.create! nombre: 'Vías'
 tipo_programa_puentes = TipoPrograma.create! nombre: 'Puentes'
@@ -77,8 +110,11 @@ tipo_programa_pan = TipoPrograma.create! nombre: 'PAN'
 tipo_programa_comunicaciones = TipoPrograma.create! nombre: 'Comunicaciones'
 tipo_programa_obra_civil = TipoPrograma.create! nombre: 'Obra civil'
 
-tipo_programa_vias.tareas << Tarea.all
-tipo_programa_vias.recursos << Recurso.all
+tipo_programa_vias.tareas   << tareas_vias
+tipo_programa_vias.recursos << recursos_vias
+
+tipo_programa_puentes.tareas << tareas_puentes
+tipo_programa_puentes.recursos << recursos_puentes
 
 puts 'SEEDS COMPLETO'
 puts ''

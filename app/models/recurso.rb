@@ -4,7 +4,7 @@ class Recurso < ApplicationRecord
 
   include Destroyable
 
-  UNIDADES = %w(metro metro_2 litro unidad kilo tonelada hora kilometro)
+  UNIDADES = %w(metro metro_2 metro_3 litro unidad kilo tonelada hora kilometro)
 
   # CALLBACKS
 
@@ -16,6 +16,8 @@ class Recurso < ApplicationRecord
   has_and_belongs_to_many :tipos_programa, class_name: 'TipoPrograma'
 
   # SCOPES
+
+  default_scope -> { order :nombre }
 
   # VALIDATIONS
 
@@ -32,8 +34,11 @@ class Recurso < ApplicationRecord
 
   # ALIASES
 
+  def to_label
+    "#{nombre} (#{unidad.humanize.downcase})"
+  end
+
   alias_attribute :to_s, :nombre
-  alias_attribute :to_label, :nombre
 
   # PRIVATE METHODS
 

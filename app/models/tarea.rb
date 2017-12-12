@@ -16,6 +16,8 @@ class Tarea < ApplicationRecord
 
   # SCOPES
 
+  default_scope -> { order :nombre }
+
   # VALIDATIONS
 
   validates :nombre, :unidad, presence: true
@@ -32,7 +34,7 @@ class Tarea < ApplicationRecord
   # ALIASES
 
   def to_label
-    "#{nombre} (#{unidad})"
+    "#{nombre} (#{unidad.humanize.downcase})"
   end
 
   alias_attribute :to_s, :nombre
