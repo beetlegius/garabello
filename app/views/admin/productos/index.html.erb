@@ -1,0 +1,35 @@
+<%= content_for :header do %>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <%= link_to fa_icon('file-excel-o', class: 'fa-fw', text: 'Descargar stock'), stock_admin_productos_path, target: :_blank, class: 'btn bg-purple btn-flat pull-right' %>
+    <h1>
+      <%= Producto.model_name.human %>
+      <%= tag.small fa_icon('question', right: true, text: 'panel principal'), rel: :popover, data: { trigger: :hover, title: 'Información', content: 'Aquí visualizarás el stock actual de los productos.' } %>
+    </h1>
+  </section>
+<% end %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box box-primary">
+      <div class="box-header">
+        <h3 class="box-title">
+          Inventario actual
+        </h3>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+        <%= tag.table role: :datatable, class: 'table table-bordered table-hover', data: { url: admin_productos_path(format: :json) } do %>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Cantidad</th>
+              <th>Unidad</th>
+              <th>Producto</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

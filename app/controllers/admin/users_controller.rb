@@ -29,7 +29,7 @@ module Admin
     def update
       @user = current_user unless can? :manage, User
       @user.update! user_params
-      redirect_to [:edit, :admin, @user], notice: t(action_name, link: can?(:manage, User) ? view_context.link_to('Volver', admin_users_path) : nil, scope: :notice)
+      redirect_to admin_root_path, notice: t(action_name, link: can?(:manage, User) ? view_context.link_to('Volver', admin_users_path) : nil, scope: :notice)
     end
 
     def destroy

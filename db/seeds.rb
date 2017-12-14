@@ -11,6 +11,8 @@ User.create! name: 'Gustavo Molinari',    email: 'info@beetlegius.com.ar',     r
 User.create! name: 'Esteban Suárez',      email: 'estebansuarezbue@gmail.com', role: User::SUPERADMIN, password: 'suarez'
 User.create! name: 'Martín Beraldi',      email: 'martinberaldibue@gmail.com', role: User::ADMIN,      password: 'beraldi'
 User.create! name: 'Sebastián Garabello', email: 'sebasofse@gmail.com',        role: User::ADMIN,      password: 'garabello'
+User.create! name: 'Almacenero',          email: 'almacenero@gmail.com',       role: User::STORAGE,    password: 'almacenero'
+User.create! name: 'Planillero',          email: 'planillero@gmail.com',       role: User::PROGRAM,    password: 'planillero'
 
 puts 'Creando cuadrillas...'
 5.times do

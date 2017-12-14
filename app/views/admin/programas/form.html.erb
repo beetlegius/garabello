@@ -29,7 +29,7 @@
         <li class="<%= :disabled if @programa.new_record? %>"><%= link_to 'Consumos', '#consumos', data: { toggle: (:tab if @programa.persisted?) } %></li>
         <li class="<%= :disabled if @programa.new_record? %>"><%= link_to 'Asistencias', '#asistencias', data: { toggle: (:tab if @programa.persisted?) } %></li>
         <li class="pull-right"><%= link_to fa_icon(:tasks, class: 'fa-fw', text: 'ver detalle'), admin_programa_path(@programa), class: 'text-muted ver-detalle' if @programa.persisted? %></li>
-        <li class="pull-right"><%= f.button :submit, class: 'btn btn-sm btn-primary btn-submit', data: { disable_with: t(:wait) } %></li>
+        <li class="pull-right"><%= f.button :button, (fa_icon 'arrow-right', text: 'Siguiente', right: true if @programa.new_record?), class: 'btn btn-sm btn-primary btn-submit', data: { disable_with: t(:wait) } %></li>
       </ul>
 
       <div class="tab-content">
@@ -97,9 +97,9 @@
         </div>
       </div>
 
-      <div class="box-footer">
-        <%= f.button :submit, class: 'btn btn-primary', data: { disable_with: t(:wait) } %>
-      </div>
+      <!-- <div class="box-footer">
+        <%#= f.button :submit, class: 'btn btn-primary', data: { disable_with: t(:wait) } %>
+      </div> -->
     </div>
   <% end %>
 </div>

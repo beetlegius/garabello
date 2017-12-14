@@ -23,4 +23,8 @@ module ApplicationHelper
     bool ? 'SI' : 'NO'
   end
 
+  def codigo(id)
+    id.to_s.rjust(5, "0")
+  end
+
 end

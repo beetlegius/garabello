@@ -3,11 +3,9 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def set_variables(title = nil, description = nil)
-    @variables = {
-      title: title.presence || "#{controller_name}/#{action_name}",
-      description: description
-    }
+  def set_variables(*args)
+    @variables = args.extract_options!
+    @variables.reverse_merge! title: "#{controller_name}/#{action_name}"
   end
 
   helper_method :variables

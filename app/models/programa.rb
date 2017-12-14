@@ -15,6 +15,7 @@ class Programa < ApplicationRecord
 
   # RELATIONS
 
+  belongs_to :user
   belongs_to :tipo_programa, counter_cache: true
   belongs_to :via, counter_cache: true
   belongs_to :cuadrilla, counter_cache: true
@@ -53,11 +54,34 @@ class Programa < ApplicationRecord
 
   # CLASS METHODS
 
-  # INSTANCE METHODS
+  class << self
 
-  # def cantidad_dias
-  #   (desde..hasta).count
-  # end
+    def to_csv
+      attributes = %w{id tipo desde hasta cuadrilla via capataz inspector dotacion_original dotacion_real}
+
+      CSV.generate(headers: true) do |csv|
+        csv << attributes.map(&:humanize).map(&:upcase)
+
+        all.each do |programa|
+          csv << [
+            programa.id,
+            programa.tipo_programa.nombre,
+            programa.desde,
+            programa.hasta,
+            programa.cuadrilla.nombre,
+            programa.via.nombre,
+            programa.capataz,
+            programa.inspector,
+            programa.dotacion_original,
+            programa.dotacion_real
+          ]
+        end
+      end
+    end
+
+  end
+
+  # INSTANCE METHODS
 
   def dotacion
     asistencias.asignada.includes(:empleado).map(&:empleado).uniq

@@ -1,0 +1,62 @@
+<!-- Main content -->
+<section class="invoice">
+  <!-- title row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <h2 class="page-header">
+        <i class="fa fa-globe"></i> <b>Trenes Argentinos</b> operadora ferroviaria
+        <small class="pull-right">Fecha: <%= l Date.today %></small>
+      </h2>
+    </div><!-- /.col -->
+  </div>
+  <!-- info row -->
+  <div class="row invoice-info">
+    <div class="col-sm-4 invoice-col">
+      De
+      <address>
+        <strong>Subgerente de Infraestructura</strong><br>
+        Gcia. Planificación Operativa<br>
+        Larga Distancia e Interior<br>
+        Hornos 67, CABA
+      </address>
+    </div><!-- /.col -->
+    <div class="col-sm-4 invoice-col">
+      Remito
+      <address>
+        <strong><%= @movimiento.remito %></strong>
+      </address>
+    </div><!-- /.col -->
+    <div class="col-sm-4 invoice-col">
+      <b>Salida #<%= codigo(@movimiento.id) %></b><br/>
+      <br/>
+      <b>Fecha de salida:</b> <%= l @movimiento.fecha %><br/>
+      <b>Usuario:</b> <%= @movimiento.user.to_label %>
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+
+  <%= render 'admin/items_movimiento/table', items: @movimiento.items %>
+
+  <div class="row">
+    <!-- accepted payments column -->
+    <div class="col-xs-6">
+      <p class="sello">
+        Sello y firma del autorizante
+      </p>
+    </div><!-- /.col -->
+    <div class="col-xs-6">
+      <p class="lead">Retirado el <%= l @movimiento.fecha %></p>
+      <div class="table-responsive">
+        <table class="table">
+          <tr>
+            <th style="width:50%">Cantidad de items:</th>
+            <td><%= @movimiento.items_count %></td>
+          </tr>
+          <tr>
+            <th>Cantidad total:</th>
+            <td><%= @movimiento.items.sum(:cantidad) %></td>
+          </tr>
+        </table>
+      </div>
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+</section><!-- /.content -->

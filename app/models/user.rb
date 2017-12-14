@@ -3,8 +3,8 @@ class User < ApplicationRecord
   # CONFIG
 
   include Destroyable
-  
-  ROLES = [SUPERADMIN = 'superadmin', ADMIN = 'admin']
+
+  ROLES = [SUPERADMIN = 'superadmin', ADMIN = 'admin', STORAGE = 'storage', PROGRAM = 'program']
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -17,6 +17,9 @@ class User < ApplicationRecord
   after_initialize :set_role
 
   # RELATIONS
+
+  has_many :movimientos
+  has_many :programas
 
   # SCOPES
 

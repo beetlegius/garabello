@@ -14,7 +14,10 @@
 #= require cocoon
 #= require admin/sortable
 #= require admin/asistencias
+#= require admin/autocomplete
 #= require rails-ujs
+#  require highcharts
+#= require chartkick
 
 $(document).on 'turbolinks:load', ->
 
@@ -96,4 +99,9 @@ $(document).on 'turbolinks:load', ->
   # $('[data-behavior="autosubmit"]').find("input, select").on 'change', (e) ->
   #   $(this).parents("form").submit()
 
- $('[data-toggle="popover"]').popover()
+  $('[rel="popover"]').popover()
+  $('[rel="tooltip"]').tooltip()
+
+  $("#table-items").on 'cocoon:after-insert', (e, insertedItem) ->
+    autoComplete(e, insertedItem)
+    $(insertedItem).find('input:visible:first').focus().select()

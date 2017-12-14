@@ -37,17 +37,19 @@
               <%= render 'file_field', f: f, attribute: :image %>
             </div>
             <div class="col-xs-12 col-md-6">
-              <%= f.input :role, collection: User::ROLES, prompt: true, disabled: @user.new_record? %>
+              <%= f.input :role, collection: User::ROLES, prompt: true, disabled: @user.new_record? if can? :manage, User %>
             </div>
           </div>
-          <div class="row">
-            <div class="col-xs-12 col-md-6">
-              <%= f.input :password, input_html: { placeholder: true } %>
+          <% if can? :manage, User %>
+            <div class="row">
+              <div class="col-xs-12 col-md-6">
+                <%= f.input :password, input_html: { placeholder: true } %>
+              </div>
+              <div class="col-xs-12 col-md-6">
+                <%= f.input :password_confirmation, input_html: { placeholder: true } %>
+              </div>
             </div>
-            <div class="col-xs-12 col-md-6">
-              <%= f.input :password_confirmation, input_html: { placeholder: true } %>
-            </div>
-          </div>
+          <% end %>
         </div><!-- /.box-body -->
 
         <div class="box-footer">

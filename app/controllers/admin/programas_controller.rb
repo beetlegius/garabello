@@ -7,6 +7,7 @@ module Admin
       respond_to do |format|
         format.html
         format.js
+        format.csv { send_data @q.result(distinct: true).to_csv, filename: "programas-actuales.csv" }
         format.json { render json: ProgramasDatatable.new(view_context) }
       end
     end
@@ -23,6 +24,7 @@ module Admin
     end
 
     def create
+      @programa.user = current_user
       @programa.save!
       redirect_to edit_admin_programa_path(@programa, anchor: :jornadas)
     end

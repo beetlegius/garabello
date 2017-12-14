@@ -1,10 +1,11 @@
 <%= content_for :header do %>
   <!-- Content Header (Page header) -->
   <section class="content-header">
+    <%= link_to fa_icon('file-excel-o', class: 'fa-fw', text: 'Descargar'), admin_programas_path(format: :csv), target: :_blank, class: 'btn bg-purple btn-flat pull-right', rel: :popover, data: { behavior: :download, trigger: :hover, placement: :left, title: 'ATENCIÓN', content: 'Si tiene filtros aplicados, influirán en los resultados que se descarguen.' } %>
     <%= link_to t(:add, element: 'programa'), new_admin_programa_path, class: 'btn btn-primary btn-flat pull-right' %>
     <h1>
       <%= Programa.model_name.human %>
-      <small>panel principal</small>
+      <%= tag.small fa_icon('question', right: true, text: 'panel principal'), rel: :popover, data: { trigger: :hover, title: 'Información', content: 'Desde aquí podrás cargar programas junto a sus respectivos trabajos, consumos y asistencias del personal.' } %>
     </h1>
   </section>
 <% end %>

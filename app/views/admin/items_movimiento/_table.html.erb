@@ -1,0 +1,23 @@
+<!-- Table row -->
+<div class="row">
+  <div class="col-xs-12 table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Cantidad</th>
+          <th>Producto</th>
+          <th>Código #</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for item in items %>
+          <tr>
+            <td><%= number_with_precision item.cantidad %></td>
+            <td><%= item.producto.nombre %></td>
+            <td><%= item.producto.codigo %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div><!-- /.col -->
+</div><!-- /.row -->

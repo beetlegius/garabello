@@ -3,17 +3,30 @@ Rails.application.routes.draw do
 
   namespace :admin do
 
+    resources :cips
+    resources :productos do
+      get :autocomplete, on: :collection
+      get :stock, on: :collection#, defaults: { format: :csv }
+    end
+    resources :movimientos_entrada, path: 'entradas'
+    resources :movimientos_salida, path: 'salidas'
+
     resources :cuadrillas
     resources :vias
     resources :empleados
     resources :recursos
     resources :tareas
     resources :programas
+
+    namespace :reportes do
+      resources :tareas, only: %w(index)
+    end
+
     resources :tipos_programa
 
     resources :users
 
-    root to: 'programas#index'
+    root to: 'base#root'
   end
 
   scope module: :public do

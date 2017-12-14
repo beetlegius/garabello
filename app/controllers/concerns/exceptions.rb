@@ -6,7 +6,7 @@ module Exceptions
   end
 
   def access_denied
-    redirect_to new_user_session_path, alert: t(:access_denied, scope: :alert)
+    redirect_to admin_root_path, alert: t(:access_denied, scope: :alert)
   end
 
   def routing_error

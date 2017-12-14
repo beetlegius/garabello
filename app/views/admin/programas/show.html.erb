@@ -12,7 +12,7 @@
     <div class="box-body table-responsive no-padding">
       <table class="table table-hover table-bordered table-condensed text-uppercase">
         <tr>
-          <th class="text-center" rowspan="2">Tarea</th>
+          <th class="text-center" rowspan="4">Tarea</th>
           <th class="text-center">Días</th>
           <% for jornada in @programa.jornadas %>
             <th class="text-center" colspan="4" title="<%= date jornada.fecha %>"><%= date jornada.fecha, format: :dia_semana %></th>
@@ -20,19 +20,31 @@
           <th class="text-center" colspan="8">Totales</th>
         </tr>
         <tr>
-          <th class="text-center" style="width: 100px;">Medida</th>
-          <% @programa.jornadas.count.times do %>
-            <td colspan="2" class="text-center" style="width: 100px;">Prog.</td>
-            <td colspan="2" class="text-center" style="width: 100px;">Ejec.</td>
+          <th class="text-center" style="width: 100px;" rowspan="3">Medida</th>
+          <% for jornada in @programa.jornadas %>
+            <td class="text-center" colspan="2">DE KM</td>
+            <td class="text-center" colspan="2"><%= number_with_precision jornada.km_desde %></td>
           <% end %>
-          <td class="text-center" style="width: 50px;">PAM Prog.</td>
-          <td class="text-center" style="width: 50px;">PAM Ejec.</td>
-          <td class="text-center" style="width: 50px;">PAT Prog.</td>
-          <td class="text-center" style="width: 50px;">PAM Ejec.</td>
-          <td class="text-center" style="width: 50px;">FP Prog.</td>
-          <td class="text-center" style="width: 50px;">FP Ejec.</td>
-          <td class="text-center" style="width: 50px;">TOT Prog.</td>
-          <td class="text-center" style="width: 50px;">TOT Ejec.</td>
+          <td class="text-center" style="width: 50px;" rowspan="3">PAM Prog.</td>
+          <td class="text-center" style="width: 50px;" rowspan="3">PAM Ejec.</td>
+          <td class="text-center" style="width: 50px;" rowspan="3">PAT Prog.</td>
+          <td class="text-center" style="width: 50px;" rowspan="3">PAM Ejec.</td>
+          <td class="text-center" style="width: 50px;" rowspan="3">FP Prog.</td>
+          <td class="text-center" style="width: 50px;" rowspan="3">FP Ejec.</td>
+          <td class="text-center" style="width: 50px;" rowspan="3">TOT Prog.</td>
+          <td class="text-center" style="width: 50px;" rowspan="3">TOT Ejec.</td>
+        </tr>
+        <tr>
+          <% for jornada in @programa.jornadas %>
+            <td class="text-center" colspan="2">A KM</td>
+            <td class="text-center" colspan="2"><%= number_with_precision jornada.km_hasta %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <% @programa.jornadas.count.times do %>
+            <th colspan="2" class="text-center" style="width: 100px;">Prog.</th>
+            <th colspan="2" class="text-center" style="width: 100px;">Ejec.</th>
+          <% end %>
         </tr>
         <% for tarea in @programa.tipo_programa.tareas %>
           <tr>
@@ -41,7 +53,7 @@
             <% for jornada in @programa.jornadas %>
               <td colspan="2" class="text-center border-left">
                 <% jornada.trabajos.where(tarea_id: tarea).each do |trabajo| %>
-                  &nbsp;&nbsp;&nbsp;<%= tag.span trabajo.cantidad_estimada, class: trabajo.color, title: "#{trabajo.model_name.human}: KM #{trabajo.km_desde} a #{trabajo.km_hasta}" %>
+                  &nbsp;&nbsp;&nbsp;<%= tag.span trabajo.cantidad_estimada, class: trabajo.color, rel: :popover, data: { trigger: :hover, placement: :bottom, title: trabajo.model_name.human, content: "KM #{trabajo.km_desde} a #{trabajo.km_hasta}" } %>
                 <% end %>
               </td>
               <td colspan="2" class="text-center">

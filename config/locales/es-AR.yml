@@ -1,0 +1,94 @@
+es-AR:
+  confirm: '¿Estás seguro?'
+  wait: 'Espere...'
+  add: 'Agregar %{element}'
+  roles:
+    admin: 'Administrador'
+    superadmin: 'Super administrador'
+  views:
+    pagination:
+      previous: "&lsaquo; Anterior"
+      next: "Siguiente &rsaquo;"
+      truncate: "&hellip;"
+
+  activerecord:
+    models:
+      user: 'Usuarios'
+      cuadrilla: 'Cuadrillas'
+      via: 'Vías'
+      empleado: 'Empleados'
+      recurso: 'Recursos'
+      tarea: 'Tareas'
+      programa: 'Programas'
+      asistencia: 'Asistencias'
+      consumo: 'Consumos'
+      trabajo: 'Trabajos'
+      trabajo_pam: 'Plan anual'
+      trabajo_pat: 'Puntada a tiempo'
+      trabajo_fp: 'Fuera de programa'
+      tipo_programa: 'Tipos de programa'
+      producto: 'Productos'
+      movimiento_entrada: 'Entradas'
+      movimiento_salida: 'Salidas'
+    attributes:
+      cuadrilla:
+        nombre: 'Nombre de la cuadrilla'
+        sector: 'Sector al que pertenece'
+      tarea:
+        nombre: 'Nombre'
+        unidad: 'Unidad'
+      user:
+        email: 'Correo electrónico'
+        name: 'Nombre'
+        image: 'Imagen'
+        remove_image: 'Eliminar imagen'
+        role: 'Rol'
+        password: 'Contraseña'
+        password_confirmation: 'Confirmación de contraseña'
+
+  date:
+    formats:
+      dia_semana: '%A'
+      default: '%Y/%m/%d'
+      header: '%d/%m/%y'
+      tab: '%d/%m %A'
+      month: '%B'
+  time:
+    formats:
+      default: '%d/%m %H:%M'
+
+  helpers:
+    placeholder:
+      asistencia:
+        recargo_horas: 'Horas extras (cantidad)'
+    submit:
+      message:
+        create: 'Enviar'
+      create: 'Agregar'
+      update: 'Guardar cambios'
+
+  notice:
+    create: 'El elemento ha sido agregado exitosamente.'
+    update: 'Se guardaron los cambios. %{link}'
+    destroy: 'El elemento ha sido eliminado exitosamente.'
+  alert:
+    destroy: 'El elemento no puede ser eliminado.'
+    access_denied: 'Acceso denegado'
+    login: 'El usuario y/o la contraseña no son correctos.'
+    no_puede_editar: 'No se puede editar este elemento.'
+    fecha_invalida: 'La fecha seleccionada es inválida. Se corrigió de manera automática.'
+  actions:
+    new: 'Agregar'
+    create: 'Agregar'
+    edit: 'Editar'
+    update: 'Editar'
+    show: 'Ver'
+
+  number:
+    precision:
+      format:
+        delimiter: '.'
+        strip_insignificant_zeros: true
+    currency:
+      format:
+        strip_insignificant_zeros: true
