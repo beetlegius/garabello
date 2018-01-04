@@ -19,7 +19,7 @@
           <%= f.input :tarea_id, collection: @tareas, prompt: true, required: true, selected: params[:tarea_id] %>
         </div>
         <div class="col-xs-12 col-sm-3">
-          <%= f.input :ano, collection: @years, include_blank: false, selected: params[:year] %>
+          <%= f.input :ano, collection: @years, include_blank: false, selected: params[:ano] %>
         </div>
         <div class="col-xs-12 col-sm-3">
           <%= f.label :desde %>
@@ -42,6 +42,18 @@
     </h3>
   </div><!-- /.box-header -->
   <div class="box-body">
-    <%= column_chart @series, stacked: true, xtitle: 'Meses', ytitle: @tarea.unidad&.pluralize %>
+    <%= column_chart @series, stacked: true, xtitle: 'Meses', ytitle: @tarea&.unidad&.pluralize %>
+  </div>
+</div>
+
+
+<div class="box box-primary">
+  <div class="box-header">
+    <h3 class="box-title">
+      Semanal
+    </h3>
+  </div><!-- /.box-header -->
+  <div class="box-body">
+    <%= line_chart @series_line, xtitle: 'Semanas', ytitle: @tarea&.unidad&.pluralize %>
   </div>
 </div>

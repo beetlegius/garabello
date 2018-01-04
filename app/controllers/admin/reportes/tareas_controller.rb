@@ -52,6 +52,17 @@ module Admin
             stack: 'ejecutado'
           }
         ]
+
+        @series_line = [
+          {
+            name: "Estimado",
+            data: Trabajo.joins(:jornada).group_by_week("jornadas.fecha", range: desde..hasta, format: 'SEM %d/%m').sum('trabajos.cantidad_estimada')
+          },
+          {
+            name: "Ejecutado",
+            data: Trabajo.joins(:jornada).group_by_week("jornadas.fecha", range: desde..hasta, format: 'SEM %d/%m').sum('trabajos.cantidad_ejecutada')
+          }
+        ]
       end
 
     end

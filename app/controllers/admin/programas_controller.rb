@@ -50,7 +50,7 @@ module Admin
         trabajos_pam_attributes: [:id, :tarea_id, :km_desde, :km_hasta, :cantidad_estimada, :cantidad_ejecutada, :jornada_id, :_destroy],
         trabajos_pat_attributes: [:id, :tarea_id, :km_desde, :km_hasta, :cantidad_estimada, :cantidad_ejecutada, :jornada_id, :_destroy],
         trabajos_fp_attributes: [:id, :tarea_id, :km_desde, :km_hasta, :cantidad_ejecutada, :jornada_id, :_destroy],
-        consumos_attributes: [:id, :cantidad, :km_desde, :km_hasta, :recurso_id, :_destroy],
+        consumos_attributes: [:id, :cantidad, :km_desde, :km_hasta, :recurso_id, :jornada_id, :_destroy],
         asistencias_attributes: [:id, :estado, :recargo_horas])
     end
 
