@@ -92,3 +92,6 @@ es-AR:
     currency:
       format:
         strip_insignificant_zeros: true
+    percentage:
+      format:
+        strip_insignificant_zeros: true

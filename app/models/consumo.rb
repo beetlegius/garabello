@@ -14,6 +14,9 @@ class Consumo < ApplicationRecord
 
   # SCOPES
 
+  scope :de_recurso, ->(un_recurso) { where recurso_id: un_recurso }
+  scope :entre, ->(desde, hasta) { joins(:jornada).where("jornadas.fecha >= :desde AND jornadas.fecha <= :hasta", desde: desde, hasta: hasta).order("jornadas.fecha") }
+
   # VALIDATIONS
 
   validates :cantidad, :km_desde, :km_hasta, presence: true

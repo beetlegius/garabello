@@ -18,6 +18,7 @@ development:
   username: postgres
   password: 123456
   timeout: 5000
+  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

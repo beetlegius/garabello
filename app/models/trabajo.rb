@@ -34,6 +34,10 @@ class Trabajo < ApplicationRecord
     cantidad_estimada == cantidad_ejecutada
   end
 
+  def porcentaje_completado
+    cantidad_ejecutada < cantidad_estimada.to_i ? cantidad_ejecutada * 100 / cantidad_estimada : 100
+  end
+
   def asociar_jornada(jornada)
     self.jornada = jornada
     self.km_desde = jornada.km_desde

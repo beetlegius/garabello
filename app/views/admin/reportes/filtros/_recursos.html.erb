@@ -1,0 +1,27 @@
+<div class="box box-info">
+  <div class="box-header with-border">
+    <h3 class="box-title">Filtros</h3>
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+    </div>
+  </div>
+    <%= simple_form_for "", url: admin_reportes_recursos_path, method: :get, role: :form do |f| %>
+    <div class="box-body">
+      <div class="row">
+        <div class="col-xs-12 col-sm-3">
+          <%= f.input :recurso_id, collection: @recursos, prompt: true, required: true, selected: params[:recurso_id], input_html: { class: :select2, data: { behavior: :select2 } } %>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <%= f.input :ano, collection: @years, include_blank: false, selected: params[:ano] %>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <%= f.input :desde, collection: 1..12, label_method: proc { |month| date(Date.new(2018, month), format: '%B').humanize }, selected: params[:desde], include_blank: 'Seleccione un mes' %>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <%= f.input :hasta, collection: 1..12, label_method: proc { |month| date(Date.new(2018, month), format: '%B').humanize }, selected: params[:hasta], include_blank: 'Seleccione un mes' %>
+        </div>
+      </div>
+      <%= f.button :button, fa_icon(:search, class: 'fa-fw', text: 'Buscar'), class: 'btn btn-primary', data: { disable_with: t(:wait) } %>
+    <% end %>
+  </div>
+</div>

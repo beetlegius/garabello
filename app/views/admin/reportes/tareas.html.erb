@@ -1,0 +1,61 @@
+<%= content_for :header do %>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <%= Programa.model_name.human %>
+      <small>reporte de tareas</small>
+    </h1>
+  </section>
+<% end %>
+
+<%= render 'nav_superior' %>
+
+<%= render 'admin/reportes/filtros/tareas' %>
+
+<div class="nav-tabs-custom">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#por-mes" data-toggle="tab">Por mes</a></li>
+    <li><a href="#por-semana" data-toggle="tab">Por semana</a></li>
+    <% for month in params[:desde]..params[:hasta] %>
+      <li class="pull-right"><%= link_to date(Date.new(2018, month.to_i), format: '%B').humanize, { anchor: "mes-#{month}" }, data: { toggle: :tab } %></li>
+    <% end %>
+    <li class="pull-right header">Resumen mensual</li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="por-mes">
+      <%= column_chart @series, stacked: true, xtitle: 'Meses', ytitle: @tarea&.unidad&.pluralize, colors: ['#dd4b39', '#3c8dbc', '#00a65a', '#dd4b39', '#3c8dbc'], discrete: false, title: @tarea&.to_label %>
+    </div>
+    <div class="tab-pane" id="por-semana">
+      <%= area_chart @series_line, xtitle: 'Semanas', ytitle: @tarea&.unidad&.pluralize, colors: ['#00a7d0', '#001f3f'], stacked: false, title: @tarea&.to_label %>
+    </div>
+
+    <% for month in params[:desde]..params[:hasta] %>
+      <div class="tab-pane" id="mes-<%= month %>">
+        <table class="table table-striped-table-condensed text-center">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Tarea</th>
+              <th>Kilómetro</th>
+              <th>Estimado</th>
+              <th>Ejecutado</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for trabajo in Trabajo.de_tarea(params[:tarea_id]).joins(:jornada).where("jornadas.fecha >= :desde AND jornadas.fecha <= :hasta", desde: Date.new(params[:ano].to_i, month.to_i).beginning_of_month, hasta: Date.new(params[:ano].to_i, month.to_i).end_of_month).order("jornadas.fecha") %>
+              <tr class="<%= trabajo.field_class %>">
+                <td><%= link_to fa_icon(:calendar, class: 'fa-fw', text: date(trabajo.jornada.fecha)), [:admin, trabajo.programa], target: :_blank, rel: :tooltip, title: 'Ver programa' %></td>
+                <td><%= trabajo.tarea.to_label %></td>
+                <td>KM&nbsp;&nbsp;&nbsp;<%= number_with_precision trabajo.km_desde %>&nbsp;&nbsp;&nbsp;al&nbsp;&nbsp;&nbsp;<%= number_with_precision trabajo.km_hasta %></td>
+                <td style="width: 100px;"><%= trabajo.cantidad_estimada %></td>
+                <td style="width: 100px;"><%= trabajo.cantidad_ejecutada %></td>
+                <td style="width: 100px;"><%= fa_icon(trabajo.cantidad_correcta? ? 'check-square-o' : 'square-o', class: 'fa-fw', text: number_to_percentage(trabajo.porcentaje_completado)) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+</div>

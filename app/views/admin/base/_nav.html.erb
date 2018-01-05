@@ -1,11 +1,11 @@
 <ul class="sidebar-menu" data-widget="tree">
 
-  <% if current_user.is_role? User::PROGRAM, User::ADMIN, User::SUPERADMIN %>
+  <% if current_user.is_role? User::PROGRAM, User::ADMIN %>
     <li class="header">Programas de trabajo</li>
     <li><%= link_to fa_icon(:tasks, text: tag.span(Programa.model_name.human)), admin_programas_path if can? :index, Programa %></li>
   <% end %>
 
-  <% if current_user.is_role? User::ADMIN, User::SUPERADMIN %>
+  <% if current_user.is_role? User::ADMIN %>
     <li class="header">Administración general</li>
     <li><%= link_to fa_icon(:th, text: tag.span(TipoPrograma.model_name.human)), admin_tipos_programa_path if can? :index, TipoPrograma %></li>
     <li><%= link_to fa_icon(:wrench, text: tag.span(Cuadrilla.model_name.human)), admin_cuadrillas_path if can? :index, Cuadrilla %></li>
@@ -15,11 +15,17 @@
     <li><%= link_to fa_icon(:cog, text: tag.span(Tarea.model_name.human)), admin_tareas_path if can? :index, Tarea %></li>
   <% end %>
 
-  <% if current_user.is_role? User::STORAGE, User::ADMIN, User::SUPERADMIN %>
+  <% if current_user.is_role? User::STORAGE, User::ADMIN %>
     <li class="header">Stock</li>
     <li><%= link_to fa_icon(:th, text: tag.span(Producto.model_name.human)), admin_productos_path if can? :index, Producto %></li>
     <li><%= link_to fa_icon('arrow-right', text: tag.span(MovimientoEntrada.model_name.human)), admin_movimientos_entrada_path if can? :index, MovimientoEntrada %></li>
     <li><%= link_to fa_icon('arrow-left', text: tag.span(MovimientoSalida.model_name.human)), admin_movimientos_salida_path if can? :index, MovimientoSalida %></li>
+  <% end %>
+
+  <% if current_user.is_role? User::ADMIN %>
+    <li class="header">Reportes</li>
+    <li><%= link_to fa_icon(:cog, text: tag.span(Tarea.model_name.human)), admin_reportes_tareas_path if can? :tareas, :reporte %></li>
+    <li><%= link_to fa_icon('thumb-tack', text: tag.span(Recurso.model_name.human)), admin_reportes_recursos_path if can? :recursos, :reporte %></li>
   <% end %>
 
   <% if current_user.is_role? User::SUPERADMIN %>

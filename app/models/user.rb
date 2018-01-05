@@ -35,7 +35,7 @@ class User < ApplicationRecord
   # INSTANCE METHODS
 
   def is_role?(*roles)
-    role.present? && roles.map(&:to_s).include?(role)
+    role.present? && (role == SUPERADMIN || roles.map(&:to_s).include?(role))
   end
 
   def can_delete?

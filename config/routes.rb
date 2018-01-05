@@ -19,7 +19,8 @@ Rails.application.routes.draw do
     resources :programas
 
     namespace :reportes do
-      resources :tareas, only: %w(index)
+      get :tareas
+      get :recursos
     end
 
     resources :tipos_programa
