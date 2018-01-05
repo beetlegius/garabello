@@ -14,6 +14,8 @@ class Trabajo < ApplicationRecord
 
   # SCOPES
 
+  scope :de_tarea, ->(una_tarea) { where tarea_id: una_tarea }
+
   # VALIDATIONS
 
   validates :cantidad_ejecutada, :km_desde, :km_hasta, presence: true

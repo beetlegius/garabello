@@ -19,7 +19,7 @@
           <%= f.input :tarea_id, collection: @tareas, prompt: true, required: true, selected: params[:tarea_id] %>
         </div>
         <div class="col-xs-12 col-sm-3">
-          <%= f.input :ano, collection: @years, include_blank: false, selected: params[:year] %>
+          <%= f.input :ano, collection: @years, include_blank: false, selected: params[:ano] %>
         </div>
         <div class="col-xs-12 col-sm-3">
           <%= f.label :desde %>
