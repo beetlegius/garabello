@@ -42,6 +42,6 @@
     </h3>
   </div><!-- /.box-header -->
   <div class="box-body">
-    <%= column_chart @series, stacked: true, xtitle: 'Meses', ytitle: @tarea.unidad&.pluralize %>
+    <%= column_chart @series, stacked: true, xtitle: 'Meses', ytitle: @tarea&.unidad&.pluralize %>
   </div>
 </div>
