@@ -30,6 +30,7 @@ module Admin
     def tareas
       @tareas = Tarea.all
       @tarea  = @tareas.find params[:tarea_id] if params[:tarea_id]
+      @trabajos = Trabajo.de_tarea(params[:tarea_id])
 
       @series = [
         {

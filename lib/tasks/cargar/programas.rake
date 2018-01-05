@@ -40,7 +40,7 @@ namespace :cargar do
         jornada.update! km_desde: km_desde, km_hasta: km_hasta
 
         tareas_disponibles = tareas.shuffle
-        rand(0..3).times do
+        rand(2..10).times do
           cantidad_estimada = rand(1..10)
           trabajo = TrabajoPAM.new(tarea: tareas_disponibles.pop, cantidad_estimada: cantidad_estimada, cantidad_ejecutada: [cantidad_estimada, cantidad_estimada - 1, cantidad_estimada - 2].sample)
           trabajo.asociar_jornada(jornada)
@@ -48,7 +48,7 @@ namespace :cargar do
         end
 
         tareas_disponibles = tareas.shuffle
-        rand(0..3).times do
+        rand(0..5).times do
           cantidad_estimada = rand(1..10)
           trabajo = TrabajoPAT.new(tarea: tareas_disponibles.pop, cantidad_estimada: cantidad_estimada, cantidad_ejecutada: [cantidad_estimada, cantidad_estimada - 1, cantidad_estimada - 2].sample)
           trabajo.asociar_jornada(jornada)
@@ -65,7 +65,7 @@ namespace :cargar do
         end
 
         recursos_disponibles = recursos.shuffle
-        rand(6..10).times do
+        rand(10..15).times do
           cantidad = rand(10..100)
           consumo = Consumo.new(recurso: recursos_disponibles.pop, cantidad: cantidad)
           consumo.asociar_jornada(jornada)

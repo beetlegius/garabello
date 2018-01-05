@@ -15,6 +15,7 @@ class Trabajo < ApplicationRecord
   # SCOPES
 
   scope :de_tarea, ->(una_tarea) { where tarea_id: una_tarea }
+  scope :entre, ->(desde, hasta) { joins(:jornada).where("jornadas.fecha >= :desde AND jornadas.fecha <= :hasta", desde: desde, hasta: hasta).order("jornadas.fecha") }
 
   # VALIDATIONS
 

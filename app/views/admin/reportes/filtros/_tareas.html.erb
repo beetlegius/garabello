@@ -11,13 +11,13 @@
         <div class="col-xs-12 col-sm-3">
           <%= f.input :tarea_id, collection: @tareas, prompt: true, required: true, selected: params[:tarea_id], input_html: { class: :select2, data: { behavior: :select2 } } %>
         </div>
-        <div class="col-xs-12 col-sm-3">
-          <%= f.input :ano, collection: @years, include_blank: false, selected: params[:ano] %>
+        <div class="col-xs-12 col-sm-2">
+          <%= f.input :ano, collection: @years, label: 'Año', include_blank: false, selected: params[:ano] %>
         </div>
-        <div class="col-xs-12 col-sm-3">
+        <div class="col-xs-12 col-sm-2">
           <%= f.input :desde, collection: 1..12, label_method: proc { |month| date(Date.new(2018, month), format: '%B').humanize }, selected: params[:desde], include_blank: 'Seleccione un mes' %>
         </div>
-        <div class="col-xs-12 col-sm-3">
+        <div class="col-xs-12 col-sm-2">
           <%= f.input :hasta, collection: 1..12, label_method: proc { |month| date(Date.new(2018, month), format: '%B').humanize }, selected: params[:hasta], include_blank: 'Seleccione un mes' %>
         </div>
       </div>
