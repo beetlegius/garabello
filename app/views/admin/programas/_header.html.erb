@@ -10,7 +10,7 @@
       <div class="col-xs-6 col-sm-3">
         <p class="info">
           <strong><%= fa_icon :wrench, class: 'fa-fw', text: 'Cuadrilla' %></strong>
-          <%= link_to fa_icon('th-list', right: true, class: 'fa-sm fa-fw', text: @programa.cuadrilla.to_label), '#cuadrilla', class: :lead, rel: :popover, data: { toggle: :modal, placement: :bottom, trigger: :hover, title: 'Información', content: 'Ver detalles de la cuadrilla, cómo está compuesta y quiénes fueron asignados a este programa.' } %>
+          <%= link_to fa_icon('th-list', right: true, class: 'fa-sm fa-fw', text: truncate(@programa.cuadrilla.to_label)), '#cuadrilla', class: :lead, rel: :popover, data: { toggle: :modal, placement: :bottom, trigger: :hover, title: "Información: #{@programa.cuadrilla.to_label}", content: 'Ver detalles de la cuadrilla, cómo está compuesta y quiénes fueron asignados a este programa.' } %>
         </p>
       </div>
       <div class="col-xs-6 col-sm-2">
@@ -50,7 +50,7 @@
           <%= tag.span "#{@programa.dotacion_real} / #{@programa.dotacion_original}", title: ("La dotación real no coincide con la original" if !@programa.dotacion_correcta?), class: ('dotacion-incorrecta' if !@programa.dotacion_correcta?) %>
         </h4>
         <ul class="nav">
-          <% for empleado in @programa.cuadrilla.empleados %>
+          <% for empleado in @programa.empleados %>
             <li class="list-group-item <%= @programa.dotacion.include?(empleado) ? 'text-success' : 'text-muted' %>">
               <%= empleado.nombre_completo %>
             </li>

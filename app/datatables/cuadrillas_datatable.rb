@@ -6,6 +6,7 @@ class CuadrillasDatatable < ApplicationDatatable
     cuadrillas.map do |cuadrilla|
       [].tap do |column|
         column << cuadrilla.id
+        column << cuadrilla.tipo_programa.to_label
         column << cuadrilla.nombre
 
         links = []

@@ -118,7 +118,7 @@
           <th class="text-center" colspan="2">A s/aviso</th>
           <th class="text-center" colspan="2">Rec. HS</th>
         </tr>
-        <% for empleado in @programa.cuadrilla.empleados %>
+        <% for empleado in @programa.empleados %>
           <tr>
             <td colspan="2" title="<%= empleado.nombre_completo %>"><%= truncate empleado.nombre_completo %></td>
             <% for jornada in @programa.jornadas %>

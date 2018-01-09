@@ -1,4 +1,11 @@
 todo:
+  ☐ Ćargar esfuerzo (octavos de jornada) por tarea
+
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+Archive:
+  ✔ Pensar cambios de empleados en el tiempo @done(2018-01-09 15:42) @project(todo)
+  ✔ Relacionar cuadrilla con tipo de programa @done(2018-01-09 15:31) @project(todo)
+  ✔ Agregar esfuerzo a tareas. @done(2018-01-09 15:32) @project(todo)
   ✔ Agregar planilla: un programa tiene muchas planillas. @done(2017-12-12 16:29) @project(todo)
   ✔ Poder elegir qué empleados de la cuadrilla elegida van a trabajar en la planilla. @done(2017-12-12 15:53) @project(todo)
   ✔ Totalizar los fuera de programa. @done(2017-12-12 12:18) @project(todo)

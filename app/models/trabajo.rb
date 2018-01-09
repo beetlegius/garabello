@@ -35,6 +35,10 @@ class Trabajo < ApplicationRecord
     cantidad_estimada == cantidad_ejecutada
   end
 
+  def dentro_de_programa_anual?
+    jornada.fecha.day < 8 || jornada.fecha.day > 22
+  end
+
   def porcentaje_completado
     cantidad_ejecutada < cantidad_estimada.to_i ? cantidad_ejecutada * 100 / cantidad_estimada : 100
   end

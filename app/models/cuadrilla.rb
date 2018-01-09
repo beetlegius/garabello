@@ -10,10 +10,14 @@ class Cuadrilla < ApplicationRecord
 
   # RELATIONS
 
+  belongs_to :tipo_programa, counter_cache: true
+
   has_many :empleados
   has_many :programas
 
   # SCOPES
+
+  default_scope -> { order :nombre }
 
   # VALIDATIONS
 

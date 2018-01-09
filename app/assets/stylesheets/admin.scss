@@ -9,6 +9,7 @@
 //= require admin/plugins/icheck/square/blue
 //= require jquery-ui
 //= require jquery.fileupload-ui
+//= require highcharts
 
 table.table tbody td { vertical-align: middle !important; }
 
@@ -78,3 +79,9 @@ p.sello {
 }
 
 .text-right { text-align: right !important; }
+
+.nav-indicadores li a { border: 2px solid transparent; }
+.nav-indicadores li.active a { background-color: #f8f8f8; border-color: #aaa; }
+.nav-indicadores li a input { cursor: pointer; }
+.nav-indicadores li a span.seleccionado { position: absolute; top: 10px; right: 10px; display: none; }
+.nav-indicadores li.active a span.seleccionado { display: block; }

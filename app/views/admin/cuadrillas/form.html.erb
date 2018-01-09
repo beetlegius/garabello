@@ -22,11 +22,14 @@
       <%= simple_form_for [:admin, @cuadrilla], html: { role: :form } do |f| %>
         <div class="box-body">
           <div class="row">
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 col-sm-4">
               <%= f.input :nombre, autofocus: true, input_html: { placeholder: true } %>
             </div>
-            <div class="col-xs-12 col-sm-6">
-              <%= f.input :sector, collection: Cuadrilla.sectores.keys, label_method: :humanize, prompt: true %>              
+            <div class="col-xs-12 col-sm-4">
+              <%= f.input :sector, collection: Cuadrilla.sectores.keys, label_method: :humanize, prompt: true %>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+              <%= f.association :tipo_programa, prompt: true %>
             </div>
           </div>
         </div><!-- /.box-body -->

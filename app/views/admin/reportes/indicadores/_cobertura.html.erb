@@ -1,0 +1,119 @@
+<div class="row">
+  <div class="col-xs-12 col-md-6 col-sm-offset-3">
+    <h3 class="profile-username text-center">Plan anual abstracto</h3>
+    <% for mes in (inicio..fin).to_a.map(&:beginning_of_month).uniq %>
+      <table class="table table-condensed text-center">
+        <thead>
+          <tr class="info">
+            <th colspan="5" class="text-center"><%= date(mes, format: '%B %Y').humanize %></th>
+          </tr>
+          <tr>
+            <th class="text-center">Tramo</th>
+            <th class="text-center">Vía</th>
+            <th class="text-center">Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>KM&nbsp;&nbsp;&nbsp;62,150&nbsp;&nbsp;&nbsp;al&nbsp;&nbsp;&nbsp;65,000</td>
+            <td>Ascendente</td>
+            <td>2,850</td>
+          </tr>
+          <tr>
+            <td>KM&nbsp;&nbsp;&nbsp;62,150&nbsp;&nbsp;&nbsp;al&nbsp;&nbsp;&nbsp;65,000</td>
+            <td>Descendente</td>
+            <td>2,850</td>
+          </tr>
+          <tr>
+            <td>KM&nbsp;&nbsp;&nbsp;103,300&nbsp;&nbsp;&nbsp;al&nbsp;&nbsp;&nbsp;109,000</td>
+            <td>Ascendente</td>
+            <td>5,700</td>
+          </tr>
+          <tr>
+            <td>KM&nbsp;&nbsp;&nbsp;214,000&nbsp;&nbsp;&nbsp;al&nbsp;&nbsp;&nbsp;219,000</td>
+            <td>Única</td>
+            <td>5,000</td>
+          </tr>
+          <tr>
+            <td>KM&nbsp;&nbsp;&nbsp;270,000&nbsp;&nbsp;&nbsp;al&nbsp;&nbsp;&nbsp;272,900</td>
+            <td>Única</td>
+            <td>2,900</td>
+          </tr>
+          <tr>
+            <td>KM&nbsp;&nbsp;&nbsp;305,000&nbsp;&nbsp;&nbsp;al&nbsp;&nbsp;&nbsp;307,900</td>
+            <td>Única</td>
+            <td>2,900</td>
+          </tr>
+          <tr>
+            <td>KM&nbsp;&nbsp;&nbsp;340,000&nbsp;&nbsp;&nbsp;al&nbsp;&nbsp;&nbsp;341,800</td>
+            <td>Única</td>
+            <td>1,800</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th></th>
+            <th></th>
+            <th class="text-right">Total &nbsp;&nbsp;&nbsp; 24,000</th>
+          </tr>
+        </tfoot>
+      </table>
+    <% end %>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <h3 class="profile-username text-center">Dentro de los tramos</h3>
+    <table class="table table-condensed text-right">
+      <thead>
+        <tr class="info">
+          <th class="text-right">Fecha</th>
+          <th class="text-right">Tarea</th>
+          <th class="text-right">Kilómetro</th>
+          <th class="text-right">Estimado</th>
+          <th class="text-right">Ejecutado</th>
+          <th class="text-right">Unidad</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for trabajo in @trabajos.entre(inicio, fin).limit(20) %>
+          <tr class="<%= :success if trabajo.dentro_de_programa_anual? %>">
+            <td style="width: 100px;"><%= link_to fa_icon(:calendar, class: 'fa-fw', text: date(trabajo.jornada.fecha)), [:admin, trabajo.programa], target: :_blank, rel: :tooltip, title: 'Ver programa' %></td>
+            <td><%= trabajo.tarea.nombre %></td>
+            <td>KM&nbsp;&nbsp;&nbsp;<%= number_with_precision trabajo.km_desde %>&nbsp;&nbsp;&nbsp;al&nbsp;&nbsp;&nbsp;<%= number_with_precision trabajo.km_hasta %></td>
+            <td style="width: 100px;"><%= trabajo.cantidad_estimada %></td>
+            <td style="width: 100px;"><%= trabajo.cantidad_ejecutada %></td>
+            <td style="width: 100px;"><%= trabajo.tarea.unidad %></td>
+            <td style="width: 100px;"><%= fa_icon trabajo.dentro_de_programa_anual? ? 'check-square-o' : 'square-o', class: 'fa-fw' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-xs-12 col-sm-6">
+    <h3 class="profile-username text-center">Fuera de los tramos</h3>
+    <table class="table table-condensed text-right">
+      <thead>
+        <tr class="info">
+          <th class="text-right">Fecha</th>
+          <th class="text-right">Tarea</th>
+          <th class="text-right">Kilómetro</th>
+          <th class="text-right">Ejecutado</th>
+          <th class="text-right">Unidad</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for trabajo in @trabajos.entre(inicio, fin).offset(20) %>
+          <tr class="<%= :success if trabajo.dentro_de_programa_anual? %>">
+            <td style="width: 100px;"><%= link_to fa_icon(:calendar, class: 'fa-fw', text: date(trabajo.jornada.fecha)), [:admin, trabajo.programa], target: :_blank, rel: :tooltip, title: 'Ver programa' %></td>
+            <td><%= trabajo.tarea.nombre %></td>
+            <td>KM&nbsp;&nbsp;&nbsp;<%= number_with_precision trabajo.km_desde %>&nbsp;&nbsp;&nbsp;al&nbsp;&nbsp;&nbsp;<%= number_with_precision trabajo.km_hasta %></td>
+            <td style="width: 100px;"><%= trabajo.cantidad_ejecutada %></td>
+            <td style="width: 100px;"><%= trabajo.tarea.unidad %></td>
+            <td style="width: 100px;"><%= fa_icon trabajo.dentro_de_programa_anual? ? 'check-square-o' : 'square-o', class: 'fa-fw' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

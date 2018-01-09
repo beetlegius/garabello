@@ -5,6 +5,7 @@ class CreateTiposPrograma < ActiveRecord::Migration[5.1]
 
       t.datetime :deleted_at, index: true
       t.integer :programas_count, default: 0, null: false
+      t.integer :cuadrillas_count, default: 0, null: false
       t.timestamps
     end
   end

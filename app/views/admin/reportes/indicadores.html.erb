@@ -1,0 +1,97 @@
+<%= content_for :header do %>
+  <%= render 'nav_superior' %>
+<% end %>
+
+<%= render 'admin/reportes/filtros/indicadores' %>
+
+<ul class="nav nav-pills">
+  <li><%= link_to "Todo el período", { anchor: :general }, data: { toggle: :tab, title: params[:ano], placement: :top, content: "#{t("date.month_names")[@desde.month]} a #{t("date.month_names")[@hasta.month]}", trigger: :hover }, rel: :popover %></li>
+  <% for month in params[:desde]..params[:hasta] %>
+    <li><%= link_to t("date.month_names")[month.to_i].humanize, { anchor: "mes-#{month}" }, data: { toggle: :tab } %></li>
+  <% end %>
+</ul>
+
+<br>
+
+<div class="tab-content">
+  <div id="general" class="tab-pane">
+
+    <div class="box box-success">
+
+      <div class="box-body">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+            <p class="lead">Cobertura</p>
+            <input type="text" data-behavior="indicator" value="80" data-fgColor="#00c0ef">
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+            <p class="lead">Eficacia</p>
+            <input type="text" data-behavior="indicator" value="80" data-fgColor="#dd4b39">
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+            <p class="lead">Asistencia</p>
+            <input type="text" data-behavior="indicator" value="75" data-fgColor="#00a65a">
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+            <p class="lead">Rendimiento</p>
+            <input type="text" data-behavior="indicator" value="55" data-fgColor="#f39c12">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <% for month in params[:desde]..params[:hasta] %>
+    <%
+      inicio = Date.new(params[:ano].to_i, month.to_i).beginning_of_month
+      fin    = Date.new(params[:ano].to_i, month.to_i).end_of_month
+    %>
+    <div class="tab-pane" id="mes-<%= month %>">
+
+      <div class="box box-success">
+
+        <div class="box-body">
+          <ul class="nav nav-indicadores row">
+            <li class="col-xs-12 col-sm-6 col-md-3 text-center">
+              <%= link_to "#mes-#{month}-cobertura", data: { toggle: :tab } do %>
+                <span class="label label-info seleccionado text-uppercase">Seleccionado</span>
+                <p class="lead">Cobertura</p>
+                <input type="text" data-behavior="indicator" value="80" data-fgColor="#00c0ef">
+              <% end %>
+            </li>
+            <li class="col-xs-12 col-sm-6 col-md-3 text-center">
+              <%= link_to "#mes-#{month}-eficacia", data: { toggle: :tab } do %>
+                <span class="label label-danger seleccionado text-uppercase">Seleccionado</span>
+                <p class="lead">Eficacia</p>
+                <input type="text" data-behavior="indicator" value="80" data-fgColor="#dd4b39">
+              <% end %>
+            </li>
+            <li class="col-xs-12 col-sm-6 col-md-3 text-center">
+              <%= link_to "#mes-#{month}-asistencia", data: { toggle: :tab } do %>
+                <span class="label label-success seleccionado text-uppercase">Seleccionado</span>
+                <p class="lead">Asistencia</p>
+                <input type="text" data-behavior="indicator" value="75" data-fgColor="#00a65a">
+              <% end %>
+            </li>
+            <li class="col-xs-12 col-sm-6 col-md-3 text-center">
+              <%= link_to "#mes-#{month}-rendimiento", data: { toggle: :tab } do %>
+                <span class="label label-warning seleccionado text-uppercase">Seleccionado</span>
+                <p class="lead">Rendimiento</p>
+                <input type="text" data-behavior="indicator" value="55" data-fgColor="#f39c12">
+              <% end %>
+            </li>
+          </ul>
+          <hr />
+          <div class="tab-content">
+            <%= tag.div render('admin/reportes/indicadores/cobertura',   inicio: inicio, fin: fin), class: 'tab-pane', id: "mes-#{month}-cobertura" %>
+            <%= tag.div render('admin/reportes/indicadores/eficacia',    inicio: inicio, fin: fin), class: 'tab-pane', id: "mes-#{month}-eficacia" %>
+            <%= tag.div render('admin/reportes/indicadores/asistencia',  inicio: inicio, fin: fin), class: 'tab-pane', id: "mes-#{month}-asistencia" %>
+            <%= tag.div render('admin/reportes/indicadores/rendimiento', inicio: inicio, fin: fin), class: 'tab-pane', id: "mes-#{month}-rendimiento" %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  <% end %>
+</div>

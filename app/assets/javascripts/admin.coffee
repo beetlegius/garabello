@@ -16,8 +16,9 @@
 #= require admin/asistencias
 #= require admin/autocomplete
 #= require rails-ujs
-#  require highcharts
+#= require highcharts
 #= require chartkick
+#= require jquery-knob
 
 $(document).on 'turbolinks:load', ->
 
@@ -105,3 +106,11 @@ $(document).on 'turbolinks:load', ->
   $("#table-items").on 'cocoon:after-insert', (e, insertedItem) ->
     autoComplete(e, insertedItem)
     $(insertedItem).find('input:visible:first').focus().select()
+
+  $('[data-behavior="indicator"]').knob
+    thickness: 0.25
+    width: 150
+    height: 150
+    readOnly: true
+    format: (value) ->
+      return value + "%"

@@ -22,11 +22,14 @@
       <%= simple_form_for [:admin, @tarea], html: { role: :form } do |f| %>
         <div class="box-body">
           <div class="row">
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 col-sm-4">
               <%= f.input :nombre, autofocus: true, input_html: { placeholder: true } %>
             </div>
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-xs-12 col-sm-4">
               <%= f.input :unidad, collection: Tarea::UNIDADES, label_method: :humanize, prompt: true %>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+              <%= f.input :esfuerzo, input_html: { placeholder: true }, hint: "Se mide en múltiplos de #{number_with_precision Tarea::ESFUERZO} (1/8 de jornada)" %>
             </div>
           </div>
         </div><!-- /.box-body -->

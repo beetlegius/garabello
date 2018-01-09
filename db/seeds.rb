@@ -14,32 +14,16 @@ User.create! name: 'Sebastián Garabello', email: 'sebasofse@gmail.com',        
 User.create! name: 'Almacenero',          email: 'almacenero@gmail.com',       role: User::STORAGE,    password: 'almacenero'
 User.create! name: 'Planillero',          email: 'planillero@gmail.com',       role: User::PROGRAM,    password: 'planillero'
 
-puts 'Creando cuadrillas...'
-5.times do
-  Cuadrilla.create! nombre: Faker::Simpsons.character, sector: [Cuadrilla::NORTE, Cuadrilla::SUR].sample
-end
-
 puts 'Creando vías...'
 Via.create! nombre: 'Mar del Plata'
-Via.create! nombre: 'Rosario'
-Via.create! nombre: 'Chaco'
-Via.create! nombre: 'Tucumán'
 Via.create! nombre: 'Bahía Blanca'
-Via.create! nombre: 'Mendoza'
-
-puts 'Creando empleados...'
-for cuadrilla in Cuadrilla.all
-  rand(4..8).times do
-    cuadrilla.empleados.create! nombre: Faker::Name.first_name, apellido: Faker::Name.last_name
-  end
-end
 
 puts 'Creando tareas de vías...'
 tareas_vias = Tarea.create! [
   { nombre: "Tapar", unidad: 'metro' },
   { nombre: "Destapar", unidad: 'metro' },
-  { nombre: "Ajuste y reemplazo de fijaciones", unidad: 'metro' },
-  { nombre: "Cambio de durmientes", unidad: 'unidad' },
+  { nombre: "Ajuste y reemplazo de fijaciones", unidad: 'metro', esfuerzo: 0.0875 },
+  { nombre: "Cambio de durmientes", unidad: 'unidad', esfuerzo: 0.1875 },
   { nombre: "Escuadrar durmientes", unidad: 'unidad' },
   { nombre: "Tratamiento de juntas", unidad: 'unidad' },
   { nombre: "Reemplazo de rieles", unidad: 'metro' },
@@ -65,7 +49,7 @@ tareas_puentes = Tarea.create! [
   { nombre: "Revisión de clavaderas y juntas de vía en puentes", unidad: "unidad" },
   { nombre: "Revisión de clavadura de contrarrieles", unidad: "unidad" },
   { nombre: "Armado de Pilastra", unidad: "unidad" },
-  { nombre: "Repracion y sellado de grietas ", unidad: "metro" },
+  { nombre: "Reparacion y sellado de grietas ", unidad: "metro" },
   { nombre: "Limpiar cauce", unidad: "metro" },
   { nombre: "Revision y tratamientos de zores", unidad: "unidad" },
   { nombre: "Limpieza de drenajes ", unidad: "unidad" },
@@ -105,12 +89,11 @@ recursos_puentes = Recurso.create! [
 
 recursos_puentes << Recurso.where(nombre: ['Mecha', 'Herbicida', 'Grasa', 'Nafta moto - herramientas', 'Nafta zorra - movilidad', 'Tanza', 'Aceite', 'Disco de corte', 'Durmiente', 'Bulón para eclisa', 'Arandela grower', 'Tirafondos para vía'])
 
-tipo_programa_vias = TipoPrograma.create! nombre: 'Vías'
-tipo_programa_puentes = TipoPrograma.create! nombre: 'Puentes'
-tipo_programa_senalamiento = TipoPrograma.create! nombre: 'Señalamiento'
-tipo_programa_pan = TipoPrograma.create! nombre: 'PAN'
+tipo_programa_vias           = TipoPrograma.create! nombre: 'Vías'
+tipo_programa_senalamiento   = TipoPrograma.create! nombre: 'Señalamiento'
 tipo_programa_comunicaciones = TipoPrograma.create! nombre: 'Comunicaciones'
-tipo_programa_obra_civil = TipoPrograma.create! nombre: 'Obra civil'
+tipo_programa_puentes        = TipoPrograma.create! nombre: 'Puentes'
+tipo_programa_obra_civil     = TipoPrograma.create! nombre: 'Obras civiles'
 
 tipo_programa_vias.tareas   << tareas_vias
 tipo_programa_vias.recursos << recursos_vias

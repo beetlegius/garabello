@@ -9,7 +9,8 @@ class TipoPrograma < ApplicationRecord
   # RELATIONS
 
   has_many :programas
-  
+  has_many :cuadrillas
+
   has_and_belongs_to_many :tareas
   has_and_belongs_to_many :recursos
 

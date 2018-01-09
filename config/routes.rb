@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     resources :programas
 
     namespace :reportes do
+      get :indicadores
       get :tareas
       get :recursos
     end

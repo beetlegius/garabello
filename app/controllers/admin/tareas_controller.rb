@@ -41,7 +41,7 @@ module Admin
     private
 
     def tarea_params
-      params.require(:tarea).permit(:nombre, :unidad)
+      params.require(:tarea).permit(:nombre, :unidad, :esfuerzo)
     end
 
   end

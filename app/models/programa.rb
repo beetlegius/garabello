@@ -22,7 +22,7 @@ class Programa < ApplicationRecord
 
   has_many :asistencias, inverse_of: :programa, dependent: :destroy
   accepts_nested_attributes_for :asistencias, reject_if: :all_blank, allow_destroy: true
-  has_many :empleados, through: :asistencias
+  has_many :empleados, -> { distinct }, through: :asistencias
 
   has_many :consumos, inverse_of: :programa, dependent: :destroy
   accepts_nested_attributes_for :consumos, reject_if: :all_blank, allow_destroy: true
@@ -88,7 +88,7 @@ class Programa < ApplicationRecord
   end
 
   def dotacion_original
-    cuadrilla.empleados.count
+    empleados.count
   end
 
   def dotacion_real

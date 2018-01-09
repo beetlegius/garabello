@@ -5,8 +5,11 @@ class Tarea < ApplicationRecord
   include Destroyable
 
   UNIDADES = %w(metro metro_2 litro unidad kilo tonelada hora kilometro)
+  ESFUERZO = 0.125
 
   # CALLBACKS
+
+  after_initialize :set_esfuerzo
 
   # RELATIONS
 
@@ -20,8 +23,9 @@ class Tarea < ApplicationRecord
 
   # VALIDATIONS
 
-  validates :nombre, :unidad, presence: true
+  validates :nombre, :unidad, :esfuerzo, presence: true
   validates :unidad, inclusion: { in: UNIDADES }
+  validates :esfuerzo, numericality: { greater_than: 0 }
 
   # CLASS METHODS
 
@@ -42,5 +46,9 @@ class Tarea < ApplicationRecord
   # PRIVATE METHODS
 
   private
+
+  def set_esfuerzo
+    self.esfuerzo ||= rand(ESFUERZO..1.0)
+  end
 
 end

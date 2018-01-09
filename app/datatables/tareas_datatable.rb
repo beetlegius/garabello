@@ -8,6 +8,7 @@ class TareasDatatable < ApplicationDatatable
         column << tarea.id
         column << tarea.nombre
         column << tarea.unidad.humanize
+        column << @view.number_with_precision(tarea.esfuerzo, precision: 8)
 
         links = []
         links.push @view.link_to('Editar', @view.edit_admin_tarea_path(tarea), class: 'btn btn-xs btn-flat btn-info')

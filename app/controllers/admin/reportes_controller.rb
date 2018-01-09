@@ -19,6 +19,10 @@ module Admin
       @hasta = Date.new(params[:ano].to_i, params[:hasta].to_i).end_of_month
     end
 
+    def indicadores
+      @trabajos = Trabajo.all
+    end
+
     def recursos
       @recursos = Recurso.all
       @recurso  = @recursos.find params[:recurso_id] if params[:recurso_id]

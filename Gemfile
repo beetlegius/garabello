@@ -88,10 +88,11 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-datatables'
   gem 'rails-assets-jquery'
   gem 'rails-assets-jquery-ui'
+  gem 'rails-assets-jquery-knob'
   gem 'rails-assets-moment'
   gem 'rails-assets-bootstrap-daterangepicker'
   gem 'rails-assets-select2'
-  # gem 'rails-assets-highcharts'
+  gem 'rails-assets-highcharts'
 end
 
 gem 'capistrano-rails'
