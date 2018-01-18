@@ -21,7 +21,7 @@
         <%= f.input :cuadrilla_id_eq, collection: Cuadrilla.all, required: false, label: 'Filtro por cuadrilla', include_blank: 'Todas las cuadrillas', input_html: { class: 'select2', data: { behavior: :select2 } } %>
       </div>
       <div class="col-xs-12 col-sm-3">
-        <%= f.input :via_id_eq, collection: Via.all, required: false, label: 'Filtro por vía', include_blank: 'Todas las vías', input_html: { class: 'select2', data: { behavior: :select2 } } %>
+        <%= f.input :ramal_id_eq, collection: Via.all, required: false, label: 'Filtro por ramal', include_blank: 'Todos los ramales', input_html: { class: 'select2', data: { behavior: :select2 } } %>
       </div>
       <div class="col-xs-12 col-sm-2">
         <%= f.input :desde_gteq, as: :date, html5: true, required: false, label: 'Filtro por fecha desde' %>

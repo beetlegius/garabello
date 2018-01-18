@@ -15,7 +15,7 @@ es-AR:
     models:
       user: 'Usuarios'
       cuadrilla: 'Cuadrillas'
-      via: 'Vías'
+      ramal: 'Ramales'
       empleado: 'Empleados'
       recurso: 'Recursos'
       tarea: 'Tareas'

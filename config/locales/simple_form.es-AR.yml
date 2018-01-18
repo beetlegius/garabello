@@ -15,7 +15,7 @@ es-AR:
       programa:
         periodo: 'Período'
         cuadrilla: 'Cuadrilla de trabajo'
-        via: 'Vía'
+        ramal: 'Ramal'
         tipo_programa: 'Tipo de programa'
         capataz: 'Capataz (nombre y apellido)'
         inspector: 'Inspector (nombre y apellido)'

@@ -1,0 +1,3 @@
+var datatable = $("table[role='grid']").DataTable();
+datatable.ajax.url("<%= admin_productos_path(params.permit!) %>");
+datatable.ajax.reload();

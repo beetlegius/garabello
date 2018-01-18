@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 20171213170012) do
     t.string "codigo"
     t.string "nombre"
     t.string "unidad"
+    t.boolean "esta_seleccionado", default: false
     t.datetime "deleted_at"
     t.decimal "cantidad", precision: 15, scale: 2, default: "0.0"
     t.bigint "cip_id"
@@ -131,6 +132,7 @@ ActiveRecord::Schema.define(version: 20171213170012) do
     t.index ["cip_id"], name: "index_productos_on_cip_id"
     t.index ["codigo"], name: "index_productos_on_codigo", unique: true
     t.index ["deleted_at"], name: "index_productos_on_deleted_at"
+    t.index ["esta_seleccionado"], name: "index_productos_on_esta_seleccionado"
   end
 
   create_table "programas", force: :cascade do |t|
@@ -143,16 +145,25 @@ ActiveRecord::Schema.define(version: 20171213170012) do
     t.integer "jornadas_count", default: 0, null: false
     t.integer "trabajos_count", default: 0, null: false
     t.bigint "user_id"
-    t.bigint "via_id"
+    t.bigint "ramal_id"
     t.bigint "cuadrilla_id"
     t.bigint "tipo_programa_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cuadrilla_id"], name: "index_programas_on_cuadrilla_id"
     t.index ["deleted_at"], name: "index_programas_on_deleted_at"
+    t.index ["ramal_id"], name: "index_programas_on_ramal_id"
     t.index ["tipo_programa_id"], name: "index_programas_on_tipo_programa_id"
     t.index ["user_id"], name: "index_programas_on_user_id"
-    t.index ["via_id"], name: "index_programas_on_via_id"
+  end
+
+  create_table "ramales", force: :cascade do |t|
+    t.string "nombre"
+    t.datetime "deleted_at"
+    t.integer "programas_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_ramales_on_deleted_at"
   end
 
   create_table "recursos", force: :cascade do |t|
@@ -240,15 +251,6 @@ ActiveRecord::Schema.define(version: 20171213170012) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "vias", force: :cascade do |t|
-    t.string "nombre"
-    t.datetime "deleted_at"
-    t.integer "programas_count", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["deleted_at"], name: "index_vias_on_deleted_at"
-  end
-
   add_foreign_key "asistencias", "empleados"
   add_foreign_key "asistencias", "jornadas"
   add_foreign_key "asistencias", "programas"
@@ -263,9 +265,9 @@ ActiveRecord::Schema.define(version: 20171213170012) do
   add_foreign_key "movimientos", "users"
   add_foreign_key "productos", "cips"
   add_foreign_key "programas", "cuadrillas"
+  add_foreign_key "programas", "ramales"
   add_foreign_key "programas", "tipos_programa"
   add_foreign_key "programas", "users"
-  add_foreign_key "programas", "vias"
   add_foreign_key "trabajos", "jornadas"
   add_foreign_key "trabajos", "programas"
   add_foreign_key "trabajos", "tareas"

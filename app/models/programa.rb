@@ -17,7 +17,7 @@ class Programa < ApplicationRecord
 
   belongs_to :user
   belongs_to :tipo_programa, counter_cache: true
-  belongs_to :via, counter_cache: true
+  belongs_to :ramal, counter_cache: true
   belongs_to :cuadrilla, counter_cache: true
 
   has_many :asistencias, inverse_of: :programa, dependent: :destroy
@@ -57,7 +57,7 @@ class Programa < ApplicationRecord
   class << self
 
     def to_csv
-      attributes = %w{id tipo desde hasta cuadrilla via capataz inspector dotacion_original dotacion_real}
+      attributes = %w{id tipo desde hasta cuadrilla ramal capataz inspector dotacion_original dotacion_real}
 
       CSV.generate(headers: true) do |csv|
         csv << attributes.map(&:humanize).map(&:upcase)
@@ -69,7 +69,7 @@ class Programa < ApplicationRecord
             programa.desde,
             programa.hasta,
             programa.cuadrilla.nombre,
-            programa.via.nombre,
+            programa.ramal.nombre,
             programa.capataz,
             programa.inspector,
             programa.dotacion_original,

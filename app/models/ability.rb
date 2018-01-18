@@ -15,7 +15,7 @@ class Ability
       can :manage, Cuadrilla
       can :manage, Empleado
       can :manage, Recurso
-      can :manage, Via
+      can :manage, Ramal
       can :manage, Tarea
       can :manage, TipoPrograma
       can :manage, Programa

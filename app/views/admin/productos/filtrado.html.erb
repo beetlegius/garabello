@@ -1,0 +1,46 @@
+<%= content_for :header do %>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <%= Producto.model_name.human %>
+      <small>filtrado</small>
+    </h1>
+  </section>
+<% end %>
+
+<div class="box box-info">
+  <div class="box-header">
+    <h3 class="box-title">Aplicar filtros</h3>
+  </div>
+  <div class="box-body">
+    <%= simple_form_for @q, as: :q, url: filtrado_admin_productos_path, method: :get, remote: true, html: { data: { behavior: :autosubmit } } do |f| %>
+      <div class="row">
+        <div class="col-xs-12">
+          <%= f.input :codigo_or_nombre_cont, label: 'Filtro por código o nombre' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="box box-primary">
+  <div class="box-header">
+    <h3 class="box-title">
+      Productos
+    </h3>
+  </div><!-- /.box-header -->
+  <div class="box-body">
+    <%= tag.table role: :datatable, class: 'table table-bordered table-hover', data: { url: admin_productos_path(q: params[:q]&.permit!, format: :json) } do %>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Cantidad</th>
+          <th>Unidad</th>
+          <th>Producto</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    <% end %>
+  </div>
+</div>

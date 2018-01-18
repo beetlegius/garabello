@@ -10,7 +10,7 @@ class ProgramasDatatable < ApplicationDatatable
         column << @view.fa_icon(:calendar, class: 'fa-fw', text: @view.date(programa.desde))
         column << @view.fa_icon(:calendar, class: 'fa-fw', text: @view.date(programa.hasta))
         column << @view.fa_icon(:wrench, class: 'fa-fw', text: programa.cuadrilla&.nombre)
-        column << @view.fa_icon(:train, class: 'fa-fw', text: programa.via&.nombre)
+        column << @view.fa_icon(:train, class: 'fa-fw', text: programa.ramal&.nombre)
         column << @view.fa_icon(:user, class: 'fa-fw', text: programa.capataz)
         column << @view.fa_icon('user-secret', class: 'fa-fw', text: programa.inspector)
         column << @view.tag.span(@view.fa_icon(:users, class: 'fa-fw', text: "#{programa.dotacion_real}/#{programa.dotacion_original}"), title: ('La dotación real no coincide con la original' unless programa.dotacion_correcta?), class: ('text-danger' unless programa.dotacion_correcta?))
@@ -33,7 +33,7 @@ class ProgramasDatatable < ApplicationDatatable
   end
 
   def programas
-    @programas ||= Programa.includes(:cuadrilla, :via).search(params[:q]).result(distinct: true)
+    @programas ||= Programa.includes(:cuadrilla, :ramal).search(params[:q]).result(distinct: true)
   end
 
 end

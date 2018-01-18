@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
     resources :cips
     resources :productos do
+      patch :toggle, on: :member
+      get :filtrado, on: :collection
       get :autocomplete, on: :collection
       get :stock, on: :collection#, defaults: { format: :csv }
     end
@@ -12,7 +14,7 @@ Rails.application.routes.draw do
     resources :movimientos_salida, path: 'salidas'
 
     resources :cuadrillas
-    resources :vias
+    resources :ramales
     resources :empleados
     resources :recursos
     resources :tareas

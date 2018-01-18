@@ -14,12 +14,12 @@ User.create! name: 'Sebastián Garabello', email: 'sebasofse@gmail.com',        
 User.create! name: 'Almacenero',          email: 'almacenero@gmail.com',       role: User::STORAGE,    password: 'almacenero'
 User.create! name: 'Planillero',          email: 'planillero@gmail.com',       role: User::PROGRAM,    password: 'planillero'
 
-puts 'Creando vías...'
-Via.create! nombre: 'Mar del Plata'
-Via.create! nombre: 'Bahía Blanca'
+puts 'Creando ramales...'
+Ramal.create! nombre: 'Mar del Plata'
+Ramal.create! nombre: 'Bahía Blanca'
 
-puts 'Creando tareas de vías...'
-tareas_vias = Tarea.create! [
+puts 'Creando tareas de ramales...'
+tareas_ramales = Tarea.create! [
   { nombre: "Tapar", unidad: 'metro' },
   { nombre: "Destapar", unidad: 'metro' },
   { nombre: "Ajuste y reemplazo de fijaciones", unidad: 'metro', esfuerzo: 0.0875 },
@@ -58,8 +58,8 @@ tareas_puentes = Tarea.create! [
 ]
 tareas_puentes << Tarea.find_by(nombre: 'Cambio de durmientes')
 
-puts 'Creando recursos de vías...'
-recursos_vias = Recurso.create! [
+puts 'Creando recursos de ramales...'
+recursos_ramales = Recurso.create! [
   { nombre: 'Durmiente', unidad: 'unidad' },
   { nombre: 'Bulón para eclisa', unidad: 'unidad' },
   { nombre: 'Arandela grower', unidad: 'unidad' },
@@ -89,14 +89,14 @@ recursos_puentes = Recurso.create! [
 
 recursos_puentes << Recurso.where(nombre: ['Mecha', 'Herbicida', 'Grasa', 'Nafta moto - herramientas', 'Nafta zorra - movilidad', 'Tanza', 'Aceite', 'Disco de corte', 'Durmiente', 'Bulón para eclisa', 'Arandela grower', 'Tirafondos para vía'])
 
-tipo_programa_vias           = TipoPrograma.create! nombre: 'Vías'
+tipo_programa_ramales           = TipoPrograma.create! nombre: 'Vías'
 tipo_programa_senalamiento   = TipoPrograma.create! nombre: 'Señalamiento'
 tipo_programa_comunicaciones = TipoPrograma.create! nombre: 'Comunicaciones'
 tipo_programa_puentes        = TipoPrograma.create! nombre: 'Puentes'
 tipo_programa_obra_civil     = TipoPrograma.create! nombre: 'Obras civiles'
 
-tipo_programa_vias.tareas   << tareas_vias
-tipo_programa_vias.recursos << recursos_vias
+tipo_programa_ramales.tareas   << tareas_ramales
+tipo_programa_ramales.recursos << recursos_ramales
 
 tipo_programa_puentes.tareas << tareas_puentes
 tipo_programa_puentes.recursos << recursos_puentes

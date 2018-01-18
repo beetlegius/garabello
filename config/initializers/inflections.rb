@@ -18,7 +18,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.singular /([c])es([A-Z]|_|$)/, 'z\2'     # Si el plural termina en 'ces', quita 'es' y reemplaza 'c' por 'z'
 
   inflect.irregular 'cuadrilla', 'cuadrillas'
-  inflect.irregular 'via', 'vias'
+  inflect.irregular 'ramal', 'ramales'
   inflect.irregular 'empleado', 'empleados'
   inflect.irregular 'recurso', 'recursos'
   inflect.irregular 'tarea', 'tareas'

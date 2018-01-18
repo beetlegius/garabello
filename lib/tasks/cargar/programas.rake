@@ -4,7 +4,7 @@ namespace :cargar do
     puts 'Inicializando variables...'
 
     nombres     = Empleado.all.map(&:nombre_completo)
-    vias        = Via.all
+    ramales     = Ramal.all
     cuadrillas  = Cuadrilla.includes(:empleados)
     users       = User.all
     capataces   = nombres
@@ -16,7 +16,7 @@ namespace :cargar do
       tareas        = tipo_programa.tareas
       recursos      = tipo_programa.recursos
       cuadrilla = cuadrillas.sample
-      via       = vias.sample
+      ramal       = ramales.sample
       desde     = i.weeks.ago.beginning_of_week.to_date
       hasta     = (desde + 4.days).to_date
       capataz   = capataces.sample
@@ -29,7 +29,7 @@ namespace :cargar do
 
       programa = tipo_programa.programas.create! desde: desde, hasta: hasta,
         capataz: capataz, inspector: inspector,
-        observaciones: [Faker::Lorem.paragraph, nil, nil].sample, cuadrilla: cuadrilla, via: via, user: users.sample
+        observaciones: [Faker::Lorem.paragraph, nil, nil].sample, cuadrilla: cuadrilla, ramal: ramal, user: users.sample
 
 
       km_desde = i.next * 100

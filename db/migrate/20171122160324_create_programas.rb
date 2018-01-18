@@ -9,7 +9,7 @@ class CreateProgramas < ActiveRecord::Migration[5.1]
       t.integer :jornadas_count, default: 0, null: false
       t.integer :trabajos_count, default: 0, null: false
       t.belongs_to :user, foreign_key: true, index: true
-      t.belongs_to :via, foreign_key: true, index: true
+      t.belongs_to :ramal, foreign_key: true, index: true
       t.belongs_to :cuadrilla, foreign_key: true, index: true
       t.belongs_to :tipo_programa, foreign_key: true, index: true
       t.timestamps

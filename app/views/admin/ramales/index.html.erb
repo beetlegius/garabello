@@ -1,0 +1,34 @@
+<%= content_for :header do %>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <%= link_to t(:add, element: 'ramal'), new_admin_ramal_path, class: 'btn btn-primary btn-flat pull-right' %>
+    <h1>
+      <%= Ramal.model_name.human %>
+      <small>panel principal</small>
+    </h1>
+  </section>
+<% end %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box box-primary">
+      <div class="box-header">
+        <h3 class="box-title">
+          Listado de ramales
+        </h3>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+        <%= tag.table role: :datatable, class: 'table table-bordered table-hover', data: { url: admin_ramales_path(format: :json) } do %>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
