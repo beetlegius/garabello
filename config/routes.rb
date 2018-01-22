@@ -3,6 +3,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
 
+    resources :solicitudes do
+      get :novedades, on: :member
+      get :items, on: :member
+    end
+
     resources :cips
     resources :productos do
       patch :toggle, on: :member

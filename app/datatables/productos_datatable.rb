@@ -9,6 +9,7 @@ class ProductosDatatable < ApplicationDatatable
         column << @view.number_with_precision(producto.cantidad)
         column << producto.unidad
         column << producto.nombre
+        column << producto.nombre_planilla
         links = []
         links.push @view.link_to('Editar', @view.edit_admin_producto_path(producto), class: 'btn btn-xs btn-flat btn-info', target: :_blank)
         links.push @view.link_to(producto.esta_seleccionado? ? 'Seleccionado' : 'Seleccionar', @view.toggle_admin_producto_path(producto, atributo: :esta_seleccionado), class: ['btn', 'btn-xs', (producto.esta_seleccionado? ? 'bg-olive' : 'btn-default')], data: { method: :patch, remote: true })

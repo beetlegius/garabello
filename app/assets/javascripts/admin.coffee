@@ -19,6 +19,7 @@
 #= require highcharts
 #= require chartkick
 #= require jquery-knob
+#= require autosize
 
 $(document).on 'turbolinks:load', ->
 
@@ -96,6 +97,7 @@ $(document).on 'turbolinks:load', ->
     $(e.target).find("tr.empty-row").remove()
   $('[data-behavior="cocoon"]').on 'cocoon:after-insert', (e, insertedItem) ->
     $(insertedItem).find('[data-behavior="select2"]').select2()
+    autosize $('[data-behavior="autosize"]')
 
   # $('[data-behavior="autosubmit"]').find("input, select").on 'change', (e) ->
   #   $(this).parents("form").submit()
@@ -114,3 +116,5 @@ $(document).on 'turbolinks:load', ->
     readOnly: true
     format: (value) ->
       return value + "%"
+
+  autosize $('[data-behavior="autosize"]')

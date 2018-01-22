@@ -1,0 +1,97 @@
+<%= content_for :header do %>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <%= link_to fa_icon('arrow-left', class: 'fa-fw', text: 'Volver'), admin_solicitudes_path, class: 'btn btn-flat bg-purple pull-right' %>
+    <h1>
+      <%= Solicitud.model_name.human %>
+      <small>panel principal</small>
+    </h1>
+  </section>
+<% end %>
+
+<section class="invoice">
+  <!-- title row -->
+  <div class="row">
+    <div class="col-xs-12">
+      <h2 class="page-header">
+        <i class="fa fa-fw fa-paper-plane"></i> Solicitud de materiales
+        <small class="pull-right">Fecha: <%= date @solicitud.fecha, format: :header %></small>
+      </h2>
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- info row -->
+  <div class="row invoice-info">
+    <div class="col-sm-4 invoice-col">
+      De
+      <address>
+        <strong>Subgerencia Infraestructura</strong><br>
+        Larga Distancia
+      </address>
+    </div>
+    <!-- /.col -->
+    <div class="col-sm-4 invoice-col">
+      A
+      <address>
+        <strong><%= @solicitud.lugar %></strong>
+      </address>
+    </div>
+    <!-- /.col -->
+    <div class="col-sm-4 invoice-col">
+      <table class="table table-condensed text-center">
+        <tr>
+          <th>Código</th>
+          <td><%= @solicitud.codigo %></td>
+        </tr>
+        <tr>
+          <th>Categoría / sector</th>
+          <td><%= @solicitud.categoria.humanize %></td>
+        </tr>
+        <tr>
+          <th>Urgencia</th>
+          <td><%= @solicitud.urgencia_label %></td>
+        </tr>
+        <tr>
+          <th>Estado</th>
+          <td><%= @solicitud.estado_label %></td>
+        </tr>
+      </table>
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+
+  <!-- Table row -->
+  <div class="row">
+    <div class="col-xs-12 table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Cantidad</th>
+            <th>Código</th>
+            <th>Producto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for item in @solicitud.items %>
+            <tr>
+              <td><%= number_with_precision item.cantidad, precision: 2 %></td>
+              <td><%= item.producto.codigo %></td>
+              <td><%= item.producto.nombre %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.col -->
+  </div>
+  <!-- /.row -->
+
+  <!-- this row will not appear when printing -->
+  <div class="row no-print">
+    <div class="col-xs-12">
+      <%= link_to fa_icon(:print, class: 'fa-fw', text: 'Imprimir'), '#', target: :_blank, class: 'btn btn-default bg-purple' %>
+      <%= link_to fa_icon('envelope-o', class: 'fa-fw', text: 'Enviar por correo'), '#', class: 'btn btn-primary pull-right' %>
+    </div>
+  </div>
+</section>

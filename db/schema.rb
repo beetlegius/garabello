@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171213170012) do
+ActiveRecord::Schema.define(version: 20180122115922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,18 @@ ActiveRecord::Schema.define(version: 20171213170012) do
     t.index ["producto_id"], name: "index_items_movimiento_on_producto_id"
   end
 
+  create_table "items_solicitud", force: :cascade do |t|
+    t.decimal "cantidad", precision: 15, scale: 2
+    t.datetime "deleted_at"
+    t.bigint "producto_id"
+    t.bigint "solicitud_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_items_solicitud_on_deleted_at"
+    t.index ["producto_id"], name: "index_items_solicitud_on_producto_id"
+    t.index ["solicitud_id"], name: "index_items_solicitud_on_solicitud_id"
+  end
+
   create_table "jornadas", force: :cascade do |t|
     t.date "fecha"
     t.decimal "km_desde", precision: 10, scale: 3
@@ -119,6 +131,19 @@ ActiveRecord::Schema.define(version: 20171213170012) do
     t.index ["user_id"], name: "index_movimientos_on_user_id"
   end
 
+  create_table "novedades_solicitud", force: :cascade do |t|
+    t.date "fecha"
+    t.text "contenido"
+    t.datetime "deleted_at"
+    t.bigint "solicitud_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_novedades_solicitud_on_deleted_at"
+    t.index ["solicitud_id"], name: "index_novedades_solicitud_on_solicitud_id"
+    t.index ["user_id"], name: "index_novedades_solicitud_on_user_id"
+  end
+
   create_table "productos", force: :cascade do |t|
     t.string "codigo"
     t.string "nombre"
@@ -129,6 +154,7 @@ ActiveRecord::Schema.define(version: 20171213170012) do
     t.bigint "cip_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "nombre_planilla"
     t.index ["cip_id"], name: "index_productos_on_cip_id"
     t.index ["codigo"], name: "index_productos_on_codigo", unique: true
     t.index ["deleted_at"], name: "index_productos_on_deleted_at"
@@ -180,6 +206,21 @@ ActiveRecord::Schema.define(version: 20171213170012) do
     t.bigint "recurso_id", null: false
     t.bigint "tipo_programa_id", null: false
     t.index ["recurso_id", "tipo_programa_id"], name: "index_recursos_tipos_programa", unique: true
+  end
+
+  create_table "solicitudes", force: :cascade do |t|
+    t.date "fecha"
+    t.string "lugar"
+    t.string "codigo_requerimiento"
+    t.integer "categoria"
+    t.integer "estado"
+    t.integer "urgencia"
+    t.integer "items_count", default: 0, null: false
+    t.integer "novedades_count", default: 0, null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_solicitudes_on_deleted_at"
   end
 
   create_table "tareas", force: :cascade do |t|
@@ -261,8 +302,12 @@ ActiveRecord::Schema.define(version: 20171213170012) do
   add_foreign_key "empleados", "cuadrillas"
   add_foreign_key "items_movimiento", "movimientos"
   add_foreign_key "items_movimiento", "productos"
+  add_foreign_key "items_solicitud", "productos"
+  add_foreign_key "items_solicitud", "solicitudes"
   add_foreign_key "jornadas", "programas"
   add_foreign_key "movimientos", "users"
+  add_foreign_key "novedades_solicitud", "solicitudes"
+  add_foreign_key "novedades_solicitud", "users"
   add_foreign_key "productos", "cips"
   add_foreign_key "programas", "cuadrillas"
   add_foreign_key "programas", "ramales"

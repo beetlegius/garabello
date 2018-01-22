@@ -1,0 +1,8 @@
+<tr class="field">
+  <td style="width: 120px;">
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.input :fecha, autofocus: true, as: :date, html5: true, label: false %>
+  </td>
+  <td><%= f.input :contenido, label: false, input_html: { rows: 1, data: { behavior: :autosize } } %></td>
+  <td><%= link_to_remove_association fa_icon(:remove), f, { wrapper_class: 'field' } %></td>
+</tr>

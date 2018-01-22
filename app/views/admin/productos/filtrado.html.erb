@@ -13,10 +13,22 @@
     <h3 class="box-title">Aplicar filtros</h3>
   </div>
   <div class="box-body">
-    <%= simple_form_for @q, as: :q, url: filtrado_admin_productos_path, method: :get, remote: true, html: { data: { behavior: :autosubmit } } do |f| %>
+    <%= simple_form_for @q, as: :q, url: filtrado_admin_productos_path, method: :get, html: { novalidate: true } do |f| %>
       <div class="row">
-        <div class="col-xs-12">
-          <%= f.input :codigo_or_nombre_cont, label: 'Filtro por código o nombre' %>
+        <div class="col-xs-12 col-sm-3">
+          <%= f.input :codigo_or_nombre_cont, autofocus: true, label: 'Filtro por código o nombre', input_html: { accesskey: :c } %>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <%= f.input :nombre_planilla_cont, label: 'Filtro por nombre de la planilla' %>
+        </div>
+        <div class="col-xs-12 col-sm-2">
+          <%= f.input :esta_seleccionado_true, label: 'Solo seleccionados', as: :radio_buttons %>
+        </div>
+        <div class="col-xs-12 col-sm-2">
+          <%= f.input :cantidad_gt, label: 'Con stock superior a' %>
+        </div>
+        <div class="col-xs-12 col-sm-2">
+          <%= f.submit 'Buscar', class: 'btn btn-primary' %>
         </div>
       </div>
     <% end %>
@@ -37,6 +49,7 @@
           <th>Cantidad</th>
           <th>Unidad</th>
           <th>Producto</th>
+          <th>Planilla</th>
           <th></th>
         </tr>
       </thead>

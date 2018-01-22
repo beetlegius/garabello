@@ -23,6 +23,11 @@
   <% end %>
 
   <% if current_user.is_role? User::ADMIN %>
+    <li class="header">Materiales</li>
+    <li><%= link_to fa_icon('paper-plane', text: tag.span(Solicitud.model_name.human)), admin_solicitudes_path if can? :index, Solicitud %></li>
+  <% end %>
+
+  <% if current_user.is_role? User::ADMIN %>
     <li class="header">Reportes</li>
     <li><%= link_to fa_icon(:cog, text: tag.span(Tarea.model_name.human)), admin_reportes_tareas_path if can? :tareas, :reporte %></li>
     <li><%= link_to fa_icon('thumb-tack', text: tag.span(Recurso.model_name.human)), admin_reportes_recursos_path if can? :recursos, :reporte %></li>

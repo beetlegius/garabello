@@ -1,0 +1,30 @@
+<nav class="nav text-uppercase">
+  <%= link_to_add_association 'Agregar novedad', f, :novedades, partial: 'admin/novedades_solicitud/fields', class: 'btn btn-sm btn-flat btn-primary',
+  data: { association_insertion_node: "#table-novedades", association_insertion_method: :append } %>
+</nav>
+<br />
+
+<table class="table table-striped table-condensed table-form">
+  <thead>
+    <tr>
+      <th>Fecha</th>
+      <th>Novedad</th>
+      <td></td>
+    </tr>
+  </thead>
+  <%= tag.tbody id: "table-novedades" do %>
+
+    <% for novedad in f.object.novedades %>
+      <%= f.simple_fields_for :novedades, novedad do |builder| %>
+        <%= render "admin/novedades_solicitud/fields", f: builder %>
+      <% end %>
+    <% end %>
+
+    <% if f.object.novedades.empty? %>
+      <tr class="empty-row">
+        <td colspan="5">No se han cargado novedades para esta solicitud.</td>
+      </tr>
+    <% end %>
+
+  <% end %>
+</table>

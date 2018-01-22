@@ -27,6 +27,9 @@ class Ability
       can :manage, Producto
       can :manage, Movimiento
       can :manage, ItemMovimiento
+      can :manage, Solicitud
+      can :manage, ItemSolicitud
+      can :manage, NovedadSolicitud
     when User::STORAGE
       can :index, Producto
       can :manage, Movimiento

@@ -1,0 +1,18 @@
+<table class="table table-hover table-condensed no-margin">
+  <thead>
+    <tr>
+      <th class="text-center">Cantidad</th>
+      <th>Código</th>
+      <th>Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for item in items %>
+      <tr>
+        <td class="text-center"><%= number_with_precision item.cantidad, precision: 2 %></td>
+        <td><%= item.producto.codigo %></td>
+        <td><%= item.producto.nombre %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

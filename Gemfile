@@ -80,7 +80,7 @@ gem 'simple_form'
 gem 'kaminari'
 
 source 'https://rails-assets.org' do
-  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-bootstrap', '~> 3.3.7'
   gem 'rails-assets-datatables'
   gem 'rails-assets-jquery'
   gem 'rails-assets-jquery-ui'
@@ -89,6 +89,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap-daterangepicker'
   gem 'rails-assets-select2'
   gem 'rails-assets-highcharts'
+  gem 'rails-assets-autosize'
 end
 
 gem 'capistrano-rails'
@@ -109,3 +110,5 @@ gem 'chartkick'
 gem 'groupdate'
 
 # gem "highcharts-rails"
+
+gem 'draper'

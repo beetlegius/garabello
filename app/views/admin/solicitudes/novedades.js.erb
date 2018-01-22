@@ -1,0 +1,5 @@
+<% if @solicitud.novedades.any? %>
+  $("#modal-solicitud .modal-title").text("<%= @solicitud.codigo %> | Novedades");
+  $("#modal-solicitud .modal-body").html("<%= j render 'novedades', novedades: @solicitud.novedades %>");
+  $("#modal-solicitud").modal('show');
+<% end %>

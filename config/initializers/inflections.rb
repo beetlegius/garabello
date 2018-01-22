@@ -35,6 +35,9 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
 
   inflect.irregular 'item_movimiento', 'items_movimiento'
   inflect.irregular 'user', 'users'
+
+  inflect.irregular 'item_solicitud', 'items_solicitud'
+  inflect.irregular 'novedades_solicitud', 'novedades_solicitud'
 end
 
 # These inflection rules are supported but not enabled by default:

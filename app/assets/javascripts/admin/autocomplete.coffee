@@ -12,10 +12,6 @@
       templateResult: (result) ->
         return result.element || result.text
       templateSelection: (result, a,b,c) ->
-        console.log result
-        console.log a
-        console.log b
-        console.log c
         return result.text || 'Buscá un NUM...'
 
     $(elem).on 'select2:select', (e) ->

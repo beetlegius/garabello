@@ -1,0 +1,6 @@
+<% for novedad in novedades %>
+  <blockquote>
+    <%= simple_format novedad.contenido %>
+    <small><%= date novedad.fecha, format: :tab %> - <%= novedad.user.to_label %></small>
+  </blockquote>
+<% end %>

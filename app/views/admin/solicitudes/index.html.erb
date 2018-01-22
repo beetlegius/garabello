@@ -1,0 +1,90 @@
+<%= content_for :header do %>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <%= link_to fa_icon('file-excel-o', class: 'fa-fw', text: 'Descargar'), admin_solicitudes_path(format: :csv), target: :_blank, class: 'btn bg-purple btn-flat pull-right', rel: :popover, data: { behavior: :download, trigger: :hover, placement: :left, title: 'ATENCIÓN', content: 'Si tiene filtros aplicados, influirán en los resultados que se descarguen.' } %>
+    <%= link_to t(:add, element: 'solicitud'), new_admin_solicitud_path, class: 'btn btn-primary btn-flat pull-right' %>
+    <h1>
+      <%= Solicitud.model_name.human %>
+      <small>panel principal</small>
+    </h1>
+  </section>
+<% end %>
+
+<div class="box box-info">
+  <div class="box-header">
+    <h3 class="box-title">Aplicar filtros</h3>
+  </div>
+  <div class="box-body">
+    <%= simple_form_for @q, as: :q, url: admin_solicitudes_path, method: :get, remote: true, html: { novalidate: true, data: { behavior: :autosubmit } } do |f| %>
+      <div class="row">
+        <div class="col-xs-12 col-sm-3">
+          <%= f.input :items_producto_id_eq, label: 'Filtro por producto', as: :select, input_html: { data: { behavior: :autocomplete, "ajax--url": @autocomplete_url } } %>
+        </div>
+        <div class="col-xs-12 col-sm-3">
+          <%= f.input :categoria_eq, label: 'Filtro por categoría', collection: Solicitud.categorias, label_method: proc { |elem| elem.first.humanize }, include_blank: 'Todas las categorías' %>
+        </div>
+        <div class="col-xs-12 col-sm-2">
+          <%= f.input :urgencia_eq, label: 'Filtro por urgencia', collection: Solicitud.urgencias, label_method: proc { |elem| elem.first.humanize }, include_blank: 'Todas las urgencias' %>
+        </div>
+        <div class="col-xs-12 col-sm-2">
+          <%= f.input :estado_eq, label: 'Filtro por estado', collection: Solicitud.estados, label_method: proc { |elem| elem.first.humanize }, include_blank: 'Todos los estados' %>
+        </div>
+        <div class="col-xs-12 col-sm-2">
+          <%= f.input :lugar_cont, label: 'Filtro por lugar', input_html: { placeholder: 'Lugar...' } %>
+        </div>
+      </div>
+      <%= f.button :button, fa_icon(:search, class: 'fa-fw', text: 'Buscar'), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box box-primary">
+      <div class="box-header">
+        <h3 class="box-title">
+          Listado de solicitudes
+        </h3>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+        <%= tag.table role: :datatable, class: 'table table-bordered table-hover', data: { url: admin_solicitudes_path(q: params[:q]&.permit!, format: :json) } do %>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Código</th>
+              <th>RC</th>
+              <th>Lugar</th>
+              <th>Estado</th>
+              <th>Urgencia</th>
+              <th>Items</th>
+              <th>Novedades</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-solicitud">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Items</h4>
+      </div>
+      <div class="modal-body no-padding">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

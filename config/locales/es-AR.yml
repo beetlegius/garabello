@@ -30,7 +30,24 @@ es-AR:
       producto: 'Productos'
       movimiento_entrada: 'Entradas'
       movimiento_salida: 'Salidas'
+      solicitud: 'Solicitudes'
+      item_solicitud: 'Items'
+      novedad_solicitud: 'Novedades'
     attributes:
+      solicitud:
+        fecha: 'Fecha de pedido'
+        lugar: 'Oficina a la que se solicita'
+        categoria: 'Categoría / sector'
+        urgencia: 'Nivel de urgencia'
+        codigo_requerimiento: 'Número de requerimiento'
+        estado: 'Estado actual'
+      item_solicitud:
+        cantidad: 'Cantidad'
+        producto_id: 'Producto'
+      novedad_solicitud:
+        fecha: 'Fecha de la novedad'
+        contenido: 'Detalle de la novedad'
+
       cuadrilla:
         nombre: 'Nombre de la cuadrilla'
         sector: 'Sector al que pertenece'

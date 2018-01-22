@@ -1,0 +1,30 @@
+<nav class="nav text-uppercase">
+  <%= link_to_add_association 'Agregar item', f, :items, partial: 'admin/items_solicitud/fields', class: 'btn btn-sm btn-flat btn-primary',
+  data: { association_insertion_node: "#table-items", association_insertion_method: :append } %>
+</nav>
+<br />
+
+<table class="table table-striped table-condensed table-form">
+  <thead>
+    <tr>
+      <th>Cantidad</th>
+      <th>Producto</th>
+      <td></td>
+    </tr>
+  </thead>
+  <%= tag.tbody id: "table-items" do %>
+
+    <% for item in f.object.items %>
+      <%= f.simple_fields_for :items, item do |builder| %>
+        <%= render "admin/items_solicitud/fields", f: builder %>
+      <% end %>
+    <% end %>
+
+    <% if f.object.items.empty? %>
+      <tr class="empty-row">
+        <td colspan="5">No se han cargado items para esta solicitud.</td>
+      </tr>
+    <% end %>
+
+  <% end %>
+</table>

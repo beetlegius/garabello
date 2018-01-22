@@ -1,0 +1,4 @@
+var datatable = $("table[role='grid']").DataTable();
+$("[data-behavior='download']").attr("href", "<%= admin_solicitudes_path(params.permit!.merge(format: :csv)) %>");
+datatable.ajax.url("<%= admin_solicitudes_path(params.permit!) %>");
+datatable.ajax.reload();
