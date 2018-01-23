@@ -17,10 +17,13 @@
   <div class="box-body">
     <%= simple_form_for @q, as: :q, url: admin_solicitudes_path, method: :get, remote: true, html: { novalidate: true, data: { behavior: :autosubmit } } do |f| %>
       <div class="row">
-        <div class="col-xs-12 col-sm-3">
+        <div class="col-xs-12 col-sm-2">
+          <%= f.input :codigo_requerimiento_eq, autofocus: true, label: 'Filtro por RC', input_html: { placeholder: 'Buscar por número de RC...' } %>
+        </div>
+        <div class="col-xs-12 col-sm-2">
           <%= f.input :items_producto_id_eq, label: 'Filtro por producto', as: :select, input_html: { data: { behavior: :autocomplete, "ajax--url": @autocomplete_url } } %>
         </div>
-        <div class="col-xs-12 col-sm-3">
+        <div class="col-xs-12 col-sm-2">
           <%= f.input :categoria_eq, label: 'Filtro por categoría', collection: Solicitud.categorias, label_method: proc { |elem| elem.first.humanize }, include_blank: 'Todas las categorías' %>
         </div>
         <div class="col-xs-12 col-sm-2">
@@ -34,6 +37,7 @@
         </div>
       </div>
       <%= f.button :button, fa_icon(:search, class: 'fa-fw', text: 'Buscar'), class: 'btn btn-primary' %>
+      <%= link_to fa_icon(:refresh, class: 'fa-fw', text: 'Cancelar búsqueda'), admin_solicitudes_path, class: 'btn btn-default' %>
     <% end %>
   </div>
 </div>
@@ -47,7 +51,7 @@
         </h3>
       </div><!-- /.box-header -->
       <div class="box-body">
-        <%= tag.table role: :datatable, class: 'table table-bordered table-hover', data: { url: admin_solicitudes_path(q: params[:q]&.permit!, format: :json) } do %>
+        <%= tag.table role: :datatable, class: 'table table-bordered table-hover', data: { order: '[[0, "desc"], [1, "asc"]]', url: admin_solicitudes_path(q: params[:q]&.permit!, format: :json) } do %>
           <thead>
             <tr>
               <th>Fecha</th>

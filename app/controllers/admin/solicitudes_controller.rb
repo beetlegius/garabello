@@ -3,7 +3,7 @@ module Admin
     load_and_authorize_resource
 
     def index
-      @autocomplete_url = autocomplete_admin_productos_url
+      @autocomplete_url = autocomplete_admin_productos_url(solicitado: true)
       @q = Solicitud.search params[:q]
       @autocomp
       respond_to do |format|

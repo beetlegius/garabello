@@ -10,10 +10,12 @@ class Producto < ApplicationRecord
 
   belongs_to :cip, optional: true, counter_cache: true
   has_many :items_movimiento
+  has_many :items_solicitud
 
   # SCOPES
 
   scope :disponible, -> { where "cantidad > 0" }
+  scope :solicitado, -> { joins(:items_solicitud) }
 
   # VALIDATIONS
 
