@@ -49,6 +49,11 @@ module Admin
       end
     end
 
+    def enviar
+      SolicitudMailer.enviar(@solicitud).deliver
+      redirect_to admin_solicitud_path(@solicitud), notice: t(action_name, scope: :notice)
+    end
+
     private
 
     def solicitud_params

@@ -20,10 +20,10 @@ module Fileable
     for atributo in @files
       dragonfly_accessor atributo do
         after_assign do |file|
-          file.encode!('jpg', '-quality 80').process!(:thumb, '1600x900>') if file.ext.downcase == 'jpg' && new_record?
+          file.encode!('jpg', '-quality 80').process!(:thumb, '1600x900>') if file.ext.present? && file.ext.downcase == 'jpg' && new_record?
         end
         storage_options do |f|
-          { path: File.join(folder, f.name) }
+          { path: File.join(folder, f.try(:name) || 'imagen.jpg') }
         end
       end
     end
@@ -35,10 +35,10 @@ module Fileable
   end
 
   def next_id
-    if Rails.env.production?
-      ActiveRecord::Base.connection.execute("select last_value from #{self.class.table_id_seq}").first["last_value"]
-    else
-      ActiveRecord::Base.connection.execute("SELECT seq FROM SQLITE_SEQUENCE WHERE name = '#{self.class.sqlite_table_name}' LIMIT 1").first['seq'].to_i.next;
-    end
+    # if Rails.env.production?
+      ActiveRecord::Base.connection.execute("select last_value from #{self.class.table_id_seq}").first["last_value"].to_i.next
+    # else
+    #   ActiveRecord::Base.connection.execute("SELECT seq FROM SQLITE_SEQUENCE WHERE name = '#{self.class.sqlite_table_name}' LIMIT 1").first['seq'].to_i.next;
+    # end
   end
 end

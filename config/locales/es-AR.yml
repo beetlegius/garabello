@@ -88,6 +88,7 @@ es-AR:
     create: 'El elemento ha sido agregado exitosamente.'
     update: 'Se guardaron los cambios. %{link}'
     destroy: 'El elemento ha sido eliminado exitosamente.'
+    enviar: 'La solicitud fue enviada por correo!'
   alert:
     destroy: 'El elemento no puede ser eliminado.'
     access_denied: 'Acceso denegado'
@@ -106,6 +107,7 @@ es-AR:
       format:
         delimiter: '.'
         strip_insignificant_zeros: true
+        precision: 3
     currency:
       format:
         strip_insignificant_zeros: true

@@ -9,6 +9,7 @@ class Ramal < ApplicationRecord
   # RELATIONS
 
   has_many :programas
+  has_and_belongs_to_many :estaciones
 
   # SCOPES
 
@@ -21,7 +22,7 @@ class Ramal < ApplicationRecord
   # INSTANCE METHODS
 
   def can_delete?
-    programas.empty?
+    programas.empty? && estaciones.empty?
   end
 
   # ALIASES

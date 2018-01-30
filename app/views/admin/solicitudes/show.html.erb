@@ -91,7 +91,7 @@
   <div class="row no-print">
     <div class="col-xs-12">
       <%= link_to fa_icon(:print, class: 'fa-fw', text: 'Imprimir'), '#', target: :_blank, class: 'btn btn-default bg-purple' %>
-      <%= link_to fa_icon('envelope-o', class: 'fa-fw', text: 'Enviar por correo'), '#', class: 'btn btn-primary pull-right' %>
+      <%= link_to fa_icon('envelope-o', class: 'fa-fw', text: 'Enviar por correo'), enviar_admin_solicitud_path(@solicitud), method: :patch, class: 'btn btn-primary pull-right' %>
     </div>
   </div>
 </section>

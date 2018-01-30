@@ -1,0 +1,59 @@
+<%= content_for :header do %>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <%= link_to t(:add, element: 'puente'), new_admin_puente_path, class: 'btn btn-primary btn-flat pull-right' %>
+    <%= link_to t(:add, element: 'alcantarilla'), new_admin_alcantarilla_path, class: 'btn btn-primary btn-flat pull-right' %>
+    <h1>
+      <%= Estructura.model_name.human %>
+      <%= tag.small fa_icon('question', right: true, text: 'panel principal'), rel: :popover, data: { trigger: :hover, title: 'Información', content: 'Desde aquí podrás cargar estructuras (puentes, alcantarillas, etc.).' } %>
+    </h1>
+  </section>
+<% end %>
+
+<div class="box box-info">
+  <div class="box-header">
+    <h3 class="box-title">Aplicar filtros</h3>
+  </div>
+  <div class="box-body">
+    <%= simple_form_for @q, as: :q, url: admin_estructuras_path, method: :get, remote: true, html: { data: { behavior: :autosubmit } } do |f| %>
+      <div class="row">
+        <div class="col-xs-12 col-sm-4">
+          <%= f.input :ramal_id_eq, collection: Ramal.all, required: false, label: 'Filtro por ramal', include_blank: 'Todos los ramales', input_html: { class: 'select2', data: { behavior: :select2 } } %>
+        </div>
+        <div class="col-xs-12 col-sm-2">
+          <%= f.input :km_gteq, as: :numeric, required: false, label: 'Filtro por km desde' %>
+        </div>
+        <div class="col-xs-12 col-sm-2">
+          <%= f.input :km_lteq, as: :numeric, required: false, label: 'Filtro por km hasta' %>
+        </div>
+        <div class="col-xs-12 col-sm-2">
+          <%= f.input :estacion_anterior_posicion_gteq, collection: Estacion.all, prompt: true, required: false, label: 'Filtro por estación anterior' %>
+        </div>
+        <div class="col-xs-12 col-sm-2">
+          <%= f.input :estacion_siguiente_posicion_lteq, collection: Estacion.all, prompt: true, required: false, label: 'Filtro por estación siguiente' %>
+        </div>
+      </div>
+      <%= f.button :button, fa_icon(:search, class: 'fa-fw', text: 'Buscar'), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
+<div class="box box-primary">
+  <div class="box-header">
+    <h3 class="box-title">
+      Listado de estructuras
+    </h3>
+  </div><!-- /.box-header -->
+  <div class="box-body">
+    <%= tag.table role: :datatable, class: 'table table-bordered table-hover', data: { url: admin_estructuras_path(q: params[:q]&.permit!, format: :json) } do %>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>KM</th>
+          <th>Vía</th>
+          <th data-sorting="false"></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    <% end %>
+  </div>
+</div>

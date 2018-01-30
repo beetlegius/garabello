@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180122115922) do
+ActiveRecord::Schema.define(version: 20180130151631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,67 @@ ActiveRecord::Schema.define(version: 20180122115922) do
     t.datetime "updated_at", null: false
     t.index ["cuadrilla_id"], name: "index_empleados_on_cuadrilla_id"
     t.index ["deleted_at"], name: "index_empleados_on_deleted_at"
+  end
+
+  create_table "estaciones", force: :cascade do |t|
+    t.string "nombre"
+    t.integer "posicion"
+    t.datetime "deleted_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_estaciones_on_deleted_at"
+  end
+
+  create_table "estaciones_ramales", id: false, force: :cascade do |t|
+    t.bigint "estacion_id", null: false
+    t.bigint "ramal_id", null: false
+    t.index ["estacion_id", "ramal_id"], name: "index_estaciones_ramales_on_estacion_id_and_ramal_id", unique: true
+  end
+
+  create_table "estados_seccion", force: :cascade do |t|
+    t.integer "estado"
+    t.bigint "seccion_id"
+    t.bigint "relevamiento_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["relevamiento_id"], name: "index_estados_seccion_on_relevamiento_id"
+    t.index ["seccion_id"], name: "index_estados_seccion_on_seccion_id"
+  end
+
+  create_table "estructuras", force: :cascade do |t|
+    t.decimal "km", precision: 10, scale: 3
+    t.integer "tipo"
+    t.string "partido"
+    t.string "localidad"
+    t.integer "cantidad_tableros", default: 1
+    t.integer "tipo_tablero"
+    t.integer "material_tableros"
+    t.integer "material_estribos"
+    t.integer "material_pilares"
+    t.string "type"
+    t.datetime "deleted_at"
+    t.integer "secciones_count", default: 0, null: false
+    t.integer "relevamientos_count", default: 0, null: false
+    t.bigint "estacion_anterior_id"
+    t.bigint "estacion_siguiente_id"
+    t.bigint "ramal_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_estructuras_on_deleted_at"
+    t.index ["estacion_anterior_id"], name: "index_estructuras_on_estacion_anterior_id"
+    t.index ["estacion_siguiente_id"], name: "index_estructuras_on_estacion_siguiente_id"
+    t.index ["ramal_id"], name: "index_estructuras_on_ramal_id"
+  end
+
+  create_table "fotos", force: :cascade do |t|
+    t.string "imagen_uid"
+    t.string "imagen_name"
+    t.datetime "deleted_at"
+    t.bigint "relevamiento_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_fotos_on_deleted_at"
+    t.index ["relevamiento_id"], name: "index_fotos_on_relevamiento_id"
   end
 
   create_table "items_movimiento", force: :cascade do |t|
@@ -208,6 +269,62 @@ ActiveRecord::Schema.define(version: 20180122115922) do
     t.index ["recurso_id", "tipo_programa_id"], name: "index_recursos_tipos_programa", unique: true
   end
 
+  create_table "relevamientos", force: :cascade do |t|
+    t.date "fecha"
+    t.integer "estado_bulones_de_amarre"
+    t.integer "estado_contra_rieles"
+    t.integer "estado_tacos_de_madera"
+    t.integer "estado_nivelacion_de_cabeceras"
+    t.integer "estado_durmientes"
+    t.string "observaciones_durmientes"
+    t.integer "estado_pintura"
+    t.string "observaciones_pintura"
+    t.integer "estado_mamposteria_muro_lateral_ascendente"
+    t.integer "estado_mamposteria_muro_lateral_descendente"
+    t.integer "estado_mamposteria_muro_frontal_ascendente"
+    t.integer "estado_mamposteria_muro_frontal_descendente"
+    t.integer "estado_mamposteria_zapatas_ascendente"
+    t.integer "estado_mamposteria_zapatas_descendente"
+    t.integer "estado_vegetacion_muro_lateral_ascendente"
+    t.integer "estado_vegetacion_muro_lateral_descendente"
+    t.integer "estado_vegetacion_muro_frontal_ascendente"
+    t.integer "estado_vegetacion_muro_frontal_descendente"
+    t.integer "estado_vegetacion_zapatas_ascendente"
+    t.integer "estado_vegetacion_zapatas_descdendente"
+    t.text "observaciones_pilares_estribos"
+    t.text "observaciones_pilares_defensas"
+    t.integer "estado_taludes_margen_izquierda_aguas_arriba"
+    t.integer "estado_taludes_margen_derecha_aguas_arriba"
+    t.integer "estado_taludes_margen_izquierda_aguas_abajo"
+    t.integer "estado_taludes_margen_derecha_aguas_abajo"
+    t.integer "estado_defensas_estribos_ascendente"
+    t.integer "estado_defensas_estribos_descendente"
+    t.integer "estado_cauce"
+    t.string "observaciones_cauce"
+    t.text "observaciones_generales"
+    t.datetime "deleted_at"
+    t.integer "fotos_count", default: 0, null: false
+    t.bigint "estructura_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_relevamientos_on_deleted_at"
+    t.index ["estructura_id"], name: "index_relevamientos_on_estructura_id"
+  end
+
+  create_table "secciones", force: :cascade do |t|
+    t.decimal "metros", precision: 15, scale: 2
+    t.decimal "luz", precision: 15, scale: 2
+    t.decimal "diametro", precision: 15, scale: 2
+    t.integer "posicion"
+    t.string "type"
+    t.datetime "deleted_at"
+    t.bigint "estructura_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_secciones_on_deleted_at"
+    t.index ["estructura_id"], name: "index_secciones_on_estructura_id"
+  end
+
   create_table "solicitudes", force: :cascade do |t|
     t.date "fecha"
     t.string "lugar"
@@ -300,6 +417,10 @@ ActiveRecord::Schema.define(version: 20180122115922) do
   add_foreign_key "consumos", "recursos"
   add_foreign_key "cuadrillas", "tipos_programa"
   add_foreign_key "empleados", "cuadrillas"
+  add_foreign_key "estados_seccion", "relevamientos"
+  add_foreign_key "estados_seccion", "secciones"
+  add_foreign_key "estructuras", "ramales"
+  add_foreign_key "fotos", "relevamientos"
   add_foreign_key "items_movimiento", "movimientos"
   add_foreign_key "items_movimiento", "productos"
   add_foreign_key "items_solicitud", "productos"
@@ -313,6 +434,8 @@ ActiveRecord::Schema.define(version: 20180122115922) do
   add_foreign_key "programas", "ramales"
   add_foreign_key "programas", "tipos_programa"
   add_foreign_key "programas", "users"
+  add_foreign_key "relevamientos", "estructuras"
+  add_foreign_key "secciones", "estructuras"
   add_foreign_key "trabajos", "jornadas"
   add_foreign_key "trabajos", "programas"
   add_foreign_key "trabajos", "tareas"

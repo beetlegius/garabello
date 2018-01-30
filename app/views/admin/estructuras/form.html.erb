@@ -1,0 +1,76 @@
+<%= content_for :header do %>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <%= @estructura.class.model_name.human %>
+      <small><%= @estructura.persisted? ? "KM #{number_with_precision(@estructura.km)}" : 'Nueva estructura' %></small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><%= link_to fa_icon(:wrench, text: Estructura.model_name.human), admin_estructuras_path %></li>
+      <li class="active"><%= t(action_name, scope: :actions) %></li>
+    </ol>
+  </section>
+<% end %>
+
+<%= simple_form_for [:admin, @estructura], as: :estructura, html: { role: :form } do |f| %>
+  <div class="nav-tabs-custom">
+
+    <ul class="nav nav-tabs">
+      <li class="<%= :active if @estructura.new_record? %>"><%= link_to 'Información', '#info', data: { toggle: :tab } %></li>
+      <li class="pull-right"><%= link_to fa_icon(:tasks, class: 'fa-fw', text: 'ver detalle'), url_for([:admin, @estructura]), class: 'text-muted ver-detalle' if @estructura.persisted? %></li>
+      <li class="pull-right"><%= f.button :button, (fa_icon 'arrow-right', text: 'Siguiente', right: true if @estructura.new_record?), class: 'btn btn-sm btn-primary btn-submit', data: { disable_with: t(:wait) } %></li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane <%= :active if @estructura.new_record? %>" id="info">
+        <div class="row">
+          <div class="col-xs-12 col-md-3">
+            <%= f.association :ramal, autofocus: true, prompt: true, input_html: { class: 'input-lg' } %>
+          </div>
+          <div class="col-xs-12 col-md-3">
+            <%= f.input :km, input_html: { class: 'input-lg', step: 0.001 } %>
+          </div>
+          <div class="col-xs-12 col-md-3">
+            <%= f.association :estacion_anterior, prompt: true, input_html: { class: 'input-lg' } %>
+          </div>
+          <div class="col-xs-12 col-md-3">
+            <%= f.association :estacion_siguiente, prompt: true, input_html: { class: 'input-lg' } %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-md-3">
+            <%= f.input :tipo, collection: Estructura.tipos.keys, prompt: true, label_method: :humanize %>
+          </div>
+          <div class="col-xs-12 col-md-3">
+            <%= f.input :partido %>
+          </div>
+          <div class="col-xs-12 col-md-3">
+            <%= f.input :localidad %>
+          </div>
+          <div class="col-xs-12 col-md-3">
+            <%= f.input :cantidad_tableros %>
+          </div>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-md-3">
+            <%= f.input :tipo_tablero, collection: Estructura.tipos_tablero.keys, prompt: true, label_method: :humanize %>
+          </div>
+          <div class="col-xs-12 col-md-3">
+            <%= f.input :material_tableros, collection: Estructura.materiales_tableros.keys, prompt: true, label_method: :humanize %>
+          </div>
+          <div class="col-xs-12 col-md-3">
+            <%= f.input :material_estribos, collection: Estructura.materiales_estribos.keys, prompt: true, label_method: :humanize %>
+          </div>
+          <div class="col-xs-12 col-md-3">
+            <%= f.input :material_pilares, collection: Estructura.materiales_pilares.keys, prompt: true, label_method: :humanize %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="box-footer">
+      <%#= f.button :submit, class: 'btn btn-primary', data: { disable_with: t(:wait) } %>
+    </div> -->
+  </div>
+<% end %>

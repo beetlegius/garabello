@@ -1,0 +1,12 @@
+Se registró una nueva solicitud de materiales:
+
+<%= "Código:".ljust(12, " ") %> <%= @solicitud.codigo %>
+<%= "Fecha:".ljust(12, " ") %> <%= l @solicitud.fecha %>
+<%= "Lugar:".ljust(12, " ") %> <%= @solicitud.lugar %>
+<%= "Categoría:".ljust(12, " ") %> <%= @solicitud.categoria %>
+<%= "Nivel de urgencia:".ljust(12, " ") %> <%= @solicitud.urgencia %>
+
+
+<%- for item in @solicitud.items -%>
+  - <%= item.producto.codigo.ljust(12, " ") %> | <%= item.producto.nombre.ljust(40, " ") %> | CANTIDAD: <%= item.cantidad %>
+<%- end -%>

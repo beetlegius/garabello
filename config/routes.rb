@@ -3,9 +3,13 @@ Rails.application.routes.draw do
 
   namespace :admin do
 
+    resources :puentes, :alcantarillas, except: %w(index)
+    resources :estructuras, only: %w(index)
+
     resources :solicitudes do
       get :novedades, on: :member
       get :items, on: :member
+      patch :enviar, on: :member
     end
 
     resources :cips

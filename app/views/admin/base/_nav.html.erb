@@ -22,9 +22,16 @@
     <li><%= link_to fa_icon('arrow-left', text: tag.span(MovimientoSalida.model_name.human)), admin_movimientos_salida_path if can? :index, MovimientoSalida %></li>
   <% end %>
 
+  <%# MATERIALES %>
   <% if current_user.is_role? User::ADMIN %>
     <li class="header">Materiales</li>
     <li><%= link_to fa_icon('paper-plane', text: tag.span(Solicitud.model_name.human)), admin_solicitudes_path if can? :index, Solicitud %></li>
+  <% end %>
+
+  <%# PUENTES %>
+  <% if current_user.is_role? User::ADMIN %>
+    <li class="header">Estructuras</li>
+    <li><%= link_to fa_icon('building', text: tag.span(Estructura.model_name.human)), admin_estructuras_path if can? :index, Estructura %></li>
   <% end %>
 
   <% if current_user.is_role? User::ADMIN %>

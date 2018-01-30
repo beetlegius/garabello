@@ -112,3 +112,5 @@ gem 'groupdate'
 # gem "highcharts-rails"
 
 gem 'draper'
+# gem 'roadie-rails'
+gem 'acts_as_list'

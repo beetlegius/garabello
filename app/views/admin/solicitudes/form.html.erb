@@ -45,8 +45,8 @@
           </div>
         </div>
       </div>
-      <div class="tab-pane" id="items" data-behavior="cocoon"><%= render 'admin/items_solicitud/form', f: f %></div>
-      <div class="tab-pane" id="novedades" data-behavior="cocoon"><%= render 'admin/novedades_solicitud/form', f: f %></div>
+      <div class="tab-pane" id="items" data-behavior="cocoon"><%= render 'admin/items_solicitud/form', f: f if @solicitud.persisted? %></div>
+      <div class="tab-pane" id="novedades" data-behavior="cocoon"><%= render 'admin/novedades_solicitud/form', f: f if @solicitud.persisted? %></div>
     </div>
   <% end %>
 </div>

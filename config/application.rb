@@ -21,5 +21,8 @@ module Garabello
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = 'es-AR'
     config.i18n.available_locales = %w(es-AR en)
+
+    config.x.email = "Sebastián Garabello <sebastian.garabello@sofse.gob.ar>"
+    config.x.receptor_solicitudes = "Sebastián Garabello <sebastian.garabello@sofse.gob.ar>"
   end
 end
