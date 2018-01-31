@@ -33,6 +33,9 @@ es-AR:
       solicitud: 'Solicitudes'
       item_solicitud: 'Items'
       novedad_solicitud: 'Novedades'
+      estructura: 'Estructuras'
+      puente: 'Puentes'
+      alcantarilla: 'Alcantarillas'
     attributes:
       solicitud:
         fecha: 'Fecha de pedido'

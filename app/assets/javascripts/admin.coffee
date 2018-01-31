@@ -20,6 +20,7 @@
 #= require chartkick
 #= require jquery-knob
 #= require autosize
+#= require bxSlider
 
 $(document).on 'turbolinks:load', ->
 
@@ -118,3 +119,17 @@ $(document).on 'turbolinks:load', ->
       return value + "%"
 
   autosize $('[data-behavior="autosize"]')
+
+  $(window).on 'resize', ->
+    $.each $('.tab-pane .pre-scrollable'), (index, elem) ->
+      height = $(window).innerHeight() - 200
+      $(elem).css('max-height', height)
+
+  $(window).resize()
+
+  $('.nav-tabs a').one 'shown.bs.tab', (e) ->
+    id = $(e.target).attr('href')
+    $(id).find("[data-behavior='bxslider']").bxSlider
+      captions: true
+      adaptiveHeight: true
+      keyboardEnabled: true

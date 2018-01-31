@@ -31,7 +31,7 @@ class CreateRelevamientos < ActiveRecord::Migration[5.1]
       t.integer :estado_vegetacion_muro_frontal_ascendente
       t.integer :estado_vegetacion_muro_frontal_descendente
       t.integer :estado_vegetacion_zapatas_ascendente
-      t.integer :estado_vegetacion_zapatas_descdendente
+      t.integer :estado_vegetacion_zapatas_descendente
       t.text :observaciones_pilares_estribos
 
       # DEFENSAS

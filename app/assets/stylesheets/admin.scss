@@ -10,6 +10,7 @@
 //= require jquery-ui
 //= require jquery.fileupload-ui
 //= require highcharts
+//= require bxSlider
 
 table.table tbody td { vertical-align: middle !important; }
 
@@ -85,3 +86,5 @@ p.sello {
 .nav-indicadores li a input { cursor: pointer; }
 .nav-indicadores li a span.seleccionado { position: absolute; top: 10px; right: 10px; display: none; }
 .nav-indicadores li.active a span.seleccionado { display: block; }
+
+table.relevamiento p { margin: 0px; }

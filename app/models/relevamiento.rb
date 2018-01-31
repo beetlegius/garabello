@@ -27,7 +27,7 @@ class Relevamiento < ApplicationRecord
   enum estado_vegetacion_muro_frontal_ascendente: ESTADOS, _suffix: true
   enum estado_vegetacion_muro_frontal_descendente: ESTADOS, _suffix: true
   enum estado_vegetacion_zapatas_ascendente: ESTADOS, _suffix: true
-  enum estado_vegetacion_zapatas_descdendente: ESTADOS, _suffix: true
+  enum estado_vegetacion_zapatas_descendente: ESTADOS, _suffix: true
   # DEFENSAS
   enum estado_taludes_margen_izquierda_aguas_arriba: ESTADOS, _suffix: true
   enum estado_taludes_margen_derecha_aguas_arriba: ESTADOS, _suffix: true

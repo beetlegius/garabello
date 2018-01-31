@@ -90,6 +90,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-select2'
   gem 'rails-assets-highcharts'
   gem 'rails-assets-autosize'
+  gem 'rails-assets-bxSlider'
 end
 
 gem 'capistrano-rails'

@@ -12,6 +12,7 @@ module Admin
     end
 
     def show
+      @relevamientos = @estructura.relevamientos.includes(:fotos).decorate
     end
 
     def new
