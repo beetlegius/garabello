@@ -1,4 +1,4 @@
-class EstadoSeccionDecorator < ApplicationDecorator
+class EstadoPilarDecorator < ApplicationDecorator
   delegate_all
 
   def estado

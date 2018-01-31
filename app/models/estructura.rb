@@ -20,6 +20,7 @@ class Estructura < ApplicationRecord
   belongs_to :estacion_anterior, class_name: 'Estacion'
   belongs_to :estacion_siguiente, class_name: 'Estacion'
 
+  has_many :pilares
   has_many :secciones
   has_many :relevamientos, -> { order fecha: :desc }
 

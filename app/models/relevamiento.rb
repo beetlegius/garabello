@@ -45,6 +45,8 @@ class Relevamiento < ApplicationRecord
   has_many :fotos, dependent: :destroy
   has_many :estados_seccion
   has_many :secciones, through: :estados_seccion
+  has_many :estados_pilar
+  has_many :pilares, through: :estados_pilar
 
   # SCOPES
 

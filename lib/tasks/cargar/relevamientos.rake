@@ -25,7 +25,7 @@ namespace :cargar do
         estado_vegetacion_muro_frontal_ascendente: estados.sample,
         estado_vegetacion_muro_frontal_descendente: estados.sample,
         estado_vegetacion_zapatas_ascendente: estados.sample,
-        estado_vegetacion_zapatas_descdendente: estados.sample,
+        estado_vegetacion_zapatas_descendente: estados.sample,
         estado_taludes_margen_izquierda_aguas_arriba: estados.sample,
         estado_taludes_margen_derecha_aguas_arriba: estados.sample,
         estado_taludes_margen_izquierda_aguas_abajo: estados.sample,
@@ -37,7 +37,11 @@ namespace :cargar do
         observaciones_generales: Faker::Lorem.paragraph
 
       for seccion in estructura.secciones
-        relevamiento.estados_seccion.create! estado: estados.sample, seccion: seccion
+        relevamiento.estados_seccion.create! estado: estados.sample, observaciones: [Faker::Lorem.sentence, nil, nil].sample, seccion: seccion
+      end
+
+      for pilar in estructura.pilares
+        relevamiento.estados_pilar.create! estado: estados.sample, observaciones: [Faker::Lorem.sentence, nil, nil].sample, pilar: pilar
       end
 
       puts "Cargando fotos relevamiento #{relevamiento.id}..."

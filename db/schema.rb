@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130151631) do
+ActiveRecord::Schema.define(version: 20180131193218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,8 +98,20 @@ ActiveRecord::Schema.define(version: 20180130151631) do
     t.index ["estacion_id", "ramal_id"], name: "index_estaciones_ramales_on_estacion_id_and_ramal_id", unique: true
   end
 
+  create_table "estados_pilar", force: :cascade do |t|
+    t.integer "estado"
+    t.string "observaciones"
+    t.bigint "pilar_id"
+    t.bigint "relevamiento_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pilar_id"], name: "index_estados_pilar_on_pilar_id"
+    t.index ["relevamiento_id"], name: "index_estados_pilar_on_relevamiento_id"
+  end
+
   create_table "estados_seccion", force: :cascade do |t|
     t.integer "estado"
+    t.string "observaciones"
     t.bigint "seccion_id"
     t.bigint "relevamiento_id"
     t.datetime "created_at", null: false
@@ -121,6 +133,7 @@ ActiveRecord::Schema.define(version: 20180130151631) do
     t.string "type"
     t.datetime "deleted_at"
     t.integer "secciones_count", default: 0, null: false
+    t.integer "pilares_count", default: 0, null: false
     t.integer "relevamientos_count", default: 0, null: false
     t.bigint "estacion_anterior_id"
     t.bigint "estacion_siguiente_id"
@@ -134,6 +147,7 @@ ActiveRecord::Schema.define(version: 20180130151631) do
   end
 
   create_table "fotos", force: :cascade do |t|
+    t.string "epigrafe"
     t.string "imagen_uid"
     t.string "imagen_name"
     t.datetime "deleted_at"
@@ -203,6 +217,16 @@ ActiveRecord::Schema.define(version: 20180130151631) do
     t.index ["deleted_at"], name: "index_novedades_solicitud_on_deleted_at"
     t.index ["solicitud_id"], name: "index_novedades_solicitud_on_solicitud_id"
     t.index ["user_id"], name: "index_novedades_solicitud_on_user_id"
+  end
+
+  create_table "pilares", force: :cascade do |t|
+    t.integer "posicion"
+    t.datetime "deleted_at"
+    t.bigint "estructura_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_pilares_on_deleted_at"
+    t.index ["estructura_id"], name: "index_pilares_on_estructura_id"
   end
 
   create_table "productos", force: :cascade do |t|
@@ -290,7 +314,7 @@ ActiveRecord::Schema.define(version: 20180130151631) do
     t.integer "estado_vegetacion_muro_frontal_ascendente"
     t.integer "estado_vegetacion_muro_frontal_descendente"
     t.integer "estado_vegetacion_zapatas_ascendente"
-    t.integer "estado_vegetacion_zapatas_descdendente"
+    t.integer "estado_vegetacion_zapatas_descendente"
     t.text "observaciones_pilares_estribos"
     t.text "observaciones_pilares_defensas"
     t.integer "estado_taludes_margen_izquierda_aguas_arriba"
@@ -417,6 +441,8 @@ ActiveRecord::Schema.define(version: 20180130151631) do
   add_foreign_key "consumos", "recursos"
   add_foreign_key "cuadrillas", "tipos_programa"
   add_foreign_key "empleados", "cuadrillas"
+  add_foreign_key "estados_pilar", "pilares"
+  add_foreign_key "estados_pilar", "relevamientos"
   add_foreign_key "estados_seccion", "relevamientos"
   add_foreign_key "estados_seccion", "secciones"
   add_foreign_key "estructuras", "ramales"
@@ -429,6 +455,7 @@ ActiveRecord::Schema.define(version: 20180130151631) do
   add_foreign_key "movimientos", "users"
   add_foreign_key "novedades_solicitud", "solicitudes"
   add_foreign_key "novedades_solicitud", "users"
+  add_foreign_key "pilares", "estructuras"
   add_foreign_key "productos", "cips"
   add_foreign_key "programas", "cuadrillas"
   add_foreign_key "programas", "ramales"

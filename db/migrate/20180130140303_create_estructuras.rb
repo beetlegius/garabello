@@ -12,7 +12,7 @@ class CreateEstructuras < ActiveRecord::Migration[5.1]
 
       t.string :type
       t.datetime :deleted_at, index: true
-      t.integer :secciones_count, :relevamientos_count, default: 0, null: false
+      t.integer :secciones_count, :pilares_count, :relevamientos_count, default: 0, null: false
       t.belongs_to :estacion_anterior, :estacion_siguiente
       t.belongs_to :ramal, foreign_key: true, index: true
       t.timestamps

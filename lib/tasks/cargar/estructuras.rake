@@ -38,6 +38,10 @@ namespace :cargar do
         end
       end
 
+      estructura.secciones.count.pred.times do
+        estructura.pilares.create!
+      end
+
     end
   end
 end

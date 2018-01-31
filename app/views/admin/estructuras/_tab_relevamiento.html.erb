@@ -10,7 +10,7 @@
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           Fecha
           &nbsp;&nbsp;&nbsp;
-          <%= date relevamiento.fecha %>
+          <%= date relevamiento.fecha, format: :header %>
         </strong>
       </p>
 
@@ -38,7 +38,7 @@
             <td><%= relevamiento.estado_tacos_de_madera %></td>
             <td><%= relevamiento.estado_nivelacion_de_cabeceras %></td>
           </tr>
-          <tr class="text-uppercase">
+          <tr class="info text-uppercase">
             <th colspan="4">Secciones</th>
           </tr>
           <% for estado in relevamiento.estados_seccion.decorate %>
@@ -47,7 +47,7 @@
               <td colspan="2"><%= estado.estado %></td>
             </tr>
           <% end %>
-          <tr class="text-uppercase">
+          <tr class="info text-uppercase">
             <th colspan="4">Durmientes</th>
           </tr>
           <tr class="text-uppercase">
@@ -58,7 +58,7 @@
             <td colspan="2"><%= relevamiento.estado_durmientes %></td>
             <td colspan="2"><%= relevamiento.observaciones_durmientes %></td>
           </tr>
-          <tr class="text-uppercase">
+          <tr class="info text-uppercase">
             <th colspan="4">Pintura</th>
           </tr>
           <tr class="text-uppercase">
@@ -120,17 +120,35 @@
             <td><%= relevamiento.estado_vegetacion_muro_frontal_descendente %></td>
             <td><%= relevamiento.estado_vegetacion_zapatas_descendente %></td>
           </tr>
-          <tr class="text-uppercase">
+
+          <tr><td colspan="4">&nbsp;</td></tr>
+
+          <tr class="info text-uppercase">
             <th colspan="4">Pilares</th>
           </tr>
-          <tr>
-            <td colspan="4"><%= relevamiento.observaciones_pilares_estribos %></td>
-          </tr>
+          <% for estado in relevamiento.estados_pilar.decorate %>
+            <tr>
+              <td>Pilar <%= estado.pilar.posicion %></td>
+              <td><%= estado.estado %></td>
+              <td><%= estado.observaciones %></td>
+            </tr>
+          <% end %>
 
           <tr><td colspan="4">&nbsp;</td></tr>
 
           <tr class="info text-uppercase">
             <th colspan="4">Defensas</th>
+          </tr>
+          <tr class="text-uppercase">
+            <th colspan="4">Estribos</th>
+          </tr>
+          <tr class="text-uppercase">
+            <th colspan="2">Ascendente</th>
+            <th colspan="2">Descendente</th>
+          </tr>
+          <tr>
+            <td colspan="2"><%= relevamiento.estado_defensas_estribos_ascendente %></td>
+            <td colspan="2"><%= relevamiento.estado_defensas_estribos_descendente %></td>
           </tr>
           <tr class="text-uppercase">
             <th colspan="4">Pilares</th>
@@ -153,18 +171,10 @@
             <td><%= relevamiento.estado_taludes_margen_izquierda_aguas_abajo %></td>
             <td><%= relevamiento.estado_taludes_margen_derecha_aguas_abajo %></td>
           </tr>
-          <tr class="text-uppercase">
-            <th colspan="4">Estribos</th>
-          </tr>
-          <tr class="text-uppercase">
-            <th colspan="2">Ascendente</th>
-            <th colspan="2">Descendente</th>
-          </tr>
-          <tr>
-            <td colspan="2"><%= relevamiento.estado_defensas_estribos_ascendente %></td>
-            <td colspan="2"><%= relevamiento.estado_defensas_estribos_descendente %></td>
-          </tr>
-          <tr class="text-uppercase">
+
+          <tr><td colspan="4">&nbsp;</td></tr>
+
+          <tr class="info text-uppercase">
             <th colspan="4">Cauce</th>
           </tr>
           <tr class="text-uppercase">

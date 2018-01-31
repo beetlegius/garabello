@@ -40,6 +40,7 @@ ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.irregular 'novedades_solicitud', 'novedades_solicitud'
 
   inflect.irregular 'estado_seccion', 'estados_seccion'
+  inflect.irregular 'estado_pilar', 'estados_pilar'
 end
 
 # These inflection rules are supported but not enabled by default:
