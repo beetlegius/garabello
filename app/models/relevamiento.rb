@@ -41,6 +41,7 @@ class Relevamiento < ApplicationRecord
 
   # RELATIONS
 
+  belongs_to :user
   belongs_to :estructura, counter_cache: true
   has_many :fotos, dependent: :destroy
   has_many :estados_seccion

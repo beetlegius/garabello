@@ -12,7 +12,7 @@ module Admin
     end
 
     def show
-      @relevamientos = @estructura.relevamientos.includes(:fotos).decorate
+      redirect_to [:admin, @estructura.relevamientos.first] if @estructura.relevamientos.any?
     end
 
     def new

@@ -3,7 +3,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
 
-    resources :puentes, :alcantarillas, except: %w(index)
+    resources :relevamientos
+    resources :puentes, :alcantarillas, except: %w(index) do
+      resources :relevamientos, only: %w(new create)
+    end
     resources :estructuras, only: %w(index)
 
     resources :solicitudes do

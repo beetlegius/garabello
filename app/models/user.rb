@@ -14,11 +14,13 @@ class User < ApplicationRecord
 
   # CALLBACKS
 
+  after_create :set_default_image
   after_initialize :set_role
 
   # RELATIONS
 
   has_many :movimientos
+  has_many :relevamientos
   has_many :programas
 
   # SCOPES
@@ -53,6 +55,10 @@ class User < ApplicationRecord
 
   def set_role
     self.role ||= ADMIN
+  end
+
+  def set_default_image
+    update! image_url: 'https://picsum.photos/320?random' if image.nil?
   end
 
 end

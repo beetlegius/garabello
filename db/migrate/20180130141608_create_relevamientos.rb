@@ -47,7 +47,7 @@ class CreateRelevamientos < ActiveRecord::Migration[5.1]
 
       t.datetime :deleted_at, index: true
       t.integer :fotos_count, default: 0, null: false
-      t.belongs_to :estructura, foreign_key: true, index: true
+      t.belongs_to :estructura, :user, foreign_key: true, index: true
       t.timestamps
     end
   end

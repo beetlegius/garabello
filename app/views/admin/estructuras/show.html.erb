@@ -12,18 +12,4 @@
   </section>
 <% end %>
 
-<div class="nav-tabs-custom">
-
-  <ul class="nav nav-tabs">
-    <li><%= link_to 'Información general', '#info', data: { toggle: :tab } %></li>
-    <% for relevamiento in @estructura.relevamientos %>
-      <li><%= link_to date(relevamiento.fecha, format: :header), "##{dom_id relevamiento}", data: { toggle: :tab } %></li>
-    <% end %>
-  </ul>
-
-  <div class="tab-content">
-    <%= render 'tab_informacion', estructura: @estructura %>
-    <%= render partial: 'tab_relevamiento', collection: @relevamientos, as: :relevamiento %>
-  </div>
-
-</div>
+<p class="lead">No se han cargado relevamientos aún... sería un buen momento para <%= link_to 'cargar el primero', [:new, :admin, @estructura, :relevamiento] %></p>
