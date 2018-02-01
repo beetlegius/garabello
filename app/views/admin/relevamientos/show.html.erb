@@ -281,7 +281,7 @@
       <div class="col-xs-12 col-md-6">
         <div class="bxslider" data-behavior="bxslider">
           <% for foto in @relevamiento.fotos %>
-            <div><%= image_tag foto.imagen.url, title: foto.epigrafe %></div>
+            <div><%= image_tag foto.imagen&.url || "https://picsum.photos/1280/960/?image=#{foto.id}", title: foto.epigrafe %></div>
           <% end %>
         </div>
       </div>

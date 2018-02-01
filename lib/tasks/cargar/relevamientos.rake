@@ -49,7 +49,8 @@ namespace :cargar do
       puts "Cargando fotos relevamiento #{relevamiento.id}..."
       6.times do |i|
         puts "Cargando foto #{i.next}"
-        relevamiento.fotos.create! imagen_url: 'https://picsum.photos/50/?random', epigrafe: Faker::Lorem.sentence
+        relevamiento.fotos.create! epigrafe: Faker::Lorem.sentence
+        # relevamiento.fotos.create! imagen_url: 'https://picsum.photos/50/?random', epigrafe: Faker::Lorem.sentence
       end
     end
 
