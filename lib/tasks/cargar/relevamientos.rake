@@ -36,7 +36,7 @@ namespace :cargar do
         estado_cauce: estados.sample,
         observaciones_cauce: Faker::Lorem.sentence,
         observaciones_generales: Faker::Lorem.paragraph,
-        user_id: users.sample
+        user: users.sample
 
       for seccion in estructura.secciones
         relevamiento.estados_seccion.create! estado: estados.sample, observaciones: [Faker::Lorem.sentence, nil, nil].sample, seccion: seccion

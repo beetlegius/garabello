@@ -21,7 +21,8 @@
 
   <div class="box-header with-border">
     <div class="user-block">
-      <%= image_tag @relevamiento.user.image.thumb('120x128#c').url, class: 'img-circle', alt: @relevamiento.user.name if @relevamiento.user.image.present? %>
+      <%#= image_tag @relevamiento.user.image.thumb('120x128#c').url, class: 'img-circle', alt: @relevamiento.user.name if @relevamiento.user.image.present? %>
+      <%= image_tag 'https://picsum.photos/128?random', class: 'img-circle', alt: @relevamiento.user.name %>
       <span class="username"><%= link_to @relevamiento.user.name, '#' %></span>
       <span class="description">Creado hace <%= time_ago_in_words @relevamiento.created_at %></span>
     </div>
