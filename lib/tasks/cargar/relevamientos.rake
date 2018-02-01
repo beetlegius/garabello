@@ -3,6 +3,7 @@ namespace :cargar do
   task relevamientos: :environment do
     puts 'Cargando relevamientos...'
 
+    users = User.all
     estados = %w(bueno bueno bueno bueno regular regular malo)
     fechas = Date.new(2017,11,1)..Date.new(2018,1,30)
 
@@ -34,7 +35,8 @@ namespace :cargar do
         estado_defensas_estribos_descendente: estados.sample,
         estado_cauce: estados.sample,
         observaciones_cauce: Faker::Lorem.sentence,
-        observaciones_generales: Faker::Lorem.paragraph
+        observaciones_generales: Faker::Lorem.paragraph,
+        user_id: users.sample
 
       for seccion in estructura.secciones
         relevamiento.estados_seccion.create! estado: estados.sample, observaciones: [Faker::Lorem.sentence, nil, nil].sample, seccion: seccion
